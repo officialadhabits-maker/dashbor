@@ -1,0 +1,914 @@
+'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadFlow - User Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','sans-serif'] },
+          colors: {
+            brand: { dark: '#0B1120', green: '#1a4d2e', lime: '#c5e86c', gray: '#f3f4f6' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { scrollbar-width: thin; scrollbar-color: #1a4d2e #0f172a; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #1a4d2e; border-radius: 3px; }
+    .glass { background:rgba(255,255,255,0.05); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.08); }
+    .glass-light { background:rgba(255,255,255,0.7); backdrop-filter:blur(10px); }
+    .nav-item.active { background: rgba(197,232,108,0.15); color: #c5e86c; border-right: 3px solid #c5e86c; }
+    .fade-in { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .slide-up { animation: slideUp 0.3s ease-out; }
+    @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .platform-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .package-card { transition: all 0.3s ease; }
+    .package-card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+    .btn-primary { background: linear-gradient(135deg, #1a4d2e, #2d6a4f); }
+    .btn-primary:hover { background: linear-gradient(135deg, #2d6a4f, #1a4d2e); }
+    .stat-card { background: linear-gradient(145deg, rgba(26,77,46,0.3), rgba(15,23,42,0.5)); }
+    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; animation: slideInRight 0.3s ease-out; }
+    @keyframes slideInRight { from { transform: translateX(100%); opacity:0; } to { transform: translateX(0); opacity:1; } }
+    .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    .progress-bar { transition: width 1s ease-out; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body class="font-sans antialiased bg-[#0B1120] text-white">
+
+<!-- ==================== AUTH PAGES ==================== -->
+<div id="auth-pages" class="min-h-screen flex">
+  
+  <!-- Login Page -->
+  <div id="login-page" class="w-full flex">
+    <div class="hidden lg:flex w-1/2 bg-gradient-to-br from-emerald-900 via-[#0B1120] to-slate-900 items-center justify-center p-12 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-20 w-64 h-64 bg-lime-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-48 h-48 bg-emerald-500 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative z-10 text-center">
+        <div class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-2xl flex items-center justify-center text-white font-bold text-3xl mx-auto mb-6 shadow-2xl">L</div>
+        <h2 class="text-4xl font-bold text-white mb-4">Welcome Back!</h2>
+        <p class="text-gray-400 text-lg max-w-sm">Access your verified leads dashboard and scale your sales today.</p>
+        <div class="mt-10 flex items-center justify-center gap-4 text-sm text-gray-500">
+          <span><i class="fas fa-shield-alt text-lime-400 mr-2"></i>Secure Login</span>
+          <span><i class="fas fa-bolt text-lime-400 mr-2"></i>Instant Access</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-[#0B1120]">
+      <div class="w-full max-w-md">
+        <div class="lg:hidden text-center mb-8">
+          <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">L</div>
+          <h2 class="text-2xl font-bold text-white">LeadFlow</h2>
+        </div>
+        <h3 class="text-3xl font-bold text-white mb-2">Sign In</h3>
+        <p class="text-gray-400 mb-8">Enter your credentials to access your account</p>
+        <form id="login-form" class="space-y-5">
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Email Address</label>
+            <div class="relative">
+              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="email" id="login-email" placeholder="you@example.com" class="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400 transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Password</label>
+            <div class="relative">
+              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="password" id="login-password" placeholder="••••••••" class="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400 transition" required>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-2 text-gray-400 cursor-pointer">
+              <input type="checkbox" class="w-4 h-4 rounded border-white/20 bg-white/5 text-lime-400 focus:ring-lime-400">
+              Remember me
+            </label>
+            <a href="#" class="text-lime-400 hover:text-lime-300">Forgot password?</a>
+          </div>
+          <button type="submit" class="w-full py-3.5 btn-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-900/50 transition flex items-center justify-center gap-2">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+          </button>
+        </form>
+        <div class="mt-8 text-center">
+          <p class="text-gray-400">Don't have an account? <button onclick="showRegister()" class="text-lime-400 font-semibold hover:text-lime-300">Register Now</button></p>
+        </div>
+        <div class="mt-6 flex items-center gap-4">
+          <div class="flex-1 h-px bg-white/10"></div>
+          <span class="text-gray-500 text-sm">or continue with</span>
+          <div class="flex-1 h-px bg-white/10"></div>
+        </div>
+        <div class="mt-6 flex gap-3">
+          <button class="flex-1 py-3 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
+            <i class="fab fa-google text-red-400"></i> Google
+          </button>
+          <button class="flex-1 py-3 bg-white/5 border border-white/10 rounded-xl text-gray-300 hover:bg-white/10 transition flex items-center justify-center gap-2">
+            <i class="fab fa-facebook-f text-blue-400"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Page -->
+  <div id="register-page" class="w-full flex hidden">
+    <div class="hidden lg:flex w-1/2 bg-gradient-to-br from-emerald-900 via-[#0B1120] to-slate-900 items-center justify-center p-12 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-20 left-20 w-64 h-64 bg-lime-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-48 h-48 bg-emerald-500 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative z-10 text-center">
+        <div class="w-20 h-20 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-2xl flex items-center justify-center text-white font-bold text-3xl mx-auto mb-6 shadow-2xl">L</div>
+        <h2 class="text-4xl font-bold text-white mb-4">Start Your Journey!</h2>
+        <p class="text-gray-400 text-lg max-w-sm">Join 500+ resellers buying verified leads and scaling their income.</p>
+        <div class="mt-10 space-y-4 text-left max-w-xs mx-auto">
+          <div class="flex items-center gap-3 text-gray-400"><i class="fas fa-check-circle text-lime-400"></i> 50k+ Verified Leads</div>
+          <div class="flex items-center gap-3 text-gray-400"><i class="fas fa-check-circle text-lime-400"></i> Instant CSV Download</div>
+          <div class="flex items-center gap-3 text-gray-400"><i class="fas fa-check-circle text-lime-400"></i> 24hr Delivery</div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-[#0B1120]">
+      <div class="w-full max-w-md">
+        <div class="lg:hidden text-center mb-8">
+          <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">L</div>
+          <h2 class="text-2xl font-bold text-white">LeadFlow</h2>
+        </div>
+        <h3 class="text-3xl font-bold text-white mb-2">Create Account</h3>
+        <p class="text-gray-400 mb-8">Fill in your details to get started</p>
+        <form id="register-form" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-gray-300 text-sm font-medium mb-2 block">First Name</label>
+              <input type="text" placeholder="John" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+            <div>
+              <label class="text-gray-300 text-sm font-medium mb-2 block">Last Name</label>
+              <input type="text" placeholder="Doe" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Email Address</label>
+            <div class="relative">
+              <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="email" placeholder="you@example.com" class="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Phone Number</label>
+            <div class="relative">
+              <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="tel" placeholder="+91 98765 43210" class="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Password</label>
+            <div class="relative">
+              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="password" placeholder="Min 8 characters" class="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-300 text-sm font-medium mb-2 block">Confirm Password</label>
+            <div class="relative">
+              <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+              <input type="password" placeholder="Confirm password" class="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition" required>
+            </div>
+          </div>
+          <label class="flex items-start gap-2 text-gray-400 text-sm cursor-pointer">
+            <input type="checkbox" class="w-4 h-4 mt-0.5 rounded border-white/20 bg-white/5 text-lime-400" required>
+            I agree to the <a href="#" class="text-lime-400">Terms & Conditions</a> and <a href="#" class="text-lime-400">Privacy Policy</a>
+          </label>
+          <button type="submit" class="w-full py-3.5 btn-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-900/50 transition flex items-center justify-center gap-2">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+        </form>
+        <div class="mt-6 text-center">
+          <p class="text-gray-400">Already have an account? <button onclick="showLogin()" class="text-lime-400 font-semibold hover:text-lime-300">Sign In</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DASHBOARD APP ==================== -->
+<div id="dashboard-app" class="hidden min-h-screen flex">
+  
+  <!-- Sidebar -->
+  <aside id="sidebar" class="w-64 bg-[#0f172a] border-r border-white/5 flex flex-col fixed h-full z-40 transition-transform duration-300 lg:translate-x-0 -translate-x-full">
+    <div class="p-6 flex items-center gap-3 border-b border-white/5">
+      <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold text-lg">L</div>
+      <span class="text-white font-bold text-lg tracking-wide">LEADFLOW</span>
+    </div>
+    
+    <nav class="flex-1 py-6 px-3 space-y-1">
+      <button onclick="navigateTo('dashboard')" id="nav-dashboard" class="nav-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-th-large w-5"></i> Dashboard
+      </button>
+      <button onclick="navigateTo('browse')" id="nav-browse" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-shopping-bag w-5"></i> Browse Leads
+      </button>
+      <button onclick="navigateTo('orders')" id="nav-orders" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-clipboard-list w-5"></i> My Orders
+      </button>
+      <button onclick="navigateTo('favorites')" id="nav-favorites" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-heart w-5"></i> Favorites
+        <span id="fav-count" class="ml-auto bg-lime-400 text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full hidden">0</span>
+      </button>
+      <button onclick="navigateTo('wallet')" id="nav-wallet" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-wallet w-5"></i> Wallet
+      </button>
+      <button onclick="navigateTo('downloads')" id="nav-downloads" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-download w-5"></i> Downloads
+      </button>
+      <button onclick="navigateTo('support')" id="nav-support" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition text-left">
+        <i class="fas fa-headset w-5"></i> Support
+      </button>
+    </nav>
+    
+    <div class="p-4 border-t border-white/5">
+      <div class="glass rounded-xl p-4">
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full border-2 border-lime-400/30" alt="">
+          <div class="flex-1 min-w-0">
+            <p class="text-white text-sm font-medium truncate">Rahul Verma</p>
+            <p class="text-gray-500 text-xs">Pro Member</p>
+          </div>
+        </div>
+        <button onclick="logout()" class="mt-3 w-full py-2 bg-white/5 border border-white/10 rounded-lg text-gray-400 text-sm hover:bg-white/10 hover:text-white transition flex items-center justify-center gap-2">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button id="sidebar-toggle" onclick="toggleSidebar()" class="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-emerald-800 rounded-xl flex items-center justify-center text-white shadow-lg">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Main Content -->
+  <main class="flex-1 lg:ml-64 min-h-screen">
+    <!-- Top Header -->
+    <header class="sticky top-0 z-30 glass border-b border-white/5 px-6 py-4 flex items-center justify-between">
+      <div class="lg:hidden w-10"></div>
+      <div>
+        <h1 id="page-title" class="text-xl font-bold text-white">Dashboard</h1>
+        <p id="page-subtitle" class="text-gray-400 text-sm">Overview of your activity</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
+          <i class="fas fa-wallet text-lime-400"></i>
+          <span class="text-white font-semibold">₹<span id="wallet-balance">12,450</span></span>
+        </div>
+        <button class="relative w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition">
+          <i class="fas fa-bell"></i>
+          <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#0B1120]"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="p-6 max-w-7xl mx-auto">
+      
+      <!-- ===== DASHBOARD SECTION ===== -->
+      <div id="section-dashboard" class="fade-in">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          <div class="stat-card rounded-2xl p-5 border border-white/5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 bg-lime-400/20 rounded-xl flex items-center justify-center text-lime-400">
+                <i class="fas fa-users"></i>
+              </div>
+              <span class="text-emerald-400 text-xs font-medium bg-emerald-400/10 px-2 py-1 rounded-full">+12%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">2,450</div>
+            <div class="text-gray-400 text-sm">Total Leads Purchased</div>
+          </div>
+          <div class="stat-card rounded-2xl p-5 border border-white/5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 bg-blue-400/20 rounded-xl flex items-center justify-center text-blue-400">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <span class="text-emerald-400 text-xs font-medium bg-emerald-400/10 px-2 py-1 rounded-full">+5%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">48</div>
+            <div class="text-gray-400 text-sm">Total Orders</div>
+          </div>
+          <div class="stat-card rounded-2xl p-5 border border-white/5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 bg-purple-400/20 rounded-xl flex items-center justify-center text-purple-400">
+                <i class="fas fa-download"></i>
+              </div>
+              <span class="text-emerald-400 text-xs font-medium bg-emerald-400/10 px-2 py-1 rounded-full">+8%</span>
+            </div>
+            <div class="text-2xl font-bold text-white">36</div>
+            <div class="text-gray-400 text-sm">CSV Downloads</div>
+          </div>
+          <div class="stat-card rounded-2xl p-5 border border-white/5">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 bg-orange-400/20 rounded-xl flex items-center justify-center text-orange-400">
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="text-gray-400 text-xs font-medium bg-white/5 px-2 py-1 rounded-full">0</span>
+            </div>
+            <div class="text-2xl font-bold text-white">5</div>
+            <div class="text-gray-400 text-sm">Favorite Packages</div>
+          </div>
+        </div>
+
+        <!-- Activity Chart + Recent Orders -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div class="lg:col-span-2 glass rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-lg font-bold text-white">Lead Purchase Activity</h3>
+              <select class="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 outline-none">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>This Year</option>
+              </select>
+            </div>
+            <canvas id="activityChart" height="120"></canvas>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-white mb-4">Recent Orders</h3>
+            <div class="space-y-4" id="recent-orders-list">
+              <!-- Populated by JS -->
+            </div>
+            <button onclick="navigateTo('orders')" class="mt-4 w-full py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-gray-300 hover:bg-white/10 hover:text-white transition">
+              View All Orders
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="glass rounded-2xl p-6 mb-8">
+          <h3 class="text-lg font-bold text-white mb-4">Quick Actions</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <button onclick="navigateTo('browse')" class="p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 hover:border-lime-400/30 transition text-left group">
+              <div class="w-10 h-10 bg-emerald-800 rounded-lg flex items-center justify-center text-lime-400 mb-3 group-hover:scale-110 transition">
+                <i class="fas fa-plus"></i>
+              </div>
+              <div class="text-white font-medium text-sm">Buy Leads</div>
+              <div class="text-gray-500 text-xs mt-1">Browse packages</div>
+            </button>
+            <button onclick="navigateTo('downloads')" class="p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 hover:border-lime-400/30 transition text-left group">
+              <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-blue-400 mb-3 group-hover:scale-110 transition">
+                <i class="fas fa-file-csv"></i>
+              </div>
+              <div class="text-white font-medium text-sm">Download CSV</div>
+              <div class="text-gray-500 text-xs mt-1">Export leads</div>
+            </button>
+            <button onclick="navigateTo('wallet')" class="p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 hover:border-lime-400/30 transition text-left group">
+              <div class="w-10 h-10 bg-purple-900 rounded-lg flex items-center justify-center text-purple-400 mb-3 group-hover:scale-110 transition">
+                <i class="fas fa-plus-circle"></i>
+              </div>
+              <div class="text-white font-medium text-sm">Add Funds</div>
+              <div class="text-gray-500 text-xs mt-1">Top up wallet</div>
+            </button>
+            <button onclick="navigateTo('support')" class="p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 hover:border-lime-400/30 transition text-left group">
+              <div class="w-10 h-10 bg-orange-900 rounded-lg flex items-center justify-center text-orange-400 mb-3 group-hover:scale-110 transition">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <div class="text-white font-medium text-sm">Raise Ticket</div>
+              <div class="text-gray-500 text-xs mt-1">Get help</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Platform Distribution -->
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Leads by Platform</h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-instagram"></i>
+              </div>
+              <div class="text-white font-bold">850</div>
+              <div class="text-gray-500 text-xs">Instagram</div>
+            </div>
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <div class="text-white font-bold">620</div>
+              <div class="text-gray-500 text-xs">Facebook</div>
+            </div>
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-youtube"></i>
+              </div>
+              <div class="text-white font-bold">430</div>
+              <div class="text-gray-500 text-xs">YouTube</div>
+            </div>
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-700 to-sky-500 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-linkedin-in"></i>
+              </div>
+              <div class="text-white font-bold">280</div>
+              <div class="text-gray-500 text-xs">LinkedIn</div>
+            </div>
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-snapchat-ghost"></i>
+              </div>
+              <div class="text-white font-bold">170</div>
+              <div class="text-gray-500 text-xs">Snapchat</div>
+            </div>
+            <div class="text-center p-4 bg-white/5 rounded-xl">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl mx-auto mb-2">
+                <i class="fab fa-google"></i>
+              </div>
+              <div class="text-white font-bold">100</div>
+              <div class="text-gray-500 text-xs">Google Ads</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== BROWSE LEADS SECTION ===== -->
+      <div id="section-browse" class="hidden fade-in">
+        <!-- Platform Selection -->
+        <div id="platforms-view">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-white">Browse Lead Packs</h2>
+            <p class="text-gray-400">Select a platform to view available lead packages</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="platforms-grid">
+            <!-- Platforms populated by JS -->
+          </div>
+        </div>
+
+        <!-- Packages View (hidden by default) -->
+        <div id="packages-view" class="hidden">
+          <button onclick="backToPlatforms()" class="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition">
+            <i class="fas fa-arrow-left"></i> Back to Platforms
+          </button>
+          <div class="flex items-center gap-4 mb-6">
+            <div id="platform-icon-lg" class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg"></div>
+            <div>
+              <h2 id="platform-title" class="text-2xl font-bold text-white"></h2>
+              <p id="platform-desc" class="text-gray-400"></p>
+            </div>
+          </div>
+          
+          <!-- Filters -->
+          <div class="flex flex-wrap gap-3 mb-6">
+            <span class="text-gray-400 text-sm py-2">Filter by Audience:</span>
+            <button onclick="filterPackages('all')" class="filter-btn active px-4 py-2 bg-lime-400 text-slate-900 rounded-full text-sm font-medium transition" data-filter="all">All</button>
+            <button onclick="filterPackages('housewife')" class="filter-btn px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 transition" data-filter="housewife">Housewife</button>
+            <button onclick="filterPackages('working')" class="filter-btn px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 transition" data-filter="working">Working Pro</button>
+            <button onclick="filterPackages('student')" class="filter-btn px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 transition" data-filter="student">Students</button>
+            <button onclick="filterPackages('business')" class="filter-btn px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 transition" data-filter="business">Business Owners</button>
+            <button onclick="filterPackages('jobseeker')" class="filter-btn px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 transition" data-filter="jobseeker">Job Seekers</button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="packages-grid">
+            <!-- Packages populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ORDERS SECTION ===== -->
+      <div id="section-orders" class="hidden fade-in">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-white">My Orders</h2>
+            <p class="text-gray-400">Track and manage your lead purchases</p>
+          </div>
+          <div class="flex gap-3">
+            <select class="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-300 outline-none">
+              <option>All Orders</option>
+              <option>Completed</option>
+              <option>Pending</option>
+              <option>Processing</option>
+            </select>
+            <button onclick="navigateTo('downloads')" class="px-4 py-2.5 bg-emerald-800 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition flex items-center gap-2">
+              <i class="fas fa-download"></i> Download Center
+            </button>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="glass rounded-2xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-white/5 text-left text-gray-400 text-sm">
+                  <th class="px-6 py-4 font-medium">Order ID</th>
+                  <th class="px-6 py-4 font-medium">Package</th>
+                  <th class="px-6 py-4 font-medium">Platform</th>
+                  <th class="px-6 py-4 font-medium">Leads</th>
+                  <th class="px-6 py-4 font-medium">Amount</th>
+                  <th class="px-6 py-4 font-medium">Date</th>
+                  <th class="px-6 py-4 font-medium">Status</th>
+                  <th class="px-6 py-4 font-medium">Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body" class="text-sm">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6">
+          <p class="text-gray-400 text-sm">Showing 1-10 of 48 orders</p>
+          <div class="flex gap-2">
+            <button class="w-9 h-9 bg-white/5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition flex items-center justify-center"><i class="fas fa-chevron-left"></i></button>
+            <button class="w-9 h-9 bg-lime-400 text-slate-900 rounded-lg font-medium flex items-center justify-center">1</button>
+            <button class="w-9 h-9 bg-white/5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition flex items-center justify-center">2</button>
+            <button class="w-9 h-9 bg-white/5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition flex items-center justify-center">3</button>
+            <button class="w-9 h-9 bg-white/5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition flex items-center justify-center"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FAVORITES SECTION ===== -->
+      <div id="section-favorites" class="hidden fade-in">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-white">Favorite Packages</h2>
+          <p class="text-gray-400">Quick access to your saved lead packages</p>
+        </div>
+        <div id="favorites-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <!-- Populated by JS -->
+        </div>
+        <div id="no-favorites" class="hidden text-center py-20">
+          <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center text-3xl text-gray-500 mx-auto mb-4">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">No Favorites Yet</h3>
+          <p class="text-gray-400 mb-6">Save packages you like for quick access later</p>
+          <button onclick="navigateTo('browse')" class="px-6 py-3 bg-emerald-800 text-white rounded-xl font-medium hover:bg-emerald-700 transition">
+            Browse Leads
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== WALLET SECTION ===== -->
+      <div id="section-wallet" class="hidden fade-in">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div class="lg:col-span-2 glass rounded-2xl p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-lime-400/10 rounded-full blur-3xl"></div>
+            <div class="relative z-10">
+              <p class="text-gray-400 text-sm mb-2">Available Balance</p>
+              <div class="text-5xl font-bold text-white mb-4">₹<span id="wallet-display">12,450</span></div>
+              <div class="flex gap-3">
+                <button onclick="showAddFundsModal()" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl font-semibold hover:bg-lime-300 transition flex items-center gap-2">
+                  <i class="fas fa-plus"></i> Add Funds
+                </button>
+                <button class="px-6 py-3 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition">
+                  Withdraw
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-white mb-4">Quick Add</h3>
+            <div class="space-y-3">
+              <button onclick="quickAdd(500)" class="w-full py-3 bg-white/5 rounded-xl text-white hover:bg-white/10 transition flex items-center justify-between px-4">
+                <span>₹500</span><i class="fas fa-plus text-lime-400"></i>
+              </button>
+              <button onclick="quickAdd(1000)" class="w-full py-3 bg-white/5 rounded-xl text-white hover:bg-white/10 transition flex items-center justify-between px-4">
+                <span>₹1,000</span><i class="fas fa-plus text-lime-400"></i>
+              </button>
+              <button onclick="quickAdd(2000)" class="w-full py-3 bg-white/5 rounded-xl text-white hover:bg-white/10 transition flex items-center justify-between px-4">
+                <span>₹2,000</span><i class="fas fa-plus text-lime-400"></i>
+              </button>
+              <button onclick="quickAdd(5000)" class="w-full py-3 bg-white/5 rounded-xl text-white hover:bg-white/10 transition flex items-center justify-between px-4">
+                <span>₹5,000</span><i class="fas fa-plus text-lime-400"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-white mb-4">Transaction History</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-white/5 text-left text-gray-400 text-sm">
+                  <th class="px-4 py-3 font-medium">Date</th>
+                  <th class="px-4 py-3 font-medium">Description</th>
+                  <th class="px-4 py-3 font-medium">Type</th>
+                  <th class="px-4 py-3 font-medium">Amount</th>
+                  <th class="px-4 py-3 font-medium">Balance</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-3 text-gray-300">Jul 24, 2026</td>
+                  <td class="px-4 py-3 text-white">Added funds via UPI</td>
+                  <td class="px-4 py-3"><span class="text-emerald-400 text-xs bg-emerald-400/10 px-2 py-1 rounded-full">Credit</span></td>
+                  <td class="px-4 py-3 text-emerald-400 font-medium">+₹5,000</td>
+                  <td class="px-4 py-3 text-gray-300">₹12,450</td>
+                </tr>
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-3 text-gray-300">Jul 23, 2026</td>
+                  <td class="px-4 py-3 text-white">Purchased Instagram Housewife Pack</td>
+                  <td class="px-4 py-3"><span class="text-red-400 text-xs bg-red-400/10 px-2 py-1 rounded-full">Debit</span></td>
+                  <td class="px-4 py-3 text-red-400 font-medium">-₹750</td>
+                  <td class="px-4 py-3 text-gray-300">₹7,450</td>
+                </tr>
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-3 text-gray-300">Jul 22, 2026</td>
+                  <td class="px-4 py-3 text-white">Purchased Facebook Working Pro Pack</td>
+                  <td class="px-4 py-3"><span class="text-red-400 text-xs bg-red-400/10 px-2 py-1 rounded-full">Debit</span></td>
+                  <td class="px-4 py-3 text-red-400 font-medium">-₹1,000</td>
+                  <td class="px-4 py-3 text-gray-300">₹8,450</td>
+                </tr>
+                <tr class="border-b border-white/5">
+                  <td class="px-4 py-3 text-gray-300">Jul 20, 2026</td>
+                  <td class="px-4 py-3 text-white">Added funds via Card</td>
+                  <td class="px-4 py-3"><span class="text-emerald-400 text-xs bg-emerald-400/10 px-2 py-1 rounded-full">Credit</span></td>
+                  <td class="px-4 py-3 text-emerald-400 font-medium">+₹10,000</td>
+                  <td class="px-4 py-3 text-gray-300">₹9,450</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DOWNLOADS SECTION ===== -->
+      <div id="section-downloads" class="hidden fade-in">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-white">Downloads</h2>
+          <p class="text-gray-400">Download your purchased leads in CSV format</p>
+        </div>
+        <div class="glass rounded-2xl overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-white/5 text-left text-gray-400 text-sm">
+                  <th class="px-6 py-4 font-medium">Order ID</th>
+                  <th class="px-6 py-4 font-medium">Package Name</th>
+                  <th class="px-6 py-4 font-medium">Platform</th>
+                  <th class="px-6 py-4 font-medium">Leads Count</th>
+                  <th class="px-6 py-4 font-medium">Purchased On</th>
+                  <th class="px-6 py-4 font-medium">Status</th>
+                  <th class="px-6 py-4 font-medium">Download</th>
+                </tr>
+              </thead>
+              <tbody id="downloads-table-body" class="text-sm">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SUPPORT SECTION ===== -->
+      <div id="section-support" class="hidden fade-in">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-2">Support Center</h2>
+            <p class="text-gray-400 mb-6">Need help? Create a ticket or check FAQs</p>
+            
+            <div class="glass rounded-2xl p-6 mb-6">
+              <h3 class="text-lg font-bold text-white mb-4">Create Ticket</h3>
+              <form class="space-y-4" onsubmit="event.preventDefault(); showToast('Ticket created successfully!', 'success');">
+                <div>
+                  <label class="text-gray-300 text-sm mb-2 block">Subject</label>
+                  <input type="text" placeholder="What is your issue about?" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition">
+                </div>
+                <div>
+                  <label class="text-gray-300 text-sm mb-2 block">Category</label>
+                  <select class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-gray-300 outline-none focus:border-lime-400 transition">
+                    <option>Order Issue</option>
+                    <option>Payment Issue</option>
+                    <option>Lead Quality</option>
+                    <option>Account Problem</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-gray-300 text-sm mb-2 block">Message</label>
+                  <textarea rows="4" placeholder="Describe your issue in detail..." class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 btn-primary text-white rounded-xl font-semibold hover:shadow-lg transition">
+                  Submit Ticket
+                </button>
+              </form>
+            </div>
+
+            <div class="glass rounded-2xl p-6">
+              <h3 class="text-lg font-bold text-white mb-4">Contact Info</h3>
+              <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-emerald-800 rounded-lg flex items-center justify-center text-lime-400">
+                    <i class="fab fa-whatsapp"></i>
+                  </div>
+                  <div>
+                    <div class="text-white font-medium">WhatsApp Support</div>
+                    <div class="text-gray-400 text-sm">+91 98765 43210</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-blue-400">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div>
+                    <div class="text-white font-medium">Email Support</div>
+                    <div class="text-gray-400 text-sm">support@leadflow.in</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white mb-4">Frequently Asked Questions</h3>
+            <div class="space-y-3">
+              <details class="glass rounded-xl overflow-hidden group">
+                <summary class="flex items-center justify-between p-4 cursor-pointer text-white font-medium hover:bg-white/5 transition">
+                  <span>How do I download my leads?</span>
+                  <i class="fas fa-chevron-down transition group-open:rotate-180 text-gray-400"></i>
+                </summary>
+                <div class="px-4 pb-4 text-gray-400 text-sm">Go to Downloads section, find your order and click the download button. You'll get a CSV file with all lead details.</div>
+              </details>
+              <details class="glass rounded-xl overflow-hidden group">
+                <summary class="flex items-center justify-between p-4 cursor-pointer text-white font-medium hover:bg-white/5 transition">
+                  <span>What if leads are invalid?</span>
+                  <i class="fas fa-chevron-down transition group-open:rotate-180 text-gray-400"></i>
+                </summary>
+                <div class="px-4 pb-4 text-gray-400 text-sm">If invalid leads exceed 10%, we offer instant replacement credits. Raise a ticket with proof.</div>
+              </details>
+              <details class="glass rounded-xl overflow-hidden group">
+                <summary class="flex items-center justify-between p-4 cursor-pointer text-white font-medium hover:bg-white/5 transition">
+                  <span>How long until I receive leads?</span>
+                  <i class="fas fa-chevron-down transition group-open:rotate-180 text-gray-400"></i>
+                </summary>
+                <div class="px-4 pb-4 text-gray-400 text-sm">Leads are delivered within 24 hours of payment confirmation. Most orders are fulfilled within 2-4 hours.</div>
+              </details>
+              <details class="glass rounded-xl overflow-hidden group">
+                <summary class="flex items-center justify-between p-4 cursor-pointer text-white font-medium hover:bg-white/5 transition">
+                  <span>Can I get a refund?</span>
+                  <i class="fas fa-chevron-down transition group-open:rotate-180 text-gray-400"></i>
+                </summary>
+                <div class="px-4 pb-4 text-gray-400 text-sm">Due to the digital nature of our product, we don't offer refunds. However, we provide replacement credits for invalid leads.</div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ==================== MODALS ==================== -->
+
+<!-- Buy Package Modal -->
+<div id="buy-modal" class="fixed inset-0 z-50 hidden">
+  <div class="modal-overlay absolute inset-0" onclick="closeBuyModal()"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg px-4">
+    <div class="bg-[#0f172a] border border-white/10 rounded-3xl p-8 shadow-2xl slide-up">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-bold text-white">Confirm Order</h3>
+        <button onclick="closeBuyModal()" class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="buy-modal-content">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Funds Modal -->
+<div id="funds-modal" class="fixed inset-0 z-50 hidden">
+  <div class="modal-overlay absolute inset-0" onclick="closeFundsModal()"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md px-4">
+    <div class="bg-[#0f172a] border border-white/10 rounded-3xl p-8 shadow-2xl slide-up">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-bold text-white">Add Funds</h3>
+        <button onclick="closeFundsModal()" class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="text-gray-300 text-sm mb-2 block">Amount (₹)</label>
+          <input type="number" id="fund-amount" placeholder="Enter amount" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none focus:border-lime-400 transition text-2xl font-bold">
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <button onclick="setFundAmount(500)" class="py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-white/10 transition text-sm">₹500</button>
+          <button onclick="setFundAmount(1000)" class="py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-white/10 transition text-sm">₹1k</button>
+          <button onclick="setFundAmount(2000)" class="py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-white/10 transition text-sm">₹2k</button>
+          <button onclick="setFundAmount(5000)" class="py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-white/10 transition text-sm">₹5k</button>
+        </div>
+        <div>
+          <label class="text-gray-300 text-sm mb-2 block">Payment Method</label>
+          <div class="space-y-2">
+            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10 cursor-pointer hover:bg-white/10 transition">
+              <input type="radio" name="payment" class="text-lime-400" checked>
+              <i class="fas fa-qrcode text-lime-400"></i>
+              <span class="text-white text-sm">UPI</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10 cursor-pointer hover:bg-white/10 transition">
+              <input type="radio" name="payment" class="text-lime-400">
+              <i class="fas fa-credit-card text-blue-400"></i>
+              <span class="text-white text-sm">Card</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10 cursor-pointer hover:bg-white/10 transition">
+              <input type="radio" name="payment" class="text-lime-400">
+              <i class="fas fa-wallet text-purple-400"></i>
+              <span class="text-white text-sm">Wallet</span>
+            </label>
+          </div>
+        </div>
+        <button onclick="processAddFunds()" class="w-full py-3.5 btn-primary text-white rounded-xl font-semibold hover:shadow-lg transition">
+          Pay Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast hidden">
+  <div class="bg-[#0f172a] border border-white/10 rounded-xl px-5 py-4 shadow-2xl flex items-center gap-3">
+    <div id="toast-icon" class="w-8 h-8 rounded-full flex items-center justify-center text-white"></div>
+    <div>
+      <div id="toast-title" class="text-white font-medium text-sm"></div>
+      <div id="toast-message" class="text-gray-400 text-xs"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const platforms = [
+  { id: 'instagram', name: 'Instagram', icon: 'fab fa-instagram', color: 'from-pink-500 to-rose-500', bg: 'bg-pink-500/10', text: 'text-pink-400', desc: 'High-intent leads from DMs, Stories & Reels', audiences: ['housewife', 'student', 'working'] },
+  { id: 'facebook', name: 'Facebook', icon: 'fab fa-facebook-f', color: 'from-blue-600 to-blue-800', bg: 'bg-blue-500/10', text: 'text-blue-400', desc: 'Targeted leads from Groups, Ads & Marketplace', audiences: ['housewife', 'working', 'business'] },
+  { id: 'youtube', name: 'YouTube', icon: 'fab fa-youtube', color: 'from-red-600 to-red-800', bg: 'bg-red-500/10', text: 'text-red-400', desc: 'Engaged subscribers & commenters from niche', audiences: ['student', 'jobseeker', 'working'] },
+  { id: 'linkedin', name: 'LinkedIn', icon: 'fab fa-linkedin-in', color: 'from-blue-700 to-sky-500', bg: 'bg-blue-400/10', text: 'text-blue-300', desc: 'B2B professionals & decision makers', audiences: ['business', 'working', 'jobseeker'] },
+  { id: 'snapchat', name: 'Snapchat', icon: 'fab fa-snapchat-ghost', color: 'from-yellow-400 to-orange-500', bg: 'bg-yellow-500/10', text: 'text-yellow-400', desc: 'Gen-Z audience, quick responders', audiences: ['student', 'working'] },
+  { id: 'google', name: 'Google Ads', icon: 'fab fa-google', color: 'from-blue-500 to-indigo-600', bg: 'bg-indigo-500/10', text: 'text-indigo-400', desc: 'High-intent search leads', audiences: ['business', 'working', 'jobseeker', 'housewife'] }
+];
+
+const packagesData = {
+  instagram: [
+    { id: 'ig1', name: 'Instagram Starter', leads: 50, price: 750, audience: 'housewife', delivery: '24 hrs', tags: ['High Response', 'Verified'] },
+    { id: 'ig2', name: 'Instagram Pro', leads: 100, price: 1400, audience: 'housewife', delivery: '24 hrs', tags: ['Premium', 'Hot'] },
+    { id: 'ig3', name: 'Instagram Student Pack', leads: 50, price: 650, audience: 'student', delivery: '24 hrs', tags: ['Gen-Z', 'Active'] },
+    { id: 'ig4', name: 'Instagram Working Pro', leads: 100, price: 1500, audience: 'working', delivery: '24 hrs', tags: ['B2C', 'Verified'] },
+    { id: 'ig5', name: 'Instagram Mega', leads: 200, price: 2800, audience: 'housewife', delivery: '48 hrs', tags: ['Bulk', 'Best Value'] },
+    { id: 'ig6', name: 'Instagram Student Bulk', leads: 150, price: 1800, audience: 'student', delivery: '48 hrs', tags: ['Bulk', 'Active'] }
+  ],
+  facebook: [
+    { id: 'fb1', name: 'Facebook Housewife', leads: 50, price: 700, audience: 'housewife', delivery: '24 hrs', tags: ['High Intent', 'Verified'] },
+    { id: 'fb2', name: 'Facebook Working', leads: 100, price: 1600, audience: 'working', delivery: '24 hrs', tags: ['Premium', 'B2C'] },
+    { id: 'fb3', name: 'Facebook Business', leads: 50, price: 1200, audience: 'business', delivery: '24 hrs', tags: ['B2B', 'Decision Makers'] },
+    { id: 'fb4', name: 'Facebook Pro Pack', leads: 200, price: 3000, audience: 'working', delivery: '48 hrs', tags: ['Bulk', 'Best Value'] }
+  ],
+  youtube: [
+    { id: 'yt1', name: 'YouTube Subscriber Leads', leads: 50, price: 875, audience: 'student', delivery: '24 hrs', tags: ['Engaged', 'Niche'] },
+    { id: 'yt2', name: 'YouTube Commenters', leads: 100, price: 1600, audience: 'working', delivery: '24 hrs', tags: ['Active', 'Hot'] },
+    { id: 'yt3', name: 'YouTube Job Seekers', leads: 50, price: 900, audience: 'jobseeker', delivery: '24 hrs', tags: ['Career', 'Active'] }
+  ],
+  linkedin: [
+    { id: 'li1', name: 'LinkedIn B2B Pro', leads: 50, price: 2000, audience: 'business', delivery: '24 hrs', tags: ['Decision Maker', 'Premium'] },
+    { id: 'li2', name: 'LinkedIn Working', leads: 100, price: 3500, audience: 'working', delivery: '48 hrs', tags: ['C-Suite', 'Verified'] },
+    { id: 'li3', name: 'LinkedIn Job Seeker', leads: 50, price: 1500, audience: 'jobseeker', delivery: '24 hrs', tags: ['Active', 'Responsive'] }
+  ],
+  snapchat: [
+    { id: 'sc1', name: 'Snapchat Gen-Z', leads: 50, price: 600, audience: 'student', delivery: '24 hrs', tags: ['Young', 'Trendy'] },
+    { id: 'sc2', name: 'Snapchat Working', leads: 100, price: 1100, audience: 'working', delivery: '24 hrs', tags: ['Millennial', 'Active'] }
+  ],
+  google: [
+    { id: 'gg1', name: 'Google Search Housewife', leads: 50, price: 900, audience: 'housewife', delivery: '24 hrs', tags: ['High Intent', 'Search'] },
+    { id: 'gg2', name: 'Google Business Leads', leads: 50, price: 1500, audience: 'business', delivery: '24 hrs', tags: ['B2B', 'Intent'] },
+    { id: 'gg3', name: 'Google Job Seekers', leads: 100, price: 1800, audience: 'jobseeker', delivery
+
+ <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+    <div class="bg-slate-900 border border-white/10 rounded-xl px-6 py-4 shadow-2xl flex items-center gap-3">
+      <div id="toastIcon" class="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400"><i class="fas fa-check"></i></div>
+      <div>
+        <p class="text-white text-sm font-medium" id="toastMessage">Success!</p>
+      </div>
+    </div>
+  </div>
+
+<div class="max-w-6xl mx-auto mt-8 text-center text-xs text-gray-500">
+      © 2026 LeadFlow. Copyright and rights reserved • <span class="hover:text-white cursor-pointer">Contact us</span> • <span class="hover:text-white cursor-pointer">Terms and Conditions</span> • <span class="hover:text-white cursor-pointer">Privacy Policy</span>
+    </div>
+  </section>
+
+</body>
+</html>
