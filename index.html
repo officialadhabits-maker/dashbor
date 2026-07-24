@@ -5,257 +5,441 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LeadFlow - Buy Verified Leads, Scale Your Sales</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 tailwind.config = {
   theme: {
     extend: {
-      fontFamily: { sans: ['Plus Jakarta Sans','sans-serif'] },
-      colors: { brand: { dark: '#0B1120', green: '#1a4d2e', lime: '#c5e86c', gray: '#f3f4f6' } }
+      fontFamily: { sans: ['Inter','sans-serif'] },
+      colors: {
+        brand: {
+          dark: '#0f172a',
+          dark2: '#1a2332',
+          green: '#3d6b5e',
+          greenDark: '#1a4d2e',
+          lime: '#c5e86c',
+          limeDark: '#a3d900',
+        }
+      }
     }
   }
 }
 </script>
 <style>
-  body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  body { font-family: 'Inter', sans-serif; }
   html { scroll-behavior: smooth; }
-  .float-anim { animation: float 6s ease-in-out infinite; }
-  .float-anim-delay { animation: float 6s ease-in-out 2s infinite; }
-  .float-anim-delay2 { animation: float 6s ease-in-out 4s infinite; }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+  .float-anim   { animation: floatY 7s ease-in-out infinite; }
+  .float-anim-d1{ animation: floatY 7s ease-in-out 1.8s infinite; }
+  .float-anim-d2{ animation: floatY 7s ease-in-out 3.6s infinite; }
+  .float-anim-d3{ animation: floatY 7s ease-in-out 5.4s infinite; }
+  @keyframes floatY { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(-22px) rotate(var(--r,0deg));} }
   
   .marquee-track { display:flex; animation: marquee 30s linear infinite; width:max-content; }
   @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
   
-  .glass { background:rgba(255,255,255,0.8); backdrop-filter:blur(12px); }
-  .dark-glass { background:rgba(11,17,32,0.75); backdrop-filter:blur(12px); }
+  .glass-dark  { background: rgba(15,23,42,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .glass-light { background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   
-  .sidebar-item.active { background: #3d6b5e; color: #fff; font-weight: 700; }
-  .sidebar-item.active i { color: #c5e86c; }
+  .sidebar-item.active { background: rgba(197,232,108,0.12); color:#c5e86c; border-right:4px solid #c5e86c; font-weight: 700; }
+  .sidebar-item.active i { color:#c5e86c; }
   
-  .fade-in { animation: fadeIn .4s ease; }
+  ::-webkit-scrollbar { width:8px; height:8px; }
+  ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  
+  .fade-in   { animation: fadeIn .4s ease; }
   @keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-  .toast-in { animation: toastIn .3s ease; }
+  .toast-in  { animation: toastIn .3s ease; }
   @keyframes toastIn { from{opacity:0; transform:translateX(60px);} to{opacity:1; transform:translateX(0);} }
   .modal-enter { animation: modalEnter .25s ease; }
   @keyframes modalEnter { from{opacity:0; transform:scale(.95);} to{opacity:1; transform:scale(1);} }
   
-  details > summary { list-style: none; } details > summary::-webkit-details-marker { display: none; }
-  .chev { transition: transform .3s ease; } details[open] .chev { transform: rotate(180deg); }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .chev { transition: transform .3s ease; }
+  details[open] .chev { transform: rotate(180deg); }
   
   .premium-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 40px -15px rgba(0,0,0,0.1); }
   .premium-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
   
-  ::-webkit-scrollbar { width:8px; height:8px; } ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+  .sticky-note { transition: transform 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+  .sticky-note:hover { transform: translateY(-5px) rotate(1deg); }
+  
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 </head>
-<body class="font-sans antialiased text-slate-900 bg-white">
+<body class="bg-slate-50 text-slate-900 antialiased">
 
 <!-- ════════════ LANDING PAGE (Public) ════════════ -->
-<div id="landingShell">
+<div id="landingShell" class="bg-white">
 
   <!-- Navbar -->
-  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 dark-glass border border-white/10 rounded-full px-6 py-3 flex items-center gap-6 shadow-2xl max-w-5xl w-[92%]">
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 glass-dark border border-white/10 rounded-full px-5 py-2.5 flex items-center gap-4 shadow-2xl w-[94%] max-w-5xl">
     <div class="flex items-center gap-2">
-      <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">L</div>
-      <span class="text-white font-extrabold text-lg tracking-tight">LeadFlow</span>
+      <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-extrabold text-lg shadow-lg">L</div>
+      <span class="text-white font-extrabold text-lg tracking-tight hidden sm:block">LeadFlow</span>
     </div>
-    <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
-      <a href="#home" class="hover:text-lime-400 transition">Home</a>
-      <a href="#packs" class="hover:text-lime-400 transition">Lead Packs</a>
-      <a href="#works" class="hover:text-lime-400 transition">Process</a>
-      <a href="#faq" class="hover:text-lime-400 transition">FAQ</a>
+    <div class="hidden md:flex items-center gap-6 text-sm text-gray-300 absolute left-1/2 -translate-x-1/2">
+      <a href="#home" class="hover:text-lime-400 transition font-medium">Home</a>
+      <a href="#packs" class="hover:text-lime-400 transition font-medium">Packages</a>
+      <a href="#faq" class="hover:text-lime-400 transition font-medium">FAQ</a>
+      <a href="#contact" class="hover:text-lime-400 transition font-medium">Contact us</a>
     </div>
-    <div class="ml-auto flex items-center gap-3">
-      <button onclick="showAuthPage('login')" class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-bold hover:bg-lime-400 transition shadow-md">Log in</button>
-      <button onclick="showAuthPage('register')" class="px-5 py-2.5 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition hidden sm:block">Register</button>
+    <div class="ml-auto flex items-center gap-2">
+      <button onclick="showAuthPage('login')" class="px-4 py-1.5 bg-white text-slate-900 rounded-full text-xs font-bold hover:bg-lime-400 transition">Log in</button>
+      <button onclick="showAuthPage('register')" class="px-4 py-1.5 border border-white/30 text-white rounded-full text-xs font-semibold hover:bg-white/10 transition">Register Now</button>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="relative pt-36 pb-24 md:pt-44 md:pb-32 bg-white overflow-hidden">
     <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-28 left-[8%] float-anim"><div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-xl flex items-center justify-center text-white text-2xl"><i class="fab fa-facebook-f"></i></div></div>
-      <div class="absolute top-40 left-[18%] float-anim-delay"><div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-xl"><i class="fab fa-instagram"></i></div></div>
-      <div class="absolute bottom-32 left-[6%] float-anim-delay2"><div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-xl flex items-center justify-center text-white text-3xl"><i class="fab fa-youtube"></i></div></div>
-      <div class="absolute top-36 right-[10%] float-anim-delay"><div class="w-16 h-16 bg-gradient-to-br from-blue-700 to-sky-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-2xl"><i class="fab fa-linkedin-in"></i></div></div>
-      <div class="absolute bottom-40 right-[8%] float-anim"><div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-xl"><i class="fab fa-snapchat-ghost"></i></div></div>
+      <div class="absolute top-24 left-[6%] float-anim"><div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-2xl transform -rotate-6"><i class="fab fa-instagram"></i></div></div>
+      <div class="absolute top-40 left-[15%] float-anim-d1"><div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-xl flex items-center justify-center text-white text-xl transform rotate-3"><i class="fab fa-facebook-f"></i></div></div>
+      <div class="absolute bottom-32 left-[4%] float-anim-d2"><div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-xl flex items-center justify-center text-white text-3xl transform -rotate-3"><i class="fab fa-youtube"></i></div></div>
+      <div class="absolute top-32 right-[8%] float-anim-d1"><div class="w-16 h-16 bg-gradient-to-br from-blue-700 to-sky-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-2xl transform rotate-6"><i class="fab fa-linkedin-in"></i></div></div>
+      <div class="absolute bottom-40 right-[6%] float-anim"><div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl shadow-xl flex items-center justify-center text-white text-xl transform -rotate-6"><i class="fab fa-snapchat-ghost"></i></div></div>
     </div>
 
-    <div class="absolute top-32 left-[4%] hidden lg:block float-anim-delay2">
-      <div class="w-40 h-32 bg-slate-900 rounded-2xl p-5 text-white shadow-2xl relative overflow-hidden border border-white/10">
-        <div class="text-4xl font-extrabold text-lime-400">50k+</div>
+    <div class="absolute top-28 left-[2%] hidden lg:block float-anim-d2">
+      <div class="w-40 h-32 bg-slate-900 rounded-2xl p-5 text-white shadow-2xl relative overflow-hidden border border-white/10 transform -rotate-3">
+        <div class="text-4xl font-extrabold text-lime-400">50K+</div>
         <div class="text-xs text-gray-400 mt-2 font-medium tracking-wide">Leads Delivered<br>Monthly</div>
         <svg class="absolute bottom-2 right-2 opacity-10" width="60" height="40"><path d="M0 40 Q20 10 40 30 T60 20" stroke="white" fill="none" stroke-width="3"/></svg>
       </div>
     </div>
-    <div class="absolute bottom-24 right-[5%] hidden lg:block float-anim">
-      <div class="w-40 h-32 bg-emerald-900 rounded-2xl p-5 text-white shadow-2xl relative overflow-hidden border border-white/10">
-        <div class="text-4xl font-extrabold text-lime-400">24hr</div>
-        <div class="text-xs text-gray-300 mt-2 font-medium tracking-wide">Delivery<br>Guarantee</div>
+    <div class="absolute top-48 right-[2%] hidden lg:block float-anim">
+      <div class="w-40 h-32 bg-emerald-900 rounded-2xl p-5 text-white shadow-2xl relative overflow-hidden border border-white/10 transform rotate-3">
+        <div class="text-4xl font-extrabold text-lime-400">5</div>
+        <div class="text-xs text-gray-300 mt-2 font-medium tracking-wide">Top Social<br>Platforms</div>
+      </div>
+    </div>
+    <div class="absolute bottom-28 left-[12%] hidden lg:block float-anim-d1">
+      <div class="w-40 h-32 bg-slate-800 rounded-2xl p-5 text-white shadow-2xl relative overflow-hidden border border-white/10 transform rotate-2">
+        <div class="text-4xl font-extrabold text-lime-400">100+</div>
+        <div class="text-xs text-gray-400 mt-2 font-medium tracking-wide">Happy Clients<br>& Resellers</div>
       </div>
     </div>
 
-    <div class="max-w-5xl mx-auto text-center px-6 relative z-10">
-      <span class="inline-block px-5 py-2 bg-slate-100 text-slate-700 rounded-full text-xs font-bold tracking-widest uppercase mb-8 border border-slate-200">India's #1 Verified Lead Marketplace</span>
+    <div class="max-w-4xl mx-auto text-center px-6 relative z-10">
       <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight tracking-tighter">
-        Buy Verified Leads. <br> <span class="relative inline-block mt-3">
-          <span class="bg-lime-400 text-slate-900 px-4 py-1 rounded-2xl transform -rotate-2 inline-block shadow-lg">Build a Business That Pays.</span>
-        </span>
+        Buy Real <span class="bg-lime-400 text-slate-900 px-2 py-1 rounded-lg inline-block transform -rotate-2">Leads.</span><br>Grow Your Business.
       </h1>
-      <p class="mt-10 text-base md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium">
-        Stop burning cash on cold ads. Access rigorously filtered, high-intent leads delivered directly to your dashboard—starting at just <span class="font-bold text-slate-900">₹15 per lead.</span>
+      <p class="mt-8 text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+        High-intent, verified leads from top social platforms. Filtered by audience. Delivered in 24 hours.
       </p>
-      <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-        <a href="#packs" class="w-full sm:w-auto px-10 py-4 bg-slate-900 text-white rounded-full font-bold text-lg hover:bg-slate-800 transition shadow-xl hover:shadow-2xl flex items-center gap-2 justify-center">Explore Lead Packs <i class="fas fa-arrow-right"></i></a>
-        <button onclick="showAuthPage('register')" class="w-full sm:w-auto px-10 py-4 bg-gray-100 text-slate-700 rounded-full font-bold text-lg hover:bg-gray-200 transition">Scale Now</button>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#packs" class="w-full sm:w-auto px-10 py-4 bg-slate-900 text-white rounded-full font-bold text-lg hover:bg-slate-800 transition shadow-xl hover:shadow-2xl flex items-center gap-2 justify-center">Explore Packages <i class="fas fa-arrow-right"></i></a>
+        <button onclick="showAuthPage('register')" class="w-full sm:w-auto px-10 py-4 bg-gray-100 text-slate-700 rounded-full font-bold text-lg hover:bg-gray-200 transition">Register Free</button>
+      </div>
+      
+      <div class="mt-20">
+        <p class="text-sm text-slate-500 font-medium mb-6 uppercase tracking-wider">Latest News & Media Coverage</p>
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60 grayscale">
+          <div class="text-2xl font-bold text-slate-400">Forbes</div>
+          <div class="text-2xl font-bold text-slate-400">TechCrunch</div>
+          <div class="text-2xl font-bold text-slate-400">YourStory</div>
+          <div class="text-2xl font-bold text-slate-400">Outlook</div>
+          <div class="text-2xl font-bold text-slate-400 hidden md:block">Mid-Day</div>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- Marquee -->
-  <div class="bg-slate-900 py-4 overflow-hidden border-y-4 border-lime-400">
-    <div class="marquee-track">
-      <span class="text-lime-400 font-extrabold text-lg mx-6 uppercase tracking-wider">Instagram Leads</span> <span class="text-slate-700 mx-2 text-2xl">•</span>
-      <span class="text-white font-extrabold text-lg mx-6 uppercase tracking-wider">Facebook Ads</span> <span class="text-slate-700 mx-2 text-2xl">•</span>
-      <span class="text-lime-400 font-extrabold text-lg mx-6 uppercase tracking-wider">YouTube Subs</span> <span class="text-slate-700 mx-2 text-2xl">•</span>
-      <span class="text-white font-extrabold text-lg mx-6 uppercase tracking-wider">LinkedIn B2B</span> <span class="text-slate-700 mx-2 text-2xl">•</span>
-      <span class="text-lime-400 font-extrabold text-lg mx-6 uppercase tracking-wider">Google Search</span> <span class="text-slate-700 mx-2 text-2xl">•</span>
-    </div>
-  </div>
 
   <!-- Lead Packs -->
   <section id="packs" class="bg-slate-900 py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-xs font-bold tracking-widest text-lime-400 uppercase">Our Inventory</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Choose Your Lead Niche</h2>
-        <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">Select your platform, apply demographic filters, and start closing high-ticket clients from day one.</p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-lime-400 uppercase">Our Inventory</span>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-3 tracking-tight">Lead Packs</h2>
+          <p class="text-slate-400 mt-2 text-lg max-w-md">Choose your platform, pick your audience, and start converting today.</p>
+        </div>
+        <div class="flex bg-white/10 rounded-full p-1">
+          <button onclick="switchLandingTab('social')" id="landingTabSocial" class="px-5 py-2 bg-white text-slate-900 rounded-full text-sm font-bold transition">Social Platforms (5)</button>
+          <button onclick="switchLandingTab('practice')" id="landingTabPractice" class="px-5 py-2 text-gray-300 rounded-full text-sm font-bold hover:text-white transition">Practice Leads (4)</button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div id="landingSocialGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Instagram -->
-        <div class="bg-emerald-900 rounded-3xl p-8 relative overflow-hidden premium-card border border-emerald-700">
-          <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-pink-500 shadow-lg mb-6"><i class="fab fa-instagram"></i></div>
-          <h3 class="text-2xl font-extrabold text-white">Instagram Leads</h3>
-          <p class="text-emerald-200 text-sm mt-3 leading-relaxed">High-intent leads from DMs, Stories & Reels. Filtered by age, gender & location.</p>
-          <div class="mt-6 flex items-center justify-between">
-            <span class="text-3xl font-extrabold text-lime-400">₹15<span class="text-sm text-emerald-300 font-normal">/lead</span></span>
-            <button onclick="showAuthPage('register')" class="px-5 py-2.5 bg-lime-400 text-slate-900 rounded-full text-sm font-bold hover:bg-lime-300 transition">View Packs</button>
+        <div class="bg-emerald-900 rounded-3xl p-8 relative overflow-hidden premium-card border border-emerald-700 transform md:rotate-[-1deg]">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white">Instagram</h3>
+              <p class="text-emerald-200 text-sm mt-3 max-w-[70%]">High-intent leads from DMs, Stories & Reels. Filtered by age, gender & location.</p>
+            </div>
+            <div class="w-16 h-20 bg-slate-800 rounded-lg flex items-center justify-center text-4xl text-pink-500 shadow-lg"><i class="fab fa-instagram"></i></div>
+          </div>
+          <div class="mt-8 flex items-center gap-3">
+            <button onclick="showAuthPage('register')" class="w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 hover:bg-lime-300 transition shadow-md"><i class="fas fa-arrow-right"></i></button>
+            <span class="text-white font-bold text-lg">Buy Now</span>
           </div>
         </div>
         <!-- Facebook -->
-        <div class="bg-gray-50 rounded-3xl p-8 relative overflow-hidden premium-card border border-slate-200">
-          <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl text-blue-600 shadow-lg mb-6 border border-slate-100"><i class="fab fa-facebook-f"></i></div>
-          <h3 class="text-2xl font-extrabold text-slate-900">Facebook Ads</h3>
-          <p class="text-slate-600 text-sm mt-3 leading-relaxed">Targeted leads from Groups, Ads & Marketplace. Ready for immediate outreach.</p>
-          <div class="mt-6 flex items-center justify-between">
-            <span class="text-3xl font-extrabold text-slate-900">₹12<span class="text-sm text-slate-500 font-normal">/lead</span></span>
-            <button onclick="showAuthPage('register')" class="px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">View Packs</button>
-          </div>
-        </div>
-        <!-- Practic Leads (NEW SECTION) -->
-        <div class="bg-lime-400 rounded-3xl p-8 relative overflow-hidden premium-card">
-          <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-lime-400 shadow-lg mb-6"><i class="fas fa-user-graduate"></i></div>
-          <h3 class="text-2xl font-extrabold text-slate-900">Practic Leads</h3>
-          <p class="text-slate-800 text-sm mt-3 leading-relaxed">Low-cost leads to practice your pitch. Only Girls at ₹3, Mix & 70/30 at ₹2.</p>
-          <div class="mt-6 flex items-center justify-between">
-            <span class="text-3xl font-extrabold text-slate-900">₹2<span class="text-sm text-slate-700 font-normal">/lead</span></span>
-            <button onclick="showAuthPage('register')" class="px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">View Packs</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dashboard Preview -->
-  <section class="bg-white py-24 px-6">
-    <div class="max-w-7xl mx-auto bg-slate-900 rounded-[2.5rem] p-8 md:p-14 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden border border-slate-100 shadow-2xl">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-lime-400/10 rounded-full blur-3xl"></div>
-      <div class="flex-1 relative z-10">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight">Launch Your Sales Engine<br><span class="text-lime-400">With Verified Leads.</span></h2>
-        <ul class="mt-8 space-y-4 text-gray-300">
-          <li class="flex items-start gap-3"><i class="fas fa-check-circle text-lime-400 mt-1"></i><span>Get 50+ leads minimum per order — no small packs.</span></li>
-          <li class="flex items-start gap-3"><i class="fas fa-check-circle text-lime-400 mt-1"></i><span>Filtered by platform, age, gender & profession.</span></li>
-          <li class="flex items-start gap-3"><i class="fas fa-check-circle text-lime-400 mt-1"></i><span>Instant CSV download from your personal dashboard.</span></li>
-        </ul>
-        <button onclick="showAuthPage('register')" class="mt-8 px-6 py-3.5 bg-lime-400 text-slate-900 rounded-full font-bold flex items-center gap-2 hover:bg-lime-300 transition shadow-lg">
-          Get Started Now <div class="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white text-xs"><i class="fas fa-arrow-right"></i></div>
-        </button>
-      </div>
-      <div class="flex-1 relative flex justify-center">
-        <div class="relative w-72 h-[500px] bg-slate-800 rounded-[3rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-slate-800 rounded-b-2xl z-20"></div>
-          <div class="p-6 pt-12 h-full bg-slate-900">
-            <div class="text-xs text-gray-500 font-bold tracking-wider uppercase">Dashboard Preview</div>
-            <div class="mt-6 space-y-4">
-              <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700">
-                <div class="flex justify-between text-xs text-gray-400 mb-2"><span>Instagram • Housewife</span><span class="text-lime-400 font-bold">₹750</span></div>
-                <div class="text-white text-sm font-semibold">50 Leads Assigned</div>
-                <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-lime-400 h-2 rounded-full" style="width:100%"></div></div>
-              </div>
-              <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700">
-                <div class="flex justify-between text-xs text-gray-400 mb-2"><span>LinkedIn • B2B</span><span class="text-lime-400 font-bold">₹2,000</span></div>
-                <div class="text-white text-sm font-semibold">100 Leads Assigned</div>
-                <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-lime-400 h-2 rounded-full" style="width:100%"></div></div>
-              </div>
+        <div class="bg-slate-100 rounded-3xl p-8 relative overflow-hidden premium-card border border-slate-200 transform md:rotate-[1deg]">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-3xl font-extrabold text-slate-900">Facebook</h3>
+              <p class="text-slate-600 text-sm mt-3 max-w-[70%]">Targeted leads from Groups, Ads & Marketplace ready for outreach.</p>
             </div>
+            <div class="w-16 h-20 bg-white rounded-lg flex items-center justify-center text-4xl text-blue-600 shadow-lg"><i class="fab fa-facebook-f"></i></div>
+          </div>
+          <div class="mt-8 flex items-center gap-3">
+            <button onclick="showAuthPage('register')" class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition shadow-md"><i class="fas fa-arrow-right"></i></button>
+            <span class="text-slate-900 font-bold text-lg">Buy Now</span>
           </div>
         </div>
+        <!-- YouTube -->
+        <div class="bg-white rounded-3xl p-8 relative overflow-hidden premium-card border border-slate-100 transform md:rotate-[1deg]">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-3xl font-extrabold text-slate-900">YouTube</h3>
+              <p class="text-slate-600 text-sm mt-3 max-w-[70%]">Engaged subscribers & commenters from your niche with high conversion.</p>
+            </div>
+            <div class="w-16 h-20 bg-slate-900 rounded-lg flex items-center justify-center text-4xl text-red-500 shadow-lg"><i class="fab fa-youtube"></i></div>
+          </div>
+          <div class="mt-8 flex items-center gap-3">
+            <button onclick="showAuthPage('register')" class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition shadow-md"><i class="fas fa-arrow-right"></i></button>
+            <span class="text-slate-900 font-bold text-lg">Buy Now</span>
+          </div>
+        </div>
+        <!-- LinkedIn -->
+        <div class="bg-lime-400 rounded-3xl p-8 relative overflow-hidden premium-card transform md:rotate-[-1deg]">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-3xl font-extrabold text-slate-900">LinkedIn</h3>
+              <p class="text-slate-800 text-sm mt-3 max-w-[70%]">B2B professionals & decision makers perfect for high-ticket offers.</p>
+            </div>
+            <div class="w-16 h-20 bg-slate-900 rounded-lg flex items-center justify-center text-4xl text-blue-400 shadow-lg"><i class="fab fa-linkedin-in"></i></div>
+          </div>
+          <div class="mt-8 flex items-center gap-3">
+            <button onclick="showAuthPage('register')" class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition shadow-md"><i class="fas fa-arrow-right"></i></button>
+            <span class="text-slate-900 font-bold text-lg">Buy Now</span>
+          </div>
+        </div>
+        <!-- Snapchat -->
+        <div class="bg-slate-800 rounded-3xl p-8 relative overflow-hidden premium-card border border-white/10 transform md:rotate-[1deg] md:col-span-2">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white">Snapchat</h3>
+              <p class="text-gray-400 text-sm mt-3 max-w-[70%]">Gen-Z audience, quick responders for trendy products & courses.</p>
+            </div>
+            <div class="w-16 h-20 bg-slate-700 rounded-lg flex items-center justify-center text-4xl text-yellow-400 shadow-lg"><i class="fab fa-snapchat-ghost"></i></div>
+          </div>
+          <div class="mt-8 flex items-center gap-3">
+            <button onclick="showAuthPage('register')" class="w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 hover:bg-lime-300 transition shadow-md"><i class="fas fa-arrow-right"></i></button>
+            <span class="text-white font-bold text-lg">Buy Now</span>
+          </div>
+        </div>
+      </div>
+      
+      <div id="landingPracticeGrid" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-emerald-900 rounded-3xl p-8 border border-emerald-700 premium-card">
+          <div class="flex justify-between items-start">
+            <div><h3 class="text-2xl font-extrabold text-white">Girls Only</h3><p class="text-emerald-200 text-sm mt-2">100% Female leads. Best for beauty & fashion.</p></div>
+            <div class="text-3xl text-lime-400"><i class="fas fa-female"></i></div>
+          </div>
+          <div class="mt-6 flex justify-between items-center">
+            <span class="text-2xl font-extrabold text-white">₹3<span class="text-sm font-normal text-gray-400">/lead</span></span>
+            <button onclick="showAuthPage('register')" class="px-4 py-2 bg-lime-400 text-slate-900 rounded-full text-sm font-bold">Buy Now</button>
+          </div>
+        </div>
+        <div class="bg-slate-100 rounded-3xl p-8 border border-slate-200 premium-card">
+          <div class="flex justify-between items-start">
+            <div><h3 class="text-2xl font-extrabold text-slate-900">Boys Only</h3><p class="text-slate-600 text-sm mt-2">100% Male leads. Ideal for tech & gaming.</p></div>
+            <div class="text-3xl text-blue-600"><i class="fas fa-male"></i></div>
+          </div>
+          <div class="mt-6 flex justify-between items-center">
+            <span class="text-2xl font-extrabold text-slate-900">₹2<span class="text-sm font-normal text-slate-500">/lead</span></span>
+            <button onclick="showAuthPage('register')" class="px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-bold">Buy Now</button>
+          </div>
+        </div>
+        <div class="bg-lime-400 rounded-3xl p-8 premium-card">
+          <div class="flex justify-between items-start">
+            <div><h3 class="text-2xl font-extrabold text-slate-900">70% Girls / 30% Boys</h3><p class="text-slate-800 text-sm mt-2">Majority female leads with male mix.</p></div>
+            <div class="text-3xl text-pink-500"><i class="fas fa-users"></i></div>
+          </div>
+          <div class="mt-6 flex justify-between items-center">
+            <span class="text-2xl font-extrabold text-slate-900">₹2<span class="text-sm font-normal text-slate-700">/lead</span></span>
+            <button onclick="showAuthPage('register')" class="px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-bold">Buy Now</button>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 premium-card">
+          <div class="flex justify-between items-start">
+            <div><h3 class="text-2xl font-extrabold text-slate-900">Mixed Audience</h3><p class="text-slate-600 text-sm mt-2">Perfectly balanced mix for broad testing.</p></div>
+            <div class="text-3xl text-amber-500"><i class="fas fa-blender"></i></div>
+          </div>
+          <div class="mt-6 flex justify-between items-center">
+            <span class="text-2xl font-extrabold text-slate-900">₹2<span class="text-sm font-normal text-slate-500">/lead</span></span>
+            <button onclick="showAuthPage('register')" class="px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-bold">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 bg-white/5 rounded-full p-4 flex flex-wrap items-center justify-center gap-3 border border-white/10">
+        <span class="text-gray-400 text-sm mr-2">Filter by Audience:</span>
+        <span class="px-4 py-2 bg-white text-slate-900 rounded-full text-sm font-medium cursor-pointer">Housewife</span>
+        <span class="px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 cursor-pointer transition">Working Pro</span>
+        <span class="px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 cursor-pointer transition">Students</span>
+        <span class="px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 cursor-pointer transition">Business Owners</span>
+        <span class="px-4 py-2 bg-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 cursor-pointer transition">Job Seekers</span>
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section id="works" class="bg-slate-50 py-24 px-6 relative overflow-hidden">
+  <section id="works" class="bg-white py-24 px-6 relative overflow-hidden">
     <div class="max-w-6xl mx-auto relative z-10">
       <div class="text-center mb-20">
-        <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">The Process</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight">Choose. Pay. Receive. Close.</h2>
-        <p class="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">A frictionless journey from lead selection to closed deal.</p>
+        <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">How It Works</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight">Choose. Buy. Download. Earn.</h2>
+        <p class="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">Select your platform, purchase verified leads, download CSV, and start converting.</p>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 relative">
         <svg class="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style="z-index:0">
           <path d="M280 120 Q400 120 400 200 T520 280" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
           <path d="M520 400 Q400 400 400 480 T280 560" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
         </svg>
-        <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm">
-          <div class="w-14 h-48 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 1</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">📦</div><h3 class="text-xl font-extrabold text-slate-900">Choose Your Platform.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Select Instagram, Facebook, YouTube, LinkedIn, Snapchat or Practic Leads.</p></div>
+
+        <div class="relative z-10 bg-lime-100 rounded-3xl p-8 flex gap-6 premium-card shadow-sm border border-lime-200">
+          <div class="w-14 h-48 bg-emerald-900 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 1</div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">📦</div><h3 class="text-xl font-extrabold text-slate-900">Choose Your Package.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Select the platform and audience type that aligns with your business goals.</p></div>
         </div>
-        <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm md:mt-24">
-          <div class="w-14 h-48 bg-slate-700 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 2</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">🎯</div><h3 class="text-xl font-extrabold text-slate-900">Select Your Filter.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pick audience type: Housewife, Working Pro, Only Boys/Girls. Minimum 50 leads.</p></div>
+        <div class="relative z-10 bg-slate-100 rounded-3xl p-8 flex gap-6 premium-card shadow-sm border border-slate-200 md:mt-24">
+          <div class="w-14 h-48 bg-slate-800 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 2</div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">🎓</div><h3 class="text-xl font-extrabold text-slate-900">Select Lead Count.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pick how many leads you need — 50, 100, 250, or custom. Price auto-calculates.</p></div>
         </div>
-        <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm">
-          <div class="w-14 h-48 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 3</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">💳</div><h3 class="text-xl font-extrabold text-slate-900">Make Payment.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pay securely via UPI, Card, or Wallet. Exact amount calculated instantly (Leads x Price).</p></div>
+        <div class="relative z-10 bg-lime-100 rounded-3xl p-8 flex gap-6 premium-card shadow-sm border border-lime-200">
+          <div class="w-14 h-48 bg-emerald-900 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 3</div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">🚀</div><h3 class="text-xl font-extrabold text-slate-900">Make Payment.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pay securely via UPI, Card, or Wallet. Instant confirmation.</p></div>
         </div>
-        <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm md:mt-24">
-          <div class="w-14 h-48 bg-slate-700 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 4</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">📥</div><h3 class="text-xl font-extrabold text-slate-900">Get Leads in Panel.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Download CSV from your dashboard or access leads anytime. Auto-notifications on refill.</p></div>
+        <div class="relative z-10 bg-slate-100 rounded-3xl p-8 flex gap-6 premium-card shadow-sm border border-slate-200 md:mt-24">
+          <div class="w-14 h-48 bg-slate-800 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 4</div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">💰</div><h3 class="text-xl font-extrabold text-slate-900">Download & Convert.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Get your CSV within 24 hours. Start calling, messaging, and closing deals.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Types -->
+  <section class="bg-slate-50 py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">Target Audience</span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight">Choose Your Lead Type</h2>
+        <p class="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">Explore audience-specific leads and discover the perfect match for your campaign.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-pink-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Housewife Leads</h3>
+          <p class="text-slate-600 text-sm mt-2">Verified home-makers interested in extra income, online work, and skill-building opportunities.</p>
+        </div>
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-blue-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Working Pro Leads</h3>
+          <p class="text-slate-600 text-sm mt-2">Active professionals looking for side income, freelancing, and career growth.</p>
+        </div>
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-amber-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Student Leads</h3>
+          <p class="text-slate-600 text-sm mt-2">College students and freshers eager to learn digital skills and earn online.</p>
+        </div>
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-emerald-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Business Owner Leads</h3>
+          <p class="text-slate-600 text-sm mt-2">Entrepreneurs and shop owners wanting to scale via digital marketing.</p>
+        </div>
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-purple-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Job Seeker Leads</h3>
+          <p class="text-slate-600 text-sm mt-2">Candidates actively looking for work-from-home and freelance opportunities.</p>
+        </div>
+        <div class="sticky-note bg-white p-6 rounded-xl border-t-4 border-rose-500 relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-400 rounded-full border-4 border-white shadow"></div>
+          <h3 class="text-xl font-bold text-slate-900 mt-2">Mixed Audience</h3>
+          <p class="text-slate-600 text-sm mt-2">Diverse leads across all categories for broad-reach campaigns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-white py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">Client Voices</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Businesses Trust Our Leads</h2>
+        </div>
+        <div class="flex gap-3">
+          <button class="w-10 h-10 bg-emerald-900 rounded-full text-white hover:bg-emerald-800 transition shadow-md"><i class="fas fa-chevron-left"></i></button>
+          <button class="w-10 h-10 bg-emerald-900 rounded-full text-white hover:bg-emerald-800 transition shadow-md"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="flex gap-6 overflow-x-auto pb-4 snap-x hide-scrollbar">
+        <div class="min-w-[300px] md:min-w-[350px] snap-center relative rounded-3xl overflow-hidden h-[400px] group">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-sky-400 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition"><i class="fas fa-play"></i></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h4 class="text-white font-bold text-lg">Rahul <span class="text-lime-400">Verma</span></h4>
+            <p class="text-gray-300 text-xs mt-1">Scaled affiliate income from ₹0 to ₹2L/month using Instagram leads.</p>
+          </div>
+        </div>
+        <div class="min-w-[300px] md:min-w-[350px] snap-center relative rounded-3xl overflow-hidden h-[400px] group">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-sky-400 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition"><i class="fas fa-play"></i></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h4 class="text-white font-bold text-lg">Priya <span class="text-lime-400">Sharma</span></h4>
+            <p class="text-gray-300 text-xs mt-1">Network marketing became easy when I stopped chasing cold data.</p>
+          </div>
+        </div>
+        <div class="min-w-[300px] md:min-w-[350px] snap-center relative rounded-3xl overflow-hidden h-[400px] group">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-sky-400 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition"><i class="fas fa-play"></i></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h4 class="text-white font-bold text-lg">Amit <span class="text-lime-400">Patel</span></h4>
+            <p class="text-gray-300 text-xs mt-1">The dashboard delivery is instant. I started closing from hour one.</p>
+          </div>
+        </div>
+        <div class="min-w-[300px] md:min-w-[350px] snap-center relative rounded-3xl overflow-hidden h-[400px] group">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-sky-400 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition"><i class="fas fa-play"></i></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <h4 class="text-white font-bold text-lg">Neha <span class="text-lime-400">Gupta</span></h4>
+            <p class="text-gray-300 text-xs mt-1">Finally a platform that understands resellers. Fair pricing, zero ad headache.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Why Us -->
-  <section class="bg-white py-24 px-6">
+  <section class="bg-slate-50 py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
           <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">Why LeadFlow?</span>
-          <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight leading-tight">We Don't Just Sell Data.<br><span class="text-emerald-700">We Deliver Opportunities.</span></h2>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight leading-tight">Why Us?<br><span class="text-emerald-700">We Don't Just Sell Data. We Deliver Results.</span></h2>
           <div class="mt-10 grid grid-cols-2 gap-8">
-            <div><div class="text-5xl font-extrabold text-slate-900">50k+</div><div class="text-slate-500 mt-2 font-medium">Leads Delivered</div></div>
-            <div><div class="text-5xl font-extrabold text-slate-900">500+</div><div class="text-slate-500 mt-2 font-medium">Active Resellers</div></div>
+            <div>
+              <div class="text-5xl font-extrabold text-slate-900">100+</div>
+              <div class="text-slate-500 mt-2 font-medium">Verified Sources</div>
+            </div>
+            <div>
+              <div class="text-5xl font-extrabold text-slate-900">300K+</div>
+              <div class="text-slate-500 mt-2 font-medium">Leads Delivered</div>
+            </div>
           </div>
-          <ul class="mt-10 space-y-5">
-            <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Rigorously verified contact information.</span></li>
-            <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Instant CSV access from dashboard.</span></li>
-            <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Transparent pricing, zero hidden costs.</span></li>
-          </ul>
         </div>
         <div class="relative flex justify-center">
            <div class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-lime-100 rounded-full blur-3xl opacity-50"></div>
@@ -275,32 +459,53 @@ tailwind.config = {
       </div>
       <div class="text-center mt-24 bg-slate-900 rounded-[2rem] p-12 border border-slate-800">
         <p class="text-2xl md:text-3xl font-medium text-white max-w-3xl mx-auto leading-relaxed">
-          Loved by thousands <span class="text-3xl">😍</span> who turned their outreach skills into real income and <span class="text-3xl">💰</span> growth opportunities online.
+          Loved by thousands <span class="text-3xl">😍</span> who turned cold outreach into real income and <span class="text-3xl">💰</span> growth opportunities online.
         </p>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="bg-gray-50 py-24 px-6">
+  <section id="faq" class="bg-white py-24 px-6">
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div>
         <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">FAQ</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 leading-tight tracking-tight">Everything you need to know</h2>
-        <p class="text-slate-600 mt-6 text-lg">Still have questions? Reach out to our support team 24/7.</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 leading-tight tracking-tight">What would you like to know about Us</h2>
+        <div class="mt-10 relative w-64 h-64 hidden lg:block">
+          <div class="absolute top-8 left-8 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl border border-slate-100"><i class="fab fa-instagram text-pink-500"></i></div>
+          <div class="absolute top-2 left-32 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl border border-slate-100"><i class="fab fa-facebook text-blue-600"></i></div>
+          <div class="absolute top-20 right-8 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl border border-slate-100"><i class="fab fa-youtube text-red-500"></i></div>
+          <div class="absolute bottom-16 left-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl border border-slate-100"><i class="fab fa-linkedin text-blue-700"></i></div>
+          <div class="absolute bottom-8 left-28 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-xl border border-slate-100"><i class="fab fa-snapchat-ghost text-yellow-400"></i></div>
+          <svg class="absolute inset-0 w-full h-full" style="z-index:-1">
+            <line x1="56" y1="56" x2="140" y2="30" stroke="#e2e8f0" stroke-width="2"/>
+            <line x1="140" y1="30" x2="220" y2="80" stroke="#e2e8f0" stroke-width="2"/>
+            <line x1="56" y1="56" x2="40" y2="160" stroke="#e2e8f0" stroke-width="2"/>
+            <line x1="40" y1="160" x2="140" y2="200" stroke="#e2e8f0" stroke-width="2"/>
+            <line x1="140" y1="200" x2="220" y2="140" stroke="#e2e8f0" stroke-width="2"/>
+          </svg>
+        </div>
       </div>
       <div class="space-y-4">
-        <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm" open>
-          <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>What happens after I buy?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">You get instant access to your dashboard with lifetime access to your purchased leads, CSV download option, and auto-refill notifications.</p>
+        <details class="group bg-slate-50 rounded-2xl p-5 cursor-pointer hover:bg-slate-100 transition border border-slate-100 shadow-sm" open>
+          <summary class="flex items-center justify-between font-bold text-slate-900"><span>What happens after I buy?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed">You get instant access to your dashboard with CSV download option and lifetime access to purchased leads.</p>
         </details>
-        <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm">
-          <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>Are these leads verified?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">Yes, we verify all leads before delivery. In case of invalid contacts exceeding 10%, we offer instant replacement credits.</p>
+        <details class="group bg-slate-50 rounded-2xl p-5 cursor-pointer hover:bg-slate-100 transition border border-slate-100 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-slate-900"><span>Can I get sample leads before purchasing?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed">Yes, we offer a sample pack of 10 leads for first-time users at a nominal cost.</p>
         </details>
-        <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm">
-          <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>What is Practic Leads?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">Practic Leads are low-cost leads (Rs. 2 to Rs. 3) provided so you can practice your sales pitch before buying premium leads.</p>
+        <details class="group bg-slate-50 rounded-2xl p-5 cursor-pointer hover:bg-slate-100 transition border border-slate-100 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-slate-900"><span>What makes these different from cold calling data?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed">Our leads are sourced from active social platforms where users have shown intent, filtered by niche.</p>
+        </details>
+        <details class="group bg-slate-50 rounded-2xl p-5 cursor-pointer hover:bg-slate-100 transition border border-slate-100 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-slate-900"><span>Is there a refund if leads are invalid?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed">We verify all leads before delivery. If invalid contacts exceed 10%, we offer instant replacement credits.</p>
+        </details>
+        <details class="group bg-slate-50 rounded-2xl p-5 cursor-pointer hover:bg-slate-100 transition border border-slate-100 shadow-sm">
+          <summary class="flex items-center justify-between font-bold text-slate-900"><span>Can I filter leads by location and age?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 text-sm mt-3 leading-relaxed">Absolutely. You can filter by Housewife, Working Pro, Students, etc., ensuring high conversion.</p>
         </details>
       </div>
     </div>
@@ -321,7 +526,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 shadow-2xl">
-        <h3 class="text-2xl font-extrabold text-white mb-8">Get In Touch</h3>
+        <h3 class="text-2xl font-extrabold text-white mb-8">Contact Us</h3>
         <form class="space-y-5" onsubmit="event.preventDefault(); toast('Message sent successfully!','success');">
           <div><label class="text-gray-400 text-sm font-medium">Name</label><input type="text" required class="w-full mt-2 px-5 py-4 bg-slate-900 rounded-xl text-white border border-slate-700 focus:border-lime-400 focus:outline-none" placeholder="John Doe"></div>
           <div><label class="text-gray-400 text-sm font-medium">Email</label><input type="email" required class="w-full mt-2 px-5 py-4 bg-slate-900 rounded-xl text-white border border-slate-700 focus:border-lime-400 focus:outline-none" placeholder="you@example.com"></div>
@@ -331,19 +536,32 @@ tailwind.config = {
       </div>
     </div>
     <footer class="max-w-6xl mx-auto mt-20 pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="flex items-center gap-3"><div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold">L</div><span class="text-white font-extrabold text-xl">LeadFlow</span></div>
-      <div class="text-sm text-gray-500">© 2024 LeadFlow. All Rights Reserved.</div>
+      <div class="flex items-center gap-3 mb-4 md:mb-0">
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold">L</div>
+        <span class="text-white font-extrabold text-xl">LeadFlow</span>
+      </div>
+      <div class="flex gap-3">
+        <div class="px-4 py-2 bg-white/10 rounded-lg text-white text-xs flex items-center gap-2"><i class="fab fa-google-play"></i> Google Play</div>
+        <div class="px-4 py-2 bg-white/10 rounded-lg text-white text-xs flex items-center gap-2"><i class="fab fa-apple"></i> App Store</div>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-gray-500 justify-center">
+        <a href="#" class="hover:text-white">About</a>
+        <a href="#" class="hover:text-white">Blog</a>
+        <a href="#" class="hover:text-white">Terms</a>
+        <a href="#" class="hover:text-white">Privacy Policy</a>
+      </div>
+      <div class="text-sm text-gray-600">© 2026 LeadFlow. All Rights Reserved.</div>
     </footer>
   </section>
 </div>
 
 <!-- ════════════ AUTH SHELL (Login/Register) ════════════ -->
-<div id="authShell" class="hidden min-h-screen relative overflow-hidden" style="background:#0B1120;">
+<div id="authShell" class="hidden min-h-screen relative overflow-hidden" style="background:#1a2332;">
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="float-anim absolute" style="--r:-18deg; top:8%; left:6%; width:120px; height:14px; background:linear-gradient(90deg,#5eead4,#2dd4bf); border-radius:8px; opacity:.85;"></div>
-    <div class="float-anim-delay absolute" style="--r:24deg; top:18%; left:78%; width:180px; height:10px; background:linear-gradient(90deg,#2dd4bf,#5eead4); border-radius:8px; opacity:.7;"></div>
+    <div class="float-anim-d1 absolute" style="--r:24deg; top:18%; left:78%; width:180px; height:10px; background:linear-gradient(90deg,#2dd4bf,#5eead4); border-radius:8px; opacity:.7;"></div>
   </div>
-  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-40 dark-glass border border-white/10 rounded-full px-5 py-3 flex items-center gap-6 shadow-2xl w-[94%] max-w-5xl">
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-40 glass-dark border border-white/10 rounded-full px-5 py-3 flex items-center gap-6 shadow-2xl w-[94%] max-w-5xl">
     <div class="flex items-center gap-2"><div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-bold">L</div><span class="text-white font-extrabold">LeadFlow</span></div>
     <div class="ml-auto flex items-center gap-3">
       <button onclick="showAuthPage('login')" class="px-4 py-2 bg-white text-slate-900 rounded-full text-sm font-bold hover:bg-lime-400">Log in</button>
@@ -355,8 +573,8 @@ tailwind.config = {
     <div class="bg-white rounded-[2rem] w-full max-w-[440px] p-10 shadow-2xl border border-slate-100">
       <div class="flex items-start justify-between mb-8"><h1 class="text-3xl font-extrabold text-slate-900 leading-tight">Welcome to<br>LeadFlow</h1><div class="text-right text-sm"><span class="text-slate-500">No Account ?</span><br><a href="#" onclick="showAuthPage('register');return false;" class="text-emerald-700 font-bold hover:underline">Sign up</a></div></div>
       <form onsubmit="handleLogin(event)" class="space-y-5">
-        <div><label class="text-sm font-bold text-slate-700">Enter your username or email address</label><input id="loginEmail" type="email" required placeholder="you@example.com" class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white transition" /></div>
-        <div><label class="text-sm font-bold text-slate-700">Enter your Password</label><div class="relative mt-2"><input id="loginPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white transition pr-12" /><button type="button" onclick="togglePw('loginPassword',this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button></div></div>
+        <div><label class="text-sm font-bold text-slate-700">Enter your username or email address</label><input id="loginEmail" type="email" required value="demo@leadflow.com" class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white transition" /></div>
+        <div><label class="text-sm font-bold text-slate-700">Enter your Password</label><div class="relative mt-2"><input id="loginPassword" type="password" required value="demo123" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white transition pr-12" /><button type="button" onclick="togglePw('loginPassword',this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button></div></div>
         <div class="text-right"><a href="#" onclick="toast('Password reset link sent','success');return false;" class="text-sm text-emerald-700 font-bold hover:underline">Forgot Password?</a></div>
         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold hover:opacity-90 transition text-lg" style="background:#3d6b5e;">Sign in</button>
       </form>
@@ -373,8 +591,8 @@ tailwind.config = {
           <div><label class="text-sm font-bold text-slate-700">Contact Number</label><input id="regPhone" type="tel" required placeholder="+91 98765 43210" class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white" /></div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div><label class="text-sm font-bold text-slate-700">Country</label><select id="regCountry" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select Country</option><option>India</option><option>United States</option></select></div>
-          <div><label class="text-sm font-bold text-slate-700">State</label><select id="regState" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select State</option><option>Maharashtra</option><option>Delhi</option></select></div>
+          <div><label class="text-sm font-bold text-slate-700">Country</label><select id="regCountry" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select Country</option><option>India</option><option>United States</option><option>UAE</option></select></div>
+          <div><label class="text-sm font-bold text-slate-700">State</label><select id="regState" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select State</option><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option></select></div>
         </div>
         <div><label class="text-sm font-bold text-slate-700">Password</label><div class="relative mt-2"><input id="regPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white pr-12" /><button type="button" onclick="togglePw('regPassword',this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-eye"></i></button></div></div>
         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold hover:opacity-90 transition text-lg" style="background:#3d6b5e;">Next</button>
@@ -386,50 +604,92 @@ tailwind.config = {
 <!-- ════════════ APP SHELL (Dashboard) ════════════ -->
 <div id="appShell" class="hidden min-h-screen bg-slate-50">
   <div id="sidebarBackdrop" class="hidden fixed inset-0 bg-black/50 z-30 lg:hidden" onclick="toggleSidebar()"></div>
-  <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col" style="background:#0B1120;">
+  <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col" style="background:#0f172a;">
     <div class="p-6 flex items-center gap-2 border-b border-white/5"><div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-bold">L</div><span class="text-white font-extrabold tracking-wide">LeadFlow</span><button onclick="toggleSidebar()" class="ml-auto lg:hidden text-gray-400"><i class="fas fa-times"></i></button></div>
     <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
       <button onclick="navigate('dashboard')" data-page="dashboard" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-chart-pie w-5 text-center"></i> Dashboard</button>
       <button onclick="navigate('browse')" data-page="browse" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-compass w-5 text-center"></i> Browse Leads</button>
       <button onclick="navigate('orders')" data-page="orders" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-bag-shopping w-5 text-center"></i> My Orders</button>
+      <button onclick="navigate('downloads')" data-page="downloads" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-download w-5 text-center"></i> Downloads</button>
+      <button onclick="navigate('favorites')" data-page="favorites" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-heart w-5 text-center"></i> Favorites <span id="favBadge" class="ml-auto bg-lime-400 text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full hidden">0</span></button>
       <button onclick="navigate('wallet')" data-page="wallet" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-wallet w-5 text-center"></i> Wallet</button>
+      <button onclick="navigate('support')" data-page="support" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-headset w-5 text-center"></i> Support</button>
     </nav>
+    <div class="mx-3 mb-3 rounded-2xl p-4 text-slate-900" style="background:linear-gradient(135deg,#c5e86c,#a3d900);">
+      <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wide"><i class="fas fa-mobile-screen"></i> Mobile App</div>
+      <p class="text-sm font-semibold mt-1.5 leading-snug">Download the LeadFlow app for instant lead access.</p>
+      <div class="flex gap-2 mt-3">
+        <button class="flex-1 bg-slate-900 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1"><i class="fab fa-apple"></i> iOS</button>
+        <button class="flex-1 bg-slate-900 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1"><i class="fab fa-google-play"></i> Android</button>
+      </div>
+    </div>
     <div class="mx-3 mb-4 bg-white/5 rounded-2xl p-4 border border-white/5">
-      <div class="flex items-center gap-3"><div id="userAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold">U</div><div class="flex-1 min-w-0"><div id="userName" class="text-white text-sm font-semibold truncate">User</div></div></div>
+      <div class="flex items-center gap-3"><div id="userAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold">U</div><div class="flex-1 min-w-0"><div id="userName" class="text-white text-sm font-semibold truncate">User</div><div id="userEmail" class="text-gray-400 text-xs truncate">user@email.com</div></div></div>
       <button onclick="logout()" class="mt-3 w-full py-2 bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 rounded-lg text-sm font-medium flex items-center justify-center gap-2"><i class="fas fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
 
   <div class="lg:ml-64">
-    <header class="sticky top-0 z-20 glass border-b border-slate-200 px-6 py-4 flex items-center gap-4">
+    <header class="sticky top-0 z-20 glass-light border-b border-slate-200 px-6 py-4 flex items-center gap-4">
       <button onclick="toggleSidebar()" class="lg:hidden text-slate-700 text-xl"><i class="fas fa-bars"></i></button>
-      <div class="flex-1"><h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1><p id="pageSubtitle" class="text-sm text-slate-500">Welcome back</p></div>
+      <div class="flex-1"><h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1><p id="pageSubtitle" class="text-sm text-slate-500">Welcome back, here's your overview</p></div>
       <button onclick="navigate('wallet')" class="hidden sm:flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition"><i class="fas fa-wallet text-lime-400"></i> Rs.<span id="headerBalance">0</span></button>
+      <button onclick="toast('3 new notifications','info')" class="relative w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition"><i class="fas fa-bell"></i><span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span></button>
     </header>
 
     <main class="p-6 md:p-8">
+      <!-- Dashboard -->
       <section id="page-dashboard" class="fade-in space-y-8">
-        <div class="rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl" style="background:linear-gradient(120deg,#0B1120,#1a4d2e 70%,#3d6b5e);">
-          <div class="relative z-10"><h2 class="text-3xl font-extrabold">Welcome! <span id="welcomeName">User</span> 👋</h2><p class="text-gray-300 mt-2 max-w-lg text-lg">Ready to scale your sales today?</p><div class="flex gap-3 mt-6"><button onclick="navigate('browse')" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Browse Leads</button><button onclick="openAddFundsModal()" class="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Add Funds</button></div></div>
+        <div class="rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl" style="background:linear-gradient(120deg,#0f172a,#1a4d2e 70%,#3d6b5e);">
+          <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-lime-400/10"></div>
+          <div class="relative z-10"><h2 class="text-3xl font-extrabold">Welcome! <span id="welcomeName">User</span> 👋</h2><p class="text-gray-300 mt-2 max-w-lg text-lg">Ready to scale your sales today? Browse fresh leads or top up your wallet.</p><div class="flex gap-3 mt-6"><button onclick="navigate('browse')" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Browse Leads</button><button onclick="openAddFundsModal()" class="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Add Funds</button></div></div>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="statsRow"></div>
-        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 text-lg mb-4">Recent Orders</h3><div id="recentOrders" class="space-y-3"></div></div>
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          <div class="xl:col-span-2 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <div class="flex items-center justify-between mb-6"><h3 class="font-bold text-slate-900 text-lg">Lead Purchase Activity</h3><div class="flex bg-slate-100 rounded-lg p-1 text-xs font-semibold"><button onclick="updateChartRange(7)" id="range7" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm">7D</button><button onclick="updateChartRange(30)" id="range30" class="px-3 py-1.5 rounded-md text-slate-500">30D</button><button onclick="updateChartRange(365)" id="range365" class="px-3 py-1.5 rounded-md text-slate-500">365D</button></div></div>
+            <div class="h-72"><canvas id="activityChart"></canvas></div>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 text-lg mb-4">Recent Orders</h3><div id="recentOrders" class="space-y-3"></div></div>
+        </div>
+        <div><h3 class="font-bold text-slate-900 text-lg mb-4">Leads by Platform</h3><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="platformMiniGrid"></div></div>
       </section>
 
+      <!-- Browse -->
       <section id="page-browse" class="hidden fade-in">
         <div id="browsePlatforms"><h2 class="text-2xl font-extrabold mb-1">Choose Your Lead Niche</h2><p class="text-slate-500 mb-6">Pick a platform to explore lead packages filtered by audience.</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="platformGridApp"></div></div>
         <div id="browsePackages" class="hidden"><button onclick="showBrowsePlatforms()" class="mb-5 flex items-center gap-2 text-sm font-bold text-emerald-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Platforms</button><div id="packagePlatformHeader" class="mb-8"></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="packageGrid"></div></div>
       </section>
 
+      <!-- Orders -->
       <section id="page-orders" class="hidden fade-in">
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Platform</th><th class="px-5 py-4 text-left">Audience</th><th class="px-5 py-4 text-left">Leads</th><th class="px-5 py-4 text-left">Amount</th><th class="px-5 py-4 text-left">Status</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+        <div class="flex justify-between gap-3 mb-5"><select id="orderFilter" onchange="renderOrders()" class="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium"><option value="all">All Orders</option><option value="Completed">Completed</option><option value="Pending">Pending</option><option value="Processing">Processing</option></select><button onclick="navigate('downloads')" class="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold">Download Center</button></div>
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Order ID</th><th class="px-5 py-4 text-left">Platform</th><th class="px-5 py-4 text-left">Audience</th><th class="px-5 py-4 text-left">Leads</th><th class="px-5 py-4 text-left">Amount</th><th class="px-5 py-4 text-left">Status</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
       </section>
+
+      <!-- Downloads -->
+      <section id="page-downloads" class="hidden fade-in">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Order ID</th><th class="px-5 py-4 text-left">Platform</th><th class="px-5 py-4 text-left">Leads</th><th class="px-5 py-4 text-left">Status</th><th class="px-5 py-4 text-left">Action</th></tr></thead><tbody id="downloadsBody"></tbody></table></div>
+      </section>
+
+      <section id="page-favorites" class="hidden fade-in"><div id="favoritesContent"></div></section>
 
       <section id="page-wallet" class="hidden fade-in space-y-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div class="lg:col-span-2 rounded-[2rem] p-8 text-white shadow-xl" style="background:linear-gradient(120deg,#0B1120,#1a4d2e 60%,#3d6b5e);"><p class="text-gray-300 text-sm font-medium">Wallet Balance</p><h2 class="text-5xl font-extrabold mt-2">Rs.<span id="walletBalance">0</span></h2><div class="flex gap-3 mt-6"><button onclick="openAddFundsModal()" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold">Add Funds</button></div></div>
+          <div class="lg:col-span-2 rounded-[2rem] p-8 text-white shadow-xl" style="background:linear-gradient(120deg,#0f172a,#1a4d2e 60%,#3d6b5e);"><p class="text-gray-300 text-sm font-medium">Wallet Balance</p><h2 class="text-5xl font-extrabold mt-2">Rs.<span id="walletBalance">0</span></h2><div class="flex gap-3 mt-6"><button onclick="openAddFundsModal()" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold">Add Funds</button></div></div>
+          <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold mb-4">Quick Add</h3><div class="grid grid-cols-2 gap-3"><button onclick="openAddFundsModal(500)" class="py-3 border rounded-xl font-bold hover:border-emerald-500">Rs.500</button><button onclick="openAddFundsModal(1000)" class="py-3 border rounded-xl font-bold hover:border-emerald-500">Rs.1000</button><button onclick="openAddFundsModal(2000)" class="py-3 border rounded-xl font-bold hover:border-emerald-500">Rs.2000</button><button onclick="openAddFundsModal(5000)" class="py-3 border rounded-xl font-bold hover:border-emerald-500">Rs.5000</button></div></div>
         </div>
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><div class="px-6 py-4 border-b"><h3 class="font-bold text-slate-900">Transaction History</h3></div><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Date</th><th class="px-5 py-4 text-left">Description</th><th class="px-5 py-4 text-left">Amount</th></tr></thead><tbody id="transactionsBody"></tbody></table></div>
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><div class="px-6 py-4 border-b"><h3 class="font-bold text-slate-900">Transaction History</h3></div><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Date</th><th class="px-5 py-4 text-left">Description</th><th class="px-5 py-4 text-left">Type</th><th class="px-5 py-4 text-left">Amount</th></tr></thead><tbody id="transactionsBody"></tbody></table></div>
+      </section>
+      
+      <section id="page-support" class="hidden fade-in">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-6">
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 mb-4">Create a Ticket</h3><form onsubmit="submitTicket(event)" class="space-y-4"><input id="ticketSubject" type="text" required placeholder="Subject" class="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /><select id="ticketCategory" required class="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500"><option value="">Category</option><option>Order Issue</option><option>Payment Issue</option></select><textarea id="ticketMessage" required rows="4" placeholder="Message" class="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 resize-none"></textarea><button type="submit" class="w-full py-3 rounded-xl text-white font-bold text-sm" style="background:#3d6b5e;">Submit Ticket</button></form></div>
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 mb-4">Contact Info</h3><div class="space-y-3"><a href="#" class="flex items-center gap-3 p-3 bg-green-50 rounded-xl hover:bg-green-100 transition"><div class="w-10 h-10 rounded-lg bg-green-500 text-white flex items-center justify-center"><i class="fab fa-whatsapp"></i></div><div><div class="text-sm font-semibold text-slate-900">WhatsApp</div><div class="text-xs text-slate-500">+91 98765 43210</div></div></a><a href="#" class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition"><div class="w-10 h-10 rounded-lg bg-blue-500 text-white flex items-center justify-center"><i class="fas fa-envelope"></i></div><div><div class="text-sm font-semibold text-slate-900">Email</div><div class="text-xs text-slate-500">support@leadflow.com</div></div></a></div></div>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 mb-4">FAQs</h3><div class="space-y-3" id="faqList"></div></div>
+        </div>
       </section>
     </main>
   </div>
@@ -447,33 +707,31 @@ tailwind.config = {
 <div id="addFundsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(11,17,32,0.6); backdrop-filter:blur(8px);">
   <div class="bg-white rounded-[2rem] w-full max-w-sm p-8 modal-enter shadow-2xl">
     <div class="flex justify-between items-center mb-6"><h3 class="text-xl font-extrabold">Add Funds</h3><button onclick="closeAddFundsModal()" class="text-slate-400"><i class="fas fa-times text-lg"></i></button></div>
-    <input id="addFundsAmount" type="number" placeholder="Enter Amount" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 mb-4 font-medium" />
-    <button onclick="confirmAddFunds()" class="w-full py-4 rounded-xl text-white font-bold transition" style="background:#3d6b5e;">Pay Now</button>
+    <input id="addFundsAmount" type="number" placeholder="Amount" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 mb-4 font-medium" />
+    <button onclick="confirmAddFunds()" class="w-full py-4 rounded-xl text-white font-bold text-sm" style="background:#3d6b5e;">Pay Now</button>
   </div>
 </div>
 
 <div id="toastContainer" class="fixed bottom-6 right-6 z-[100] space-y-3"></div>
 
 <script>
-const STORAGE_KEY = 'leadflow_classic_final_v1';
+const STORAGE_KEY = 'leadflow_final_v1';
 let state = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : seedState();
 let currentPlatform = null;
 let tempConfig = { audience: null, count: 50, pricePerLead: 15 };
 
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 function seedState() {
-  // Only 5 Platforms + Practic Leads
   const platforms = [
-    { id:'p1', name:'Instagram', icon:'fab fa-instagram', gradient:'from-pink-500 to-rose-500', desc:'High-intent leads from Reels & DMs.', audiences:['Mix Leads', 'Students', 'Only Girls', 'Only Boys'] },
-    { id:'p2', name:'Facebook', icon:'fab fa-facebook-f', gradient:'from-blue-600 to-blue-800', desc:'Targeted leads from Groups & Ads.', audiences:['Mix Leads', 'Housewife', 'Business Owners'] },
-    { id:'p3', name:'YouTube', icon:'fab fa-youtube', gradient:'from-red-500 to-red-700', desc:'Engaged subscribers & commenters.', audiences:['Mix Leads', 'Students', 'Only Boys'] },
-    { id:'p4', name:'LinkedIn', icon:'fab fa-linkedin-in', gradient:'from-sky-500 to-blue-700', desc:'B2B professionals & decision makers.', audiences:['Working Pro', 'Business Owners'] },
-    { id:'p5', name:'Snapchat', icon:'fab fa-snapchat-ghost', gradient:'from-yellow-400 to-amber-500', desc:'Gen-Z audience, quick responders.', audiences:['Only Girls', 'Only Boys', 'Students'] },
-    // NEW SECTION: Practic Leads
-    { id:'p6', name:'Practic Leads', icon:'fas fa-user-graduate', gradient:'from-emerald-500 to-teal-700', desc:'Practice your pitch with real-time low-cost leads.', audiences:['Only Girls (Rs.3)', '70% Girls / 30% Boys (Rs.2)', 'Mix Leads (Rs.2)'] }
+    { id:'p1', name:'Instagram', icon:'fab fa-instagram', gradient:'from-pink-500 to-rose-500', desc:'High-intent leads from Reels & DMs.', audiences:['Housewife', 'Working Pro', 'Students', 'Only Girls', 'Only Boys'], type: 'social', pricePerLead: 20 },
+    { id:'p2', name:'Facebook', icon:'fab fa-facebook-f', gradient:'from-blue-600 to-blue-800', desc:'Targeted leads from Groups & Ads.', audiences:['Mix Leads', 'Housewife', 'Business Owners'], type: 'social', pricePerLead: 18 },
+    { id:'p3', name:'YouTube', icon:'fab fa-youtube', gradient:'from-red-500 to-red-700', desc:'Engaged subscribers & commenters.', audiences:['Mix Leads', 'Students', 'Only Boys'], type: 'social', pricePerLead: 22 },
+    { id:'p4', name:'LinkedIn', icon:'fab fa-linkedin-in', gradient:'from-sky-500 to-blue-700', desc:'B2B professionals & decision makers.', audiences:['Working Pro', 'Business Owners'], type: 'social', pricePerLead: 35 },
+    { id:'p5', name:'Snapchat', icon:'fab fa-snapchat-ghost', gradient:'from-yellow-400 to-amber-500', desc:'Gen-Z audience, quick responders.', audiences:['Only Girls', 'Only Boys', 'Students'], type: 'social', pricePerLead: 15 },
+    { id:'p6', name:'Practice Leads', icon:'fas fa-user-graduate', gradient:'from-emerald-500 to-teal-700', desc:'Practice your pitch with real-time low-cost leads.', audiences:['Girls Only', 'Boys Only', '70% Girls 30% Boys', 'Mixed'], type: 'practice' }
   ];
   const demoUser = { id:'u1', name:'Farhin Almas', email:'demo@leadflow.com', password:'demo123', walletBalance:12450 };
-  return { users:[demoUser], currentUserId:null, platforms, orders:[], transactions:[{ id:'t1', userId:'u1', type:'credit', amount:12450, description:'Initial load', balanceAfter:12450, createdAt:Date.now() }] };
+  return { users:[demoUser], currentUserId:null, platforms, orders:[], favorites:[], transactions:[{ id:'t1', userId:'u1', type:'credit', amount:12450, description:'Initial load', balanceAfter:12450, createdAt:Date.now() }] };
 }
 
 function currentUser(){ return state.users.find(u=>u.id===state.currentUserId); }
@@ -482,9 +740,9 @@ function uid(p){ return p + Math.random().toString(36).slice(2,9); }
 function toast(msg, type='success') {
   const el = document.createElement('div');
   el.className = `toast-in ${type==='success'?'bg-emerald-600':type==='error'?'bg-red-600':'bg-slate-800'} text-white px-5 py-4 rounded-xl shadow-2xl flex items-center gap-3 min-w-[280px]`;
-  el.innerHTML = `<i class="fas ${type==='success'?'fa-circle-check':'fa-circle-xmark'} text-xl"></i><span class="text-sm font-semibold">${msg}</span>`;
+  el.innerHTML = `<i class="fas ${type==='success'?'fa-circle-check':type==='error'?'fa-circle-xmark':'fa-circle-info'} text-xl"></i><span class="text-sm font-semibold">${msg}</span>`;
   document.getElementById('toastContainer').appendChild(el);
-  setTimeout(()=>{ el.style.transition='all .3s'; el.style.opacity='0'; el.style.transform='translateX(60px)'; setTimeout(()=>el.remove(),300); }, 3000);
+  setTimeout(()=>{ el.style.opacity='0'; setTimeout(()=>el.remove(),300); }, 3000);
 }
 function togglePw(id, btn) { const inp = document.getElementById(id); inp.type = inp.type === 'password' ? 'text' : 'password'; btn.innerHTML = inp.type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>'; }
 
@@ -493,9 +751,23 @@ function showAuthPage(p) { document.getElementById('landingShell').classList.add
 function handleLogin(e) { e.preventDefault(); const u = state.users.find(u=>u.email===document.getElementById('loginEmail').value.trim().toLowerCase()); if(!u||u.password!==document.getElementById('loginPassword').value) return toast('Invalid credentials','error'); state.currentUserId=u.id; saveState(); enterApp(); toast(`Welcome back, ${u.name.split(' ')[0]}!`); }
 function handleRegister(e) { e.preventDefault(); const email = document.getElementById('regEmail').value.trim().toLowerCase(); if (state.users.some(u=>u.email===email)) return toast('Account already exists','error'); const u = { id:uid('u'), name:document.getElementById('regName').value, email, password:document.getElementById('regPassword').value, walletBalance:500, createdAt:Date.now() }; state.users.push(u); state.transactions.push({ id:uid('t'), userId:u.id, type:'credit', amount:500, description:'Welcome bonus', balanceAfter:500, createdAt:Date.now() }); state.currentUserId=u.id; saveState(); enterApp(); toast('Account created! Rs.500 welcome bonus added'); }
 function logout() { state.currentUserId=null; saveState(); showLanding(); toast('Logged out successfully','info'); }
-function enterApp() { document.getElementById('authShell').classList.add('hidden'); document.getElementById('appShell').classList.remove('hidden'); const u=currentUser(); document.getElementById('userName').textContent=u.name; document.getElementById('userAvatar').textContent=u.name.charAt(0); document.getElementById('welcomeName').textContent=u.name.split(' ')[0]; updateWalletUI(); navigate('dashboard'); }
+function enterApp() { document.getElementById('authShell').classList.add('hidden'); document.getElementById('appShell').classList.remove('hidden'); const u=currentUser(); document.getElementById('userName').textContent=u.name; document.getElementById('userEmail').textContent=u.email; document.getElementById('userAvatar').textContent=u.name.charAt(0); document.getElementById('welcomeName').textContent=u.name.split(' ')[0]; updateWalletUI(); navigate('dashboard'); }
 
-const PAGE_META = { dashboard:{t:'Dashboard',s:"Welcome back"}, browse:{t:'Browse Leads',s:'Explore premium lead packages'}, orders:{t:'My Orders',s:'Track and manage your purchases'}, wallet:{t:'Wallet',s:'Manage your balance and transactions'} };
+function switchLandingTab(tab) {
+  if(tab === 'social') {
+    document.getElementById('landingSocialGrid').classList.remove('hidden');
+    document.getElementById('landingPracticeGrid').classList.add('hidden');
+    document.getElementById('landingTabSocial').className = 'px-5 py-2 bg-white text-slate-900 rounded-full text-sm font-bold transition';
+    document.getElementById('landingTabPractice').className = 'px-5 py-2 text-gray-300 rounded-full text-sm font-bold hover:text-white transition';
+  } else {
+    document.getElementById('landingSocialGrid').classList.add('hidden');
+    document.getElementById('landingPracticeGrid').classList.remove('hidden');
+    document.getElementById('landingTabPractice').className = 'px-5 py-2 bg-white text-slate-900 rounded-full text-sm font-bold transition';
+    document.getElementById('landingTabSocial').className = 'px-5 py-2 text-gray-300 rounded-full text-sm font-bold hover:text-white transition';
+  }
+}
+
+const PAGE_META = { dashboard:{t:'Dashboard',s:"Welcome back, here's your overview"}, browse:{t:'Browse Leads',s:'Explore premium lead packages across platforms'}, orders:{t:'My Orders',s:'Track and manage your purchases'}, downloads:{t:'Downloads',s:'Download your lead CSV files instantly'}, favorites:{t:'Favorites',s:'Your saved lead packages'}, wallet:{t:'Wallet',s:'Manage your balance and transaction history'}, support:{t:'Support',s:'Get help and find answers'} };
 function navigate(page) {
   document.querySelectorAll('[id^="page-"]').forEach(s=>s.classList.add('hidden'));
   const sec = document.getElementById('page-'+page);
@@ -503,10 +775,11 @@ function navigate(page) {
   document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
   document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
   document.getElementById('pageTitle').textContent = PAGE_META[page].t; document.getElementById('pageSubtitle').textContent = PAGE_META[page].s;
-  if(page==='dashboard') renderDashboard(); if(page==='browse') showBrowsePlatforms(); if(page==='orders') renderOrders(); if(page==='wallet') renderWallet();
+  if(page==='dashboard') renderDashboard(); if(page==='browse') showBrowsePlatforms(); if(page==='orders') renderOrders(); if(page==='downloads') renderDownloads(); if(page==='favorites') renderFavorites(); if(page==='wallet') renderWallet(); if(page==='support') renderSupport();
 }
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
 function updateWalletUI() { const u=currentUser(); document.getElementById('headerBalance').textContent=fmt(u.walletBalance); document.getElementById('walletBalance').textContent=fmt(u.walletBalance); }
+function updateFavBadge() { const c=state.favorites.filter(f=>f.userId===currentUser().id).length; const b=document.getElementById('favBadge'); b.textContent=c; b.classList.toggle('hidden', c===0); }
 
 function renderDashboard() {
   const u=currentUser(); const o=state.orders.filter(o=>o.userId===u.id);
@@ -517,9 +790,14 @@ function renderDashboard() {
     {l:'Balance',v:'Rs.'+fmt(u.walletBalance),i:'fa-wallet',b:'bg-pink-100',c:'text-pink-600'}
   ].map(s=>`<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card"><div class="w-12 h-12 rounded-xl ${s.b} ${s.c} flex items-center justify-center text-xl mb-4"><i class="fas ${s.i}"></i></div><div class="text-3xl font-extrabold text-slate-900">${s.v}</div><div class="text-sm text-slate-500 mt-1">${s.l}</div></div>`).join('');
   document.getElementById('recentOrders').innerHTML = o.slice(-5).reverse().map(x=>`<div class="flex items-center gap-3 p-4 rounded-xl hover:bg-slate-50 border border-slate-100"><div class="flex-1 min-w-0"><div class="text-sm font-bold truncate">${x.platformName} (${x.audience})</div><div class="text-xs text-slate-500">${x.leadsCount} leads • Rs.${fmt(x.amount)}</div></div><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">${x.status}</span></div>`).join('') || '<div class="text-center py-8 text-slate-400 text-sm">No orders yet.</div>';
+  document.getElementById('platformMiniGrid').innerHTML = state.platforms.filter(p=>p.type==='social').map(p=>`<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm text-center premium-card"><div class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-2xl mb-3"><i class="${p.icon}"></i></div><div class="text-sm font-bold text-slate-900">${p.name}</div><div class="text-xs text-slate-500 mt-0.5">Rs.${p.pricePerLead}/lead</div></div>`).join('');
+  
+  const ctx=document.getElementById('activityChart').getContext('2d');
+  if(activityChart)activityChart.destroy(); 
+  activityChart=new Chart(ctx,{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[5,10,3,8,12,6,9],backgroundColor:'#3d6b5e',borderRadius:8,maxBarThickness:40}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}},x:{grid:{display:false}}}}});
 }
 
-function showBrowsePlatforms(){document.getElementById('browsePlatforms').classList.remove('hidden');document.getElementById('browsePackages').classList.add('hidden');document.getElementById('platformGridApp').innerHTML=state.platforms.map(p=>`<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card cursor-pointer" onclick="showPackages('${p.id}')"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-3xl shadow-lg mb-4"><i class="${p.icon}"></i></div><h3 class="text-xl font-bold text-slate-900">${p.name}</h3><p class="text-sm text-slate-500 mt-2 mb-4">${p.desc}</p><button class="w-full mt-2 py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">View Packages</button></div>`).join('');}
+function showBrowsePlatforms(){document.getElementById('browsePlatforms').classList.remove('hidden');document.getElementById('browsePackages').classList.add('hidden');document.getElementById('platformGridApp').innerHTML=state.platforms.map(p=>`<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card cursor-pointer" onclick="showPackages('${p.id}')"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-3xl shadow-lg mb-4"><i class="${p.icon}"></i></div><h3 class="text-xl font-bold text-slate-900">${p.name}</h3><p class="text-sm text-slate-500 mt-2 mb-4">${p.desc}</p><div class="flex flex-wrap gap-2 mb-4">${p.audiences.slice(0,3).map(a=>`<span class="text-xs px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full font-semibold">${a}</span>`).join('')}</div><button class="w-full mt-2 py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">View Packages</button></div>`).join('');}
 function showPackages(id) {
   currentPlatform = state.platforms.find(p=>p.id==id);
   document.getElementById('browsePlatforms').classList.add('hidden');
@@ -527,14 +805,14 @@ function showPackages(id) {
   document.getElementById('packagePlatformHeader').innerHTML = `<div class="flex items-center gap-4"><div class="w-20 h-20 rounded-2xl bg-gradient-to-br ${currentPlatform.gradient} text-white flex items-center justify-center text-4xl shadow-lg"><i class="${currentPlatform.icon}"></i></div><div><h2 class="text-3xl font-extrabold text-slate-900">${currentPlatform.name} Leads</h2><p class="text-slate-500 mt-1">${currentPlatform.desc}</p></div></div>`;
   
   document.getElementById('packageGrid').innerHTML = currentPlatform.audiences.map(aud => {
-    // Exact Calculation Pricing Logic
-    let price = 15; // Default for standard platforms
-    if(currentPlatform.name === 'Practic Leads') {
-      if(aud.includes('Rs.3')) price = 3;
-      else price = 2;
+    let price = 0;
+    if(currentPlatform.type === 'practice') {
+      if(aud === 'Girls Only') price = 3;
+      else if(aud === 'Boys Only') price = 2;
+      else if(aud === '70% Girls 30% Boys') price = 2;
+      else if(aud === 'Mixed') price = 2;
     } else {
-      if(['Business Owners', 'Working Pro'].includes(aud)) price = 20;
-      else if(['Only Girls', 'Only Boys', 'Students', 'Housewife'].includes(aud)) price = 18;
+      price = currentPlatform.pricePerLead;
     }
     return `<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card"><div class="flex justify-between items-center mb-3"><h3 class="font-bold text-slate-900 text-lg">${aud}</h3><span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">₹${price}/lead</span></div><p class="text-slate-500 text-xs mb-4">High-quality ${aud} leads for ${currentPlatform.name}.</p><button onclick="openBuyModal('${currentPlatform.id}', '${aud}', ${price})" class="w-full py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">Buy Now</button></div>`;
   }).join('');
@@ -547,7 +825,6 @@ function openBuyModal(pid, aud, price) {
 }
 function updateBuyModalUI() {
   const u = currentUser();
-  // Exact Calculation: count * pricePerLead (e.g., 50 * 20 = 1000)
   const total = tempConfig.count * tempConfig.pricePerLead;
   document.getElementById('buyModalBody').innerHTML = `
     <div class="space-y-5">
@@ -583,11 +860,43 @@ function confirmBuy() {
 
 function renderOrders() {
   const u=currentUser(); let o=state.orders.filter(o=>o.userId===u.id);
-  document.getElementById('ordersBody').innerHTML = o.length ? o.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 font-bold">${x.platformName}</td><td class="px-5 py-4 text-slate-600">${x.audience}</td><td class="px-5 py-4 text-slate-600">${x.leadsCount}</td><td class="px-5 py-4 font-bold text-slate-900">Rs. ${fmt(x.amount)}</td><td class="px-5 py-4"><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">${x.status}</span></td></tr>`).join('') : '<tr><td colspan="5" class="text-center py-10 text-slate-400">No orders found</td></tr>';
+  document.getElementById('ordersBody').innerHTML = o.length ? o.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 font-mono text-xs text-slate-600">#${x.id.slice(-6).toUpperCase()}</td><td class="px-5 py-4 font-bold text-slate-900">${x.platformName}</td><td class="px-5 py-4 text-slate-600">${x.audience}</td><td class="px-5 py-4 text-slate-600">${x.leadsCount}</td><td class="px-5 py-4 font-bold text-slate-900">Rs. ${fmt(x.amount)}</td><td class="px-5 py-4"><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">${x.status}</span></td></tr>`).join('') : '<tr><td colspan="6" class="text-center py-10 text-slate-400">No orders found</td></tr>';
 }
+function renderDownloads() {
+  const u=currentUser(); const o=state.orders.filter(o=>o.userId===u.id&&o.status==='Completed');
+  document.getElementById('downloadsBody').innerHTML = o.length ? o.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 font-mono text-xs text-slate-600">#${x.id.slice(-6).toUpperCase()}</td><td class="px-5 py-4 font-bold text-slate-900">${x.platformName}</td><td class="px-5 py-4 text-slate-600">${x.leadsCount}</td><td class="px-5 py-4"><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Ready</span></td><td class="px-5 py-4"><button onclick="downloadCSV('${x.id}')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-700">Download</button></td></tr>`).join('') : '<tr><td colspan="5" class="text-center py-10 text-slate-400">No downloads available</td></tr>';
+}
+function downloadCSV(id) {
+  const o = state.orders.find(x=>x.id===id);
+  let csv = 'Name,Phone,Email,City,Source,Date\n';
+  const names = ['Rahul','Priya','Amit','Sneha','Vikram'];
+  const cities = ['Mumbai','Delhi','Pune','Surat'];
+  for(let i=0; i<o.leadsCount; i++) {
+    csv += `${names[i%5]}${i},+91${Math.floor(6000000000+Math.random()*3999999999)},user${i}@mail.com,${cities[i%4]},${o.platformName},${new Date().toISOString().slice(0,10)}\n`;
+  }
+  const blob = new Blob([csv], { type:'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = `leads_${o.id.slice(-6)}.csv`; a.click();
+  toast('CSV with leads downloaded successfully');
+}
+
+function toggleFavorite(id) {
+  const u = currentUser(); const idx = state.favorites.findIndex(f=>f.userId===u.id && f.packageId===id);
+  if(idx >= 0) state.favorites.splice(idx, 1); else state.favorites.push({ id:uid('f'), userId:u.id, packageId:id });
+  saveState(); updateFavBadge(); renderFavorites();
+  toast(idx >= 0 ? 'Removed from favorites' : 'Added to favorites');
+}
+function renderFavorites() {
+  const u = currentUser(); const favs = state.favorites.filter(f=>f.userId===u.id);
+  document.getElementById('favoritesContent').innerHTML = favs.length ? favs.map(f=>{
+    const p = state.platforms.find(x=>x.id===f.packageId); if(!p) return '';
+    return `<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card"><div class="flex justify-between"><h3 class="font-bold text-slate-900 text-lg">${p.name}</h3><button onclick="toggleFavorite('${p.id}')" class="text-red-500"><i class="fas fa-heart"></i></button></div><p class="text-slate-500 text-sm mt-2">${p.desc}</p></div>`;
+  }).join('') : '<div class="bg-white rounded-2xl p-12 border border-slate-100 shadow-sm text-center"><i class="fas fa-heart text-5xl text-red-300 mb-4"></i><h3 class="text-xl font-bold text-slate-900">No Favorites Yet</h3><button onclick="navigate(\'browse\')" class="mt-5 px-6 py-2.5 rounded-xl text-white text-sm font-bold" style="background:#3d6b5e;">Browse Leads</button></div>';
+}
+
 function renderWallet() {
   const u=currentUser(); const t=state.transactions.filter(t=>t.userId===u.id);
-  document.getElementById('transactionsBody').innerHTML = t.length ? t.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 text-slate-600">${new Date(x.createdAt).toLocaleDateString()}</td><td class="px-5 py-4 text-slate-900">${x.description}</td><td class="px-5 py-4 font-bold ${x.type==='credit'?'text-emerald-600':'text-red-600'}">${x.type==='credit'?'+':'-'} Rs. ${fmt(x.amount)}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center py-10 text-slate-400">No transactions yet</td></tr>';
+  document.getElementById('transactionsBody').innerHTML = t.length ? t.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 text-slate-600">${new Date(x.createdAt).toLocaleDateString()}</td><td class="px-5 py-4 text-slate-900">${x.description}</td><td class="px-5 py-4"><span class="text-xs font-bold px-2.5 py-1 rounded-full ${x.type==='credit'?'bg-emerald-100 text-emerald-700':'bg-red-100 text-red-700'}">${x.type}</span></td><td class="px-5 py-4 font-bold ${x.type==='credit'?'text-emerald-600':'text-red-600'}">${x.type==='credit'?'+':'-'} Rs. ${fmt(x.amount)}</td></tr>`).join('') : '<tr><td colspan="4" class="text-center py-10 text-slate-400">No transactions yet</td></tr>';
 }
 function openAddFundsModal() { document.getElementById('addFundsAmount').value=''; document.getElementById('addFundsModal').classList.remove('hidden'); }
 function closeAddFundsModal() { document.getElementById('addFundsModal').classList.add('hidden'); }
@@ -598,7 +907,16 @@ function confirmAddFunds() {
   saveState(); updateWalletUI(); closeAddFundsModal(); toast(`Rs.${fmt(amt)} added successfully`);
 }
 
-showLanding();
+function renderSupport() {
+  document.getElementById('faqList').innerHTML = [
+    {q:'What happens after I buy?', a:'You get instant access to your dashboard with CSV download option.'},
+    {q:'Are these leads verified?', a:'Yes, we verify all leads before delivery. Invalid contacts are replaced instantly.'},
+    {q:'Can I filter by specific audience?', a:'Absolutely. You can filter by Housewife, Students, Only Boys, Only Girls, etc.'}
+  ].map(f=>`<details class="group bg-slate-50 rounded-xl p-4 cursor-pointer hover:bg-slate-100 transition border border-slate-100"><summary class="flex justify-between font-bold text-slate-800 text-sm">${f.q} <i class="fas fa-chevron-down chev text-slate-400 text-xs"></i></summary><p class="text-slate-600 text-xs mt-2">${f.a}</p></details>`).join('');
+}
+function submitTicket(e) { e.preventDefault(); toast('Ticket submitted! Our team will reach out soon'); e.target.reset(); }
+
+if(state.currentUserId && currentUser()) { enterApp(); } else { showLanding(); }
 </script>
 </body>
 </html>
