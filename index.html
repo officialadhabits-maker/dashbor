@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LeadFlow — Dashboard</title>
+<title>LeadFlow — Buy Real Leads. Grow Your Business.</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -14,64 +14,633 @@ tailwind.config = {
     extend: {
       fontFamily: { sans: ['Inter','sans-serif'] },
       colors: {
-        brand: {
-          dark: '#0f172a',
-          dark2: '#1a2332',
-          green: '#3d6b5e',
-          greenDark: '#1a4d2e',
-          lime: '#c5e86c',
-          limeDark: '#a3d900',
-        }
+        brand: { dark:'#0f172a', dark2:'#1a2332', green:'#3d6b5e', greenDark:'#1a4d2e', lime:'#c5e86c', limeDark:'#a3d900' }
       }
     }
   }
 }
 </script>
 <style>
-  body { font-family: 'Inter', sans-serif; }
-  .float-anim   { animation: floatY 7s ease-in-out infinite; }
-  .float-anim-d1{ animation: floatY 7s ease-in-out 1.8s infinite; }
-  .float-anim-d2{ animation: floatY 7s ease-in-out 3.6s infinite; }
-  .float-anim-d3{ animation: floatY 7s ease-in-out 5.4s infinite; }
-  @keyframes floatY { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(-22px) rotate(var(--r,0deg));} }
-  .glass-dark  { background: rgba(15,23,42,0.82); backdrop-filter: blur(14px); }
-  .glass-light { background: rgba(255,255,255,0.78); backdrop-filter: blur(14px); }
-  .sidebar-item.active { background: rgba(197,232,108,0.12); color:#c5e86c; border-right:3px solid #c5e86c; }
-  .sidebar-item.active i { color:#c5e86c; }
-  ::-webkit-scrollbar { width:8px; height:8px; }
-  ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
-  ::-webkit-scrollbar-track { background:transparent; }
-  .fade-in   { animation: fadeIn .35s ease; }
-  @keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-  .toast-in  { animation: toastIn .3s ease; }
-  @keyframes toastIn { from{opacity:0; transform:translateX(60px);} to{opacity:1; transform:translateX(0);} }
-  .modal-enter { animation: modalEnter .25s ease; }
-  @keyframes modalEnter { from{opacity:0; transform:scale(.95);} to{opacity:1; transform:scale(1);} }
-  details > summary { list-style:none; }
-  details > summary::-webkit-details-marker { display:none; }
-  .chev { transition: transform .3s ease; }
-  details[open] .chev { transform: rotate(180deg); }
-  input:focus, select:focus, textarea:focus { outline:none; box-shadow:0 0 0 3px rgba(61,107,94,0.15); }
-  .card-hover { transition: all .3s ease; }
-  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -12px rgba(15,23,42,0.18); }
+  body{font-family:'Inter',sans-serif;}
+  .float-anim{animation:floatY 7s ease-in-out infinite;}
+  .float-anim-d1{animation:floatY 7s ease-in-out 1.8s infinite;}
+  .float-anim-d2{animation:floatY 7s ease-in-out 3.6s infinite;}
+  .float-anim-d3{animation:floatY 7s ease-in-out 5.4s infinite;}
+  @keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-22px) rotate(var(--r,0deg));}}
+  @keyframes floatGentle{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  .gentle-float{animation:floatGentle 6s ease-in-out infinite;}
+  .gentle-float-d1{animation:floatGentle 6s ease-in-out 1.5s infinite;}
+  .gentle-float-d2{animation:floatGentle 6s ease-in-out 3s infinite;}
+  .gentle-float-d3{animation:floatGentle 6s ease-in-out 4.5s infinite;}
+  .glass-dark{background:rgba(15,23,42,0.82);backdrop-filter:blur(14px);}
+  .glass-light{background:rgba(255,255,255,0.78);backdrop-filter:blur(14px);}
+  .sidebar-item.active{background:rgba(197,232,108,0.12);color:#c5e86c;border-right:3px solid #c5e86c;}
+  .sidebar-item.active i{color:#c5e86c;}
+  ::-webkit-scrollbar{width:8px;height:8px;}
+  ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  .fade-in{animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .toast-in{animation:toastIn .3s ease;}
+  @keyframes toastIn{from{opacity:0;transform:translateX(60px);}to{opacity:1;transform:translateX(0);}}
+  .modal-enter{animation:modalEnter .25s ease;}
+  @keyframes modalEnter{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
+  details>summary{list-style:none;}
+  details>summary::-webkit-details-marker{display:none;}
+  .chev{transition:transform .3s ease;}
+  details[open] .chev{transform:rotate(180deg);}
+  input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(61,107,94,0.15);}
+  .card-hover{transition:all .3s ease;}
+  .card-hover:hover{transform:translateY(-4px);box-shadow:0 18px 40px -12px rgba(15,23,42,0.18);}
+  @keyframes dashMove{to{stroke-dashoffset:0;}}
+  .dash-anim{animation:dashMove 1.5s ease forwards;}
+  .carousel-track{scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;}
+  .carousel-track::-webkit-scrollbar{display:none;}
+  .step-pill{writing-mode:vertical-rl;text-orientation:mixed;}
+  .pin-top{position:relative;}
+  .pin-top::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--pin-color,#ef4444);box-shadow:0 2px 6px rgba(0,0,0,0.15);}
 </style>
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
 
-<!-- ════════════════════ AUTH SHELL ════════════════════ -->
-<div id="authShell" class="min-h-screen relative overflow-hidden" style="background:#1a2332;">
+<!-- ════════════════════ LANDING PAGE ════════════════════ -->
+<div id="landingShell" class="min-h-screen">
 
-  <!-- Floating decorative teal bars -->
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="float-anim absolute" style="--r:-18deg; top:8%; left:6%; width:120px; height:14px; background:linear-gradient(90deg,#5eead4,#2dd4bf); border-radius:8px; opacity:.85;"></div>
-    <div class="float-anim-d1 absolute" style="--r:24deg; top:18%; left:78%; width:180px; height:10px; background:linear-gradient(90deg,#2dd4bf,#5eead4); border-radius:8px; opacity:.7;"></div>
-    <div class="float-anim-d2 absolute" style="--r:-32deg; top:62%; left:10%; width:90px; height:12px; background:#5eead4; border-radius:8px; opacity:.6;"></div>
-    <div class="float-anim-d3 absolute" style="--r:14deg; top:74%; left:72%; width:150px; height:12px; background:linear-gradient(90deg,#5eead4,#2dd4bf); border-radius:8px; opacity:.8;"></div>
-    <div class="float-anim absolute" style="--r:40deg; top:40%; left:88%; width:60px; height:10px; background:#2dd4bf; border-radius:8px; opacity:.5;"></div>
-    <div class="float-anim-d1 absolute" style="--r:-22deg; top:88%; left:30%; width:200px; height:10px; background:linear-gradient(90deg,#2dd4bf,#5eead4); border-radius:8px; opacity:.55;"></div>
-    <div class="float-anim-d2 absolute" style="--r:8deg; top:30%; left:42%; width:70px; height:8px; background:#5eead4; border-radius:8px; opacity:.4;"></div>
+<!-- SECTION A — NAVBAR -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-40 glass-dark border border-white/10 rounded-full px-5 py-3 flex items-center gap-6 shadow-2xl w-[94%] max-w-5xl" id="landingNav">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-bold text-sm">L</div>
+    <span class="text-white font-extrabold text-sm tracking-wide">LEADFLOW</span>
+  </div>
+  <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+    <a href="#heroSection" class="hover:text-white transition">Home</a>
+    <div class="relative group">
+      <a href="#leadPacks" class="hover:text-white transition flex items-center gap-1">Packages <i class="fas fa-chevron-down text-xs"></i></a>
+    </div>
+    <a href="#footerSection" class="hover:text-white transition">Contact us</a>
+  </div>
+  <div class="ml-auto flex items-center gap-2.5">
+    <button onclick="showAuthShell('login')" class="px-4 py-2 bg-white text-slate-900 rounded-full text-sm font-semibold hover:bg-gray-100 transition">Log in</button>
+    <button onclick="showAuthShell('register')" class="px-4 py-2 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition">Register Now</button>
+  </div>
+</nav>
+
+<!-- SECTION B — HERO -->
+<section id="heroSection" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-slate-50 to-gray-100 pt-24 pb-16">
+  <!-- Floating platform icons -->
+  <div class="pointer-events-none absolute inset-0">
+    <div class="float-anim absolute" style="--r:-12deg;top:12%;left:8%;"><div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl shadow-lg flex items-center justify-center text-white text-2xl gentle-float"><i class="fab fa-instagram"></i></div></div>
+    <div class="float-anim-d1 absolute" style="--r:18deg;top:8%;left:75%;"><div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-lg flex items-center justify-center text-white text-xl gentle-float-d1"><i class="fab fa-facebook-f"></i></div></div>
+    <div class="float-anim-d2 absolute" style="--r:-8deg;top:70%;left:5%;"><div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl shadow-lg flex items-center justify-center text-white text-xl gentle-float-d2"><i class="fab fa-snapchat-ghost"></i></div></div>
+    <div class="float-anim-d3 absolute" style="--r:22deg;top:65%;left:80%;"><div class="w-14 h-14 bg-gradient-to-br from-sky-500 to-blue-700 rounded-2xl shadow-lg flex items-center justify-center text-white text-2xl gentle-float-d3"><i class="fab fa-linkedin-in"></i></div></div>
+    <div class="float-anim absolute" style="--r:14deg;top:30%;left:88%;"><div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl shadow-lg flex items-center justify-center text-white text-xl gentle-float"><i class="fab fa-youtube"></i></div></div>
+    <div class="float-anim-d2 absolute" style="--r:-6deg;top:50%;left:15%;"><div class="w-10 h-10 bg-white rounded-xl shadow-md flex items-center justify-center text-emerald-600 text-lg gentle-float-d2"><i class="fas fa-envelope"></i></div></div>
+    <div class="float-anim-d3 absolute" style="--r:30deg;top:22%;left:50%;"><div class="w-10 h-10 bg-white rounded-xl shadow-md flex items-center justify-center text-amber-500 text-lg gentle-float-d3"><i class="fas fa-bullhorn"></i></div></div>
   </div>
 
+  <!-- Stats cards floating -->
+  <div class="pointer-events-none absolute hidden lg:block" style="top:18%;right:6%;">
+    <div class="bg-brand-dark text-white rounded-2xl px-5 py-4 shadow-2xl border border-white/10 gentle-float">
+      <div class="text-lime-400 font-extrabold text-2xl">50K+</div>
+      <div class="text-gray-300 text-sm font-medium">Leads Delivered</div>
+    </div>
+  </div>
+  <div class="pointer-events-none absolute hidden lg:block" style="top:55%;left:3%;">
+    <div class="bg-brand-dark text-white rounded-2xl px-5 py-4 shadow-2xl border border-white/10 gentle-float-d1">
+      <div class="text-lime-400 font-extrabold text-2xl">5</div>
+      <div class="text-gray-300 text-sm font-medium">Platforms</div>
+    </div>
+  </div>
+  <div class="pointer-events-none absolute hidden lg:block" style="bottom:14%;right:10%;">
+    <div class="bg-brand-dark text-white rounded-2xl px-5 py-4 shadow-2xl border border-white/10 gentle-float-d2">
+      <div class="text-lime-400 font-extrabold text-2xl">100+</div>
+      <div class="text-gray-300 text-sm font-medium">Happy Clients</div>
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight text-slate-900">
+      Buy Real <span class="bg-brand-lime/90 text-slate-900 px-3 py-1 rounded-lg inline-block">Leads</span>.<br>Grow Your Business.
+    </h1>
+    <p class="mt-5 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">High-intent, verified leads from top social platforms. Filtered by audience. Delivered in 24 hours.</p>
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <button onclick="showAuthShell('login')" class="px-8 py-4 bg-brand-greenDark text-white rounded-full text-base font-bold hover:bg-brand-green transition shadow-lg">Log in</button>
+      <a href="#leadPacks" class="px-8 py-4 bg-slate-100 text-slate-900 rounded-full text-base font-semibold hover:bg-slate-200 transition border border-slate-200">Explore Packages</a>
+    </div>
+  </div>
+</section>
+
+<!-- Latest News & Media Coverage -->
+<div class="py-10 bg-white border-t border-slate-100">
+  <div class="max-w-5xl mx-auto px-6">
+    <p class="text-center text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6">Latest News & Media Coverage</p>
+    <div class="flex items-center justify-center gap-8 md:gap-12 flex-wrap opacity-40 grayscale">
+      <div class="text-2xl font-black text-slate-800">TechCrunch</div>
+      <div class="text-2xl font-black text-slate-800">Forbes</div>
+      <div class="text-2xl font-black text-slate-800">Inc.</div>
+      <div class="text-2xl font-black text-slate-800">YourStory</div>
+      <div class="text-2xl font-black text-slate-800">Entrepreneur</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION C — LEAD PACKS -->
+<section id="leadPacks" class="py-16 md:py-24 bg-brand-dark relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5"><div class="absolute top-0 left-0 w-96 h-96 rounded-full bg-brand-lime blur-3xl"></div><div class="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-emerald-500 blur-3xl"></div></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+      <div>
+        <h2 class="text-3xl md:text-5xl font-black text-white">Lead Packs</h2>
+        <p class="text-gray-400 mt-2 text-lg max-w-lg">Choose your platform, pick your audience, and start converting today.</p>
+      </div>
+      <div class="flex gap-3">
+        <button id="tabSocial" onclick="switchPackTab('social')" class="px-5 py-3 bg-white text-slate-900 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg transition">Social Platforms <span class="bg-brand-lime text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full">5</span></button>
+        <button id="tabPractice" onclick="switchPackTab('practice')" class="px-5 py-3 bg-white/10 text-white rounded-full text-sm font-bold flex items-center gap-2 border border-white/20 hover:bg-white/20 transition">Practice Leads <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">4</span></button>
+      </div>
+    </div>
+
+    <!-- Social Platforms Grid -->
+    <div id="socialGrid">
+      <!-- ROW 1 — 3 cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        <!-- Instagram -->
+        <div class="rounded-3xl p-6 md:p-8 relative overflow-hidden card-hover" style="background:#1a4d2e;">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-pink-500/20 blur-xl"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-white mb-2">Instagram</h3>
+            <p class="text-gray-300 text-sm leading-relaxed mb-5">High-intent leads from DMs, Stories & Reels. Filtered by age, gender & location.</p>
+            <div class="flex items-center gap-3">
+              <button onclick="showAuthShell('login')" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-greenDark hover:bg-gray-100 transition"><i class="fas fa-arrow-right"></i></button>
+              <span class="text-white font-semibold text-sm">Buy Now</span>
+            </div>
+          </div>
+          <div class="absolute right-4 bottom-4 text-5xl text-white/10"><i class="fab fa-instagram"></i></div>
+        </div>
+        <!-- Facebook -->
+        <div class="rounded-3xl p-6 md:p-8 relative overflow-hidden card-hover bg-slate-200">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-blue-500/20 blur-xl"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-slate-900 mb-2">Facebook</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-5">Targeted leads from Groups, Ads & Marketplace ready for outreach.</p>
+            <div class="flex items-center gap-3">
+              <button onclick="showAuthShell('login')" class="w-10 h-10 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition"><i class="fas fa-arrow-right"></i></button>
+              <span class="text-slate-900 font-semibold text-sm">Buy Now</span>
+            </div>
+          </div>
+          <div class="absolute right-4 bottom-4 text-5xl text-blue-500/10"><i class="fab fa-facebook-f"></i></div>
+        </div>
+        <!-- LinkedIn -->
+        <div class="rounded-3xl p-6 md:p-8 relative overflow-hidden card-hover" style="background:#c5e86c;">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-sky-500/20 blur-xl"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-brand-dark mb-2">LinkedIn</h3>
+            <p class="text-brand-dark/70 text-sm leading-relaxed mb-5">B2B professionals & decision makers perfect for high-ticket offers.</p>
+            <div class="flex items-center gap-3">
+              <button onclick="showAuthShell('login')" class="w-10 h-10 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition"><i class="fas fa-arrow-right"></i></button>
+              <span class="text-brand-dark font-semibold text-sm">Buy Now</span>
+            </div>
+          </div>
+          <div class="absolute right-4 bottom-4 text-5xl text-sky-500/10"><i class="fab fa-linkedin-in"></i></div>
+        </div>
+      </div>
+      <!-- ROW 2 — 2 wider cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- YouTube -->
+        <div class="rounded-3xl p-6 md:p-8 relative overflow-hidden card-hover bg-white border border-slate-100">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-red-500/20 blur-xl"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-slate-900 mb-2">YouTube</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-5">Engaged subscribers & commenters from your niche with high conversion.</p>
+            <div class="flex items-center gap-3">
+              <button onclick="showAuthShell('login')" class="w-10 h-10 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition"><i class="fas fa-arrow-right"></i></button>
+              <span class="text-slate-900 font-semibold text-sm">Buy Now</span>
+            </div>
+          </div>
+          <div class="absolute right-4 bottom-4 text-5xl text-red-500/10"><i class="fab fa-youtube"></i></div>
+        </div>
+        <!-- Snapchat -->
+        <div class="rounded-3xl p-6 md:p-8 relative overflow-hidden card-hover bg-slate-100">
+          <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-amber-500/20 blur-xl"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-black text-slate-900 mb-2">Snapchat</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-5">Gen-Z audience, quick responders for trendy products & courses.</p>
+            <div class="flex items-center gap-3">
+              <button onclick="showAuthShell('login')" class="w-10 h-10 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-slate-800 transition"><i class="fas fa-arrow-right"></i></button>
+              <span class="text-slate-900 font-semibold text-sm">Buy Now</span>
+            </div>
+          </div>
+          <div class="absolute right-4 bottom-4 text-5xl text-amber-500/10"><i class="fab fa-snapchat-ghost"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice Leads Grid -->
+    <div id="practiceGrid" class="hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="rounded-3xl p-6 relative overflow-hidden card-hover bg-gradient-to-br from-pink-100 to-rose-50 border border-pink-200">
+          <div class="text-3xl mb-3">👩</div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Girls Only</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-3">Female-only leads. Best for beauty, fashion, and women-focused offers.</p>
+          <div class="text-brand-lime font-bold text-sm mb-4">₹3 / lead</div>
+          <button onclick="showAuthShell('login')" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">Buy Now</button>
+        </div>
+        <div class="rounded-3xl p-6 relative overflow-hidden card-hover bg-gradient-to-br from-blue-100 to-sky-50 border border-blue-200">
+          <div class="text-3xl mb-3">👨</div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Boys Only</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-3">Male-only leads. Ideal for tech, finance, and gaming offers.</p>
+          <div class="text-brand-lime font-bold text-sm mb-4">₹2 / lead</div>
+          <button onclick="showAuthShell('login')" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">Buy Now</button>
+        </div>
+        <div class="rounded-3xl p-6 relative overflow-hidden card-hover bg-gradient-to-br from-purple-100 to-violet-50 border border-purple-200">
+          <div class="text-3xl mb-3">👩👨</div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">70% Girls 30% Boys</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-3">Majority female leads with male mix. Balanced for general campaigns.</p>
+          <div class="text-brand-lime font-bold text-sm mb-4">₹2 / lead</div>
+          <button onclick="showAuthShell('login')" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">Buy Now</button>
+        </div>
+        <div class="rounded-3xl p-6 relative overflow-hidden card-hover bg-gradient-to-br from-emerald-100 to-lime-50 border border-emerald-200">
+          <div class="text-3xl mb-3">🤝</div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Mixed Audience</h3>
+          <p class="text-slate-600 text-sm leading-relaxed mb-3">Perfectly balanced 50/50 mix for broad audience testing.</p>
+          <div class="text-brand-lime font-bold text-sm mb-4">₹2 / lead</div>
+          <button onclick="showAuthShell('login')" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audience filter pills -->
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <span class="text-gray-400 text-sm font-semibold">Filter by Audience:</span>
+      <button class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/20 transition border border-white/10">Housewife</button>
+      <button class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/20 transition border border-white/10">Working Pro</button>
+      <button class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/20 transition border border-white/10">Students</button>
+      <button class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/20 transition border border-white/10">Business Owners</button>
+      <button class="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium hover:bg-white/20 transition border border-white/10">Job Seekers</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION D — HOW IT WORKS -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">HOW IT WORKS</p>
+    <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-3">Choose. Buy. Download. Earn.</h2>
+    <p class="text-slate-500 text-lg max-w-xl mb-12">Select your platform, purchase verified leads, download CSV, and start converting.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+      <!-- Zig-zag dashed arrows (decorative SVG) -->
+      <svg class="hidden md:block absolute inset-0 pointer-events-none z-0" style="width:100%;height:100%;">
+        <path d="M 25% 15% Q 50% 30%, 75% 45%" stroke="#cbd5e1" stroke-width="2" fill="none" stroke-dasharray="8 6" class="dash-anim"/>
+        <path d="M 75% 45% Q 50% 60%, 25% 75%" stroke="#cbd5e1" stroke-width="2" fill="none" stroke-dasharray="8 6" class="dash-anim" style="animation-delay:.5s"/>
+        <path d="M 25% 75% Q 50% 90%, 75% 105%" stroke="#cbd5e1" stroke-width="2" fill="none" stroke-dasharray="8 6" class="dash-anim" style="animation-delay:1s"/>
+      </svg>
+
+      <!-- Step 1 -->
+      <div class="rounded-2xl p-6 relative overflow-hidden card-hover z-10" style="background:#ecfccb;">
+        <div class="absolute left-0 top-0 bottom-0 w-10 bg-brand-greenDark rounded-r-xl flex items-center justify-center">
+          <span class="text-white font-bold text-xs step-pill">Step - 1</span>
+        </div>
+        <div class="ml-14">
+          <div class="text-3xl mb-2">📦</div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">Choose Your Package.</h3>
+          <p class="text-slate-600 text-sm">Select the platform and audience type that aligns with your business goals.</p>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="rounded-2xl p-6 relative overflow-hidden card-hover z-10" style="background:#f1f5f9;">
+        <div class="absolute left-0 top-0 bottom-0 w-10 bg-brand-dark rounded-r-xl flex items-center justify-center">
+          <span class="text-white font-bold text-xs step-pill">Step - 2</span>
+        </div>
+        <div class="ml-14">
+          <div class="text-3xl mb-2">🎯</div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">Select Lead Count.</h3>
+          <p class="text-slate-600 text-sm">Pick how many leads you need — 50, 100, 250, or custom. Price auto-calculates.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="rounded-2xl p-6 relative overflow-hidden card-hover z-10" style="background:#ecfccb;">
+        <div class="absolute left-0 top-0 bottom-0 w-10 bg-brand-greenDark rounded-r-xl flex items-center justify-center">
+          <span class="text-white font-bold text-xs step-pill">Step - 3</span>
+        </div>
+        <div class="ml-14">
+          <div class="text-3xl mb-2">🚀</div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">Make Payment.</h3>
+          <p class="text-slate-600 text-sm">Pay securely via UPI, Card, or Wallet. Instant confirmation.</p>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="rounded-2xl p-6 relative overflow-hidden card-hover z-10" style="background:#f1f5f9;">
+        <div class="absolute left-0 top-0 bottom-0 w-10 bg-brand-dark rounded-r-xl flex items-center justify-center">
+          <span class="text-white font-bold text-xs step-pill">Step - 4</span>
+        </div>
+        <div class="ml-14">
+          <div class="text-3xl mb-2">💰</div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">Download & Convert.</h3>
+          <p class="text-slate-600 text-sm">Get your CSV within 24 hours. Start calling, messaging, and closing deals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION E — LEAD TYPES -->
+<section class="py-16 md:py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">LEAD CATEGORIES</p>
+    <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-3">Choose Your Lead Type</h2>
+    <p class="text-slate-500 text-lg max-w-xl mb-12">Explore audience-specific leads and discover the perfect match for your campaign.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#ef4444;">
+        <div class="text-3xl mb-3">🎬</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Housewife Leads</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Verified home-makers interested in extra income, online work, and skill-building opportunities.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#3b82f6;">
+        <div class="text-3xl mb-3">🤖</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Working Pro Leads</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Active professionals looking for side income, freelancing, and career growth.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#f59e0b;">
+        <div class="text-3xl mb-3">📱</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Student Leads</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">College students and freshers eager to learn digital skills and earn online.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#8b5cf6;">
+        <div class="text-3xl mb-3">🎨</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Business Owner Leads</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Entrepreneurs and shop owners wanting to scale via digital marketing.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#10b981;">
+        <div class="text-3xl mb-3">💼</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Job Seeker Leads</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Candidates actively looking for work-from-home and freelance opportunities.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md card-hover pin-top" style="--pin-color:#c5e86c;">
+        <div class="text-3xl mb-3">🚀</div>
+        <h3 class="text-lg font-black text-slate-900 mb-2">Mixed Audience</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Diverse leads across all categories for broad-reach campaigns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION F — TESTIMONIALS -->
+<section class="py-16 md:py-24 bg-brand-dark relative overflow-hidden">
+  <div class="absolute inset-0 opacity-5"><div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand-lime blur-3xl"></div></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <p class="text-xs font-bold uppercase tracking-widest text-brand-lime mb-2">CLIENT VOICES</p>
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-10">Businesses Trust Our Leads</h2>
+    <div class="relative">
+      <button onclick="scrollCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-brand-greenDark rounded-full flex items-center justify-center text-white shadow-lg hover:bg-brand-green transition -ml-2 md:-ml-4"><i class="fas fa-chevron-left"></i></button>
+      <button onclick="scrollCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-brand-greenDark rounded-full flex items-center justify-center text-white shadow-lg hover:bg-brand-green transition -mr-2 md:-mr-4"><i class="fas fa-chevron-right"></i></button>
+      <div id="carouselTrack" class="carousel-track flex gap-5 overflow-x-auto py-4 px-8">
+        <div class="min-w-[280px] md:min-w-[320px] bg-white/5 border border-white/10 rounded-2xl p-5 card-hover">
+          <div class="w-full h-48 rounded-xl bg-slate-700 mb-4 flex items-center justify-center relative overflow-hidden">
+            <img src="https://picsum.photos/seed/testi1/320/200.jpg" class="w-full h-full object-cover rounded-xl" alt="testimonial"/>
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30"><div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><i class="fas fa-play text-white text-lg ml-1"></i></div></div>
+          </div>
+          <h4 class="text-white font-bold text-lg">Ravi <span class="text-brand-lime">Sharma</span></h4>
+          <p class="text-gray-400 text-sm mt-1">Doubled my conversion rate using Instagram leads from LeadFlow.</p>
+        </div>
+        <div class="min-w-[280px] md:min-w-[320px] bg-white/5 border border-white/10 rounded-2xl p-5 card-hover">
+          <div class="w-full h-48 rounded-xl bg-slate-700 mb-4 flex items-center justify-center relative overflow-hidden">
+            <img src="https://picsum.photos/seed/testi2/320/200.jpg" class="w-full h-full object-cover rounded-xl" alt="testimonial"/>
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30"><div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><i class="fas fa-play text-white text-lg ml-1"></i></div></div>
+          </div>
+          <h4 class="text-white font-bold text-lg">Priya <span class="text-brand-lime">Patel</span></h4>
+          <p class="text-gray-400 text-sm mt-1">Best LinkedIn B2B leads I've ever purchased. Highly recommended.</p>
+        </div>
+        <div class="min-w-[280px] md:min-w-[320px] bg-white/5 border border-white/10 rounded-2xl p-5 card-hover">
+          <div class="w-full h-48 rounded-xl bg-slate-700 mb-4 flex items-center justify-center relative overflow-hidden">
+            <img src="https://picsum.photos/seed/testi3/320/200.jpg" class="w-full h-full object-cover rounded-xl" alt="testimonial"/>
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30"><div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><i class="fas fa-play text-white text-lg ml-1"></i></div></div>
+          </div>
+          <h4 class="text-white font-bold text-lg">Amit <span class="text-brand-lime">Verma</span></h4>
+          <p class="text-gray-400 text-sm mt-1">From cold calls to warm conversations. LeadFlow changed my game.</p>
+        </div>
+        <div class="min-w-[280px] md:min-w-[320px] bg-white/5 border border-white/10 rounded-2xl p-5 card-hover">
+          <div class="w-full h-48 rounded-xl bg-slate-700 mb-4 flex items-center justify-center relative overflow-hidden">
+            <img src="https://picsum.photos/seed/testi4/320/200.jpg" class="w-full h-full object-cover rounded-xl" alt="testimonial"/>
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30"><div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><i class="fas fa-play text-white text-lg ml-1"></i></div></div>
+          </div>
+          <h4 class="text-white font-bold text-lg">Sneha <span class="text-brand-lime">Gupta</span></h4>
+          <p class="text-gray-400 text-sm mt-1">Student leads helped me fill every batch of my digital course.</p>
+        </div>
+        <div class="min-w-[280px] md:min-w-[320px] bg-white/5 border border-white/10 rounded-2xl p-5 card-hover">
+          <div class="w-full h-48 rounded-xl bg-slate-700 mb-4 flex items-center justify-center relative overflow-hidden">
+            <img src="https://picsum.photos/seed/testi5/320/200.jpg" class="w-full h-full object-cover rounded-xl" alt="testimonial"/>
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30"><div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"><i class="fas fa-play text-white text-lg ml-1"></i></div></div>
+          </div>
+          <h4 class="text-white font-bold text-lg">Karan <span class="text-brand-lime">Mehta</span></h4>
+          <p class="text-gray-400 text-sm mt-1">Practice leads at Rs.2 are insane value. Testing campaigns made easy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION G — WHY US -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-3">Why Us?</h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">We Don't Just Sell Data. We Deliver Results.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-brand-lime/20 rounded-2xl px-6 py-4 text-center">
+            <div class="text-3xl font-black text-brand-greenDark">100+</div>
+            <div class="text-sm font-semibold text-slate-600">Verified Sources</div>
+          </div>
+          <div class="bg-brand-lime/20 rounded-2xl px-6 py-4 text-center">
+            <div class="text-3xl font-black text-brand-greenDark">300K+</div>
+            <div class="text-sm font-semibold text-slate-600">Leads Delivered</div>
+          </div>
+        </div>
+        <div class="flex -space-x-3 mb-6">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-rose-400 border-2 border-white flex items-center justify-center text-white font-bold">R</div>
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-sky-400 border-2 border-white flex items-center justify-center text-white font-bold">P</div>
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 border-2 border-white flex items-center justify-center text-white font-bold">A</div>
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-yellow-400 border-2 border-white flex items-center justify-center text-white font-bold">S</div>
+          <div class="w-12 h-12 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-slate-500 font-bold text-xs">+96</div>
+        </div>
+        <h3 class="text-2xl font-black text-slate-900 mb-2">Buy Without Limits</h3>
+        <p class="text-slate-500 leading-relaxed">Access verified leads from 5 platforms. No restrictions on downloads, no hidden fees. Pay per lead, get exactly what you need.</p>
+      </div>
+      <div class="relative">
+        <div class="bg-slate-100 rounded-3xl p-6 shadow-xl card-hover">
+          <div class="bg-white rounded-2xl p-4 shadow-md mb-4">
+            <div class="flex items-center gap-3 mb-3"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div></div>
+            <div class="bg-brand-dark rounded-xl p-4 text-white">
+              <div class="flex items-center gap-2 mb-2"><div class="w-6 h-6 rounded bg-brand-lime/20 flex items-center justify-center text-brand-lime text-xs"><i class="fas fa-chart-line"></i></div><span class="text-sm font-semibold">Dashboard</span></div>
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white/10 rounded-lg p-2"><div class="text-brand-lime font-bold text-sm">2,450</div><div class="text-gray-400 text-xs">Leads</div></div>
+                <div class="bg-white/10 rounded-lg p-2"><div class="text-brand-lime font-bold text-sm">12</div><div class="text-gray-400 text-xs">Orders</div></div>
+                <div class="bg-white/10 rounded-lg p-2"><div class="text-brand-lime font-bold text-sm">₹8K</div><div class="text-gray-400 text-xs">Spent</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-slate-500"><i class="fas fa-mobile-screen text-brand-green"></i> Mobile dashboard available</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-slate-500 mt-10 text-sm">Loved by thousands who turned cold outreach into real income and growth opportunities online</p>
+  </div>
+</section>
+
+<!-- SECTION H — FAQ -->
+<section class="py-16 md:py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">FAQ</p>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6">What would you like to know about Us</h2>
+        <div class="flex items-center gap-4 mt-8 relative">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white text-xl shadow-lg"><i class="fab fa-instagram"></i></div>
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white text-xl shadow-lg"><i class="fab fa-facebook-f"></i></div>
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center text-white text-xl shadow-lg"><i class="fab fa-linkedin-in"></i></div>
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white text-xl shadow-lg"><i class="fab fa-youtube"></i></div>
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center text-white text-xl shadow-lg"><i class="fab fa-snapchat-ghost"></i></div>
+          <!-- Faint connecting lines -->
+          <svg class="absolute inset-0 pointer-events-none" style="width:100%;height:100%;z-index:0;">
+            <line x1="14%" y1="50%" x2="38%" y2="50%" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="38%" y1="50%" x2="62%" y2="50%" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="62%" y1="50%" x2="86%" y2="50%" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+          </svg>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <details class="bg-white rounded-xl border border-slate-100 shadow-sm group">
+          <summary class="px-5 py-4 flex items-center justify-between cursor-pointer font-semibold text-slate-900">
+            What happens after I buy? <i class="fas fa-chevron-down chev text-slate-400"></i>
+          </summary>
+          <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">You get instant access to your dashboard with CSV download option and lifetime access to purchased leads.</div>
+        </details>
+        <details class="bg-white rounded-xl border border-slate-100 shadow-sm group">
+          <summary class="px-5 py-4 flex items-center justify-between cursor-pointer font-semibold text-slate-900">
+            Can I get sample leads before purchasing? <i class="fas fa-chevron-down chev text-slate-400"></i>
+          </summary>
+          <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">Yes, we offer a sample pack of 10 leads for first-time users at a nominal cost so you can verify quality.</div>
+        </details>
+        <details class="bg-white rounded-xl border border-slate-100 shadow-sm group">
+          <summary class="px-5 py-4 flex items-center justify-between cursor-pointer font-semibold text-slate-900">
+            What makes these different from cold calling data? <i class="fas fa-chevron-down chev text-slate-400"></i>
+          </summary>
+          <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">Our leads are sourced from active social platforms where users have shown intent, filtered by niche and demographics — not random cold data.</div>
+        </details>
+        <details class="bg-white rounded-xl border border-slate-100 shadow-sm group">
+          <summary class="px-5 py-4 flex items-center justify-between cursor-pointer font-semibold text-slate-900">
+            Is there a refund if leads are invalid? <i class="fas fa-chevron-down chev text-slate-400"></i>
+          </summary>
+          <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">We verify all leads before delivery. If invalid contacts exceed 10%, we offer instant replacement credits to your wallet.</div>
+        </details>
+        <details class="bg-white rounded-xl border border-slate-100 shadow-sm group">
+          <summary class="px-5 py-4 flex items-center justify-between cursor-pointer font-semibold text-slate-900">
+            Can I filter leads by location and age? <i class="fas fa-chevron-down chev text-slate-400"></i>
+          </summary>
+          <div class="px-5 pb-4 text-slate-500 text-sm leading-relaxed">Absolutely. Each package offers audience filters including location, age group, gender, and profession for precise targeting.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION I — FOOTER -->
+<footer id="footerSection" class="bg-brand-dark pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+      <!-- Founder's Desk -->
+      <div>
+        <h3 class="text-brand-lime font-bold text-sm uppercase tracking-widest mb-4">From the Founder's Desk</h3>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <p class="text-gray-300 text-sm leading-relaxed mb-4">"We built LeadFlow because cold data doesn't work. Real leads from real platforms, verified and filtered — that's what growing businesses need. Every lead you buy from us has intent behind it."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold text-sm">F</div>
+            <div><div class="text-white font-semibold text-sm">Farhin Almas</div><div class="text-gray-400 text-xs">Founder, LeadFlow</div></div>
+          </div>
+          <div class="flex -space-x-2 mt-4">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-rose-400 border-2 border-brand-dark flex items-center justify-center text-white font-bold text-xs">R</div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-sky-400 border-2 border-brand-dark flex items-center justify-center text-white font-bold text-xs">P</div>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-yellow-400 border-2 border-brand-dark flex items-center justify-center text-white font-bold text-xs">A</div>
+          </div>
+        </div>
+      </div>
+      <!-- Contact Form -->
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">Contact Us</h3>
+        <form onsubmit="handleContactForm(event)" class="space-y-3">
+          <input id="contactName" type="text" required placeholder="Your Name" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-brand-lime text-sm" />
+          <input id="contactEmail" type="email" required placeholder="Your Email" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-brand-lime text-sm" />
+          <input id="contactPhone" type="tel" placeholder="Phone Number" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-brand-lime text-sm" />
+          <button type="submit" class="w-full py-3 bg-brand-lime text-brand-dark rounded-xl font-bold text-sm hover:bg-lime-300 transition">Contact Us</button>
+        </form>
+      </div>
+    </div>
+    <!-- Bottom Footer -->
+    <div class="border-t border-white/10 pt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-bold text-sm">L</div>
+          <span class="text-white font-extrabold text-sm tracking-wide">LEADFLOW</span>
+        </div>
+        <div class="flex gap-2">
+          <button class="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-xs font-semibold flex items-center gap-1 hover:bg-white/10 transition"><i class="fab fa-apple"></i> App Store</button>
+          <button class="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-xs font-semibold flex items-center gap-1 hover:bg-white/10 transition"><i class="fab fa-google-play"></i> Google Play</button>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Support</h4>
+        <div class="space-y-2 text-sm text-gray-400">
+          <a href="#" class="hover:text-white transition">About Us</a><br>
+          <a href="#" class="hover:text-white transition">Free Affiliate</a><br>
+          <a href="#" class="hover:text-white transition">Blog</a><br>
+          <a href="#" class="hover:text-white transition">Disclaimer</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Our Packages</h4>
+        <div class="space-y-2 text-sm text-gray-400">
+          <a href="#leadPacks" class="hover:text-white transition">Pro</a><br>
+          <a href="#leadPacks" class="hover:text-white transition">Supreme</a><br>
+          <a href="#leadPacks" class="hover:text-white transition">Premium</a><br>
+          <a href="#leadPacks" class="hover:text-white transition">Premium Plus</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3">Contact</h4>
+        <div class="space-y-2 text-sm text-gray-400">
+          <span>support@leadflow.com</span><br>
+          <span>+91 98765 43210</span><br>
+          <span>Mumbai, India</span>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <span>&copy; 2026 LeadFlow. All rights reserved.</span>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-white transition">Contact us</a>
+        <a href="#" class="hover:text-white transition">Terms</a>
+        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end landingShell -->
+
+<!-- ════════════════════ AUTH SHELL ════════════════════ -->
+<div id="authShell" class="hidden min-h-screen relative overflow-hidden" style="background:#1a2332;">
+  <!-- Floating decorative bars -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="float-anim absolute" style="--r:-18deg;top:8%;left:6%;width:120px;height:14px;background:linear-gradient(90deg,#5eead4,#2dd4bf);border-radius:8px;opacity:.85;"></div>
+    <div class="float-anim-d1 absolute" style="--r:24deg;top:18%;left:78%;width:180px;height:10px;background:linear-gradient(90deg,#2dd4bf,#5eead4);border-radius:8px;opacity:.7;"></div>
+    <div class="float-anim-d2 absolute" style="--r:-32deg;top:62%;left:10%;width:90px;height:12px;background:#5eead4;border-radius:8px;opacity:.6;"></div>
+    <div class="float-anim-d3 absolute" style="--r:14deg;top:74%;left:72%;width:150px;height:12px;background:linear-gradient(90deg,#5eead4,#2dd4bf);border-radius:8px;opacity:.8;"></div>
+    <div class="float-anim absolute" style="--r:40deg;top:40%;left:88%;width:60px;height:10px;background:#2dd4bf;border-radius:8px;opacity:.5;"></div>
+    <div class="float-anim-d1 absolute" style="--r:-22deg;top:88%;left:30%;width:200px;height:10px;background:linear-gradient(90deg,#2dd4bf,#5eead4);border-radius:8px;opacity:.55;"></div>
+    <div class="float-anim-d2 absolute" style="--r:8deg;top:30%;left:42%;width:70px;height:8px;background:#5eead4;border-radius:8px;opacity:.4;"></div>
+  </div>
   <!-- Navbar -->
   <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-40 glass-dark border border-white/10 rounded-full px-5 py-3 flex items-center gap-6 shadow-2xl w-[94%] max-w-5xl">
     <div class="flex items-center gap-2">
@@ -79,7 +648,7 @@ tailwind.config = {
       <span class="text-white font-extrabold text-sm tracking-wide">LEADFLOW</span>
     </div>
     <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
-      <a href="#" class="hover:text-white transition">Home</a>
+      <a href="#" onclick="backToLanding();return false;" class="hover:text-white transition">Home</a>
       <a href="#" class="hover:text-white transition">Packages</a>
       <a href="#" class="hover:text-white transition">Contact us</a>
     </div>
@@ -88,86 +657,34 @@ tailwind.config = {
       <button onclick="showAuthPage('register')" class="px-4 py-2 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition">Register Now</button>
     </div>
   </nav>
-
   <!-- Login Page -->
   <div id="loginPage" class="relative z-10 min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
     <div class="bg-white rounded-[2rem] w-full max-w-[420px] p-8 shadow-2xl">
       <div class="flex items-start justify-between mb-6">
         <h1 class="text-3xl font-extrabold text-slate-900 leading-tight">Welcome to<br>LEADFLOW</h1>
-        <div class="text-right text-sm">
-          <span class="text-slate-500">No Account ?</span><br>
-          <a href="#" onclick="showAuthPage('register');return false;" class="text-emerald-700 font-semibold hover:underline">Sign up</a>
-        </div>
+        <div class="text-right text-sm"><span class="text-slate-500">No Account ?</span><br><a href="#" onclick="showAuthPage('register');return false;" class="text-emerald-700 font-semibold hover:underline">Sign up</a></div>
       </div>
       <form onsubmit="handleLogin(event)" class="space-y-4">
-        <div>
-          <label class="text-sm font-medium text-slate-700">Enter your username or email address</label>
-          <input id="loginEmail" type="email" required placeholder="you@example.com" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-        </div>
-        <div>
-          <label class="text-sm font-medium text-slate-700">Enter your Password</label>
-          <div class="relative mt-1.5">
-            <input id="loginPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 pr-12" />
-            <button type="button" onclick="togglePw('loginPassword',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button>
-          </div>
-        </div>
-        <div class="text-right">
-          <a href="#" onclick="toast('Password reset link sent to your email','success');return false;" class="text-sm text-emerald-700 font-medium hover:underline">Forgot Password?</a>
-        </div>
+        <div><label class="text-sm font-medium text-slate-700">Enter your username or email address</label><input id="loginEmail" type="email" required placeholder="you@example.com" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /></div>
+        <div><label class="text-sm font-medium text-slate-700">Enter your Password</label><div class="relative mt-1.5"><input id="loginPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 pr-12" /><button type="button" onclick="togglePw('loginPassword',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button></div></div>
+        <div class="text-right"><a href="#" onclick="toast('Password reset link sent to your email','success');return false;" class="text-sm text-emerald-700 font-medium hover:underline">Forgot Password?</a></div>
         <button type="submit" class="w-full py-3.5 rounded-xl text-white font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Sign in</button>
       </form>
-      <p class="text-center text-xs text-slate-400 mt-5">Demo: <span class="font-semibold">demo@leadflow.com</span> / <span class="font-semibold">demo123</span></p>
+      <p class="text-center text-xs text-slate-400 mt-5">Demo: <span class="font-semibold cursor-pointer" onclick="prefillDemo()">demo@leadflow.com / demo123</span></p>
     </div>
   </div>
-
   <!-- Register Page -->
   <div id="registerPage" class="hidden relative z-10 min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
     <div class="bg-white rounded-[2rem] w-full max-w-[520px] p-8 shadow-2xl">
       <div class="flex items-start justify-between mb-6">
         <h1 class="text-3xl font-extrabold text-slate-900">Sign up</h1>
-        <div class="text-right text-sm">
-          <span class="text-slate-500">Have an Account ?</span><br>
-          <a href="#" onclick="showAuthPage('login');return false;" class="text-emerald-700 font-semibold hover:underline">Sign in</a>
-        </div>
+        <div class="text-right text-sm"><span class="text-slate-500">Have an Account ?</span><br><a href="#" onclick="showAuthPage('login');return false;" class="text-emerald-700 font-semibold hover:underline">Sign in</a></div>
       </div>
       <form onsubmit="handleRegister(event)" class="space-y-4">
-        <div>
-          <label class="text-sm font-medium text-slate-700">Email Id</label>
-          <input id="regEmail" type="email" required placeholder="you@example.com" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="text-sm font-medium text-slate-700">Full Name</label>
-            <input id="regName" type="text" required placeholder="John Doe" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-          </div>
-          <div>
-            <label class="text-sm font-medium text-slate-700">Contact Number</label>
-            <input id="regPhone" type="tel" required placeholder="+91 98765 43210" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="text-sm font-medium text-slate-700">Country</label>
-            <select id="regCountry" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500">
-              <option value="">Select Country</option>
-              <option>India</option><option>United States</option><option>United Kingdom</option><option>UAE</option><option>Singapore</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-sm font-medium text-slate-700">State</label>
-            <select id="regState" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500">
-              <option value="">Select State</option>
-              <option>Maharashtra</option><option>Karnataka</option><option>Delhi</option><option>Tamil Nadu</option><option>Gujarat</option><option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="text-sm font-medium text-slate-700">Password</label>
-          <div class="relative mt-1.5">
-            <input id="regPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 pr-12" />
-            <button type="button" onclick="togglePw('regPassword',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button>
-          </div>
-        </div>
+        <div><label class="text-sm font-medium text-slate-700">Email Id</label><input id="regEmail" type="email" required placeholder="you@example.com" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="text-sm font-medium text-slate-700">Full Name</label><input id="regName" type="text" required placeholder="John Doe" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /></div><div><label class="text-sm font-medium text-slate-700">Contact Number</label><input id="regPhone" type="tel" required placeholder="+91 98765 43210" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /></div></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="text-sm font-medium text-slate-700">Country</label><select id="regCountry" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500"><option value="">Select Country</option><option>India</option><option>United States</option><option>United Kingdom</option><option>UAE</option><option>Singapore</option></select></div><div><label class="text-sm font-medium text-slate-700">State</label><select id="regState" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500"><option value="">Select State</option><option>Maharashtra</option><option>Karnataka</option><option>Delhi</option><option>Tamil Nadu</option><option>Gujarat</option><option>Other</option></select></div></div>
+        <div><label class="text-sm font-medium text-slate-700">Password</label><div class="relative mt-1.5"><input id="regPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 pr-12" /><button type="button" onclick="togglePw('regPassword',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"><i class="fas fa-eye"></i></button></div></div>
         <button type="submit" class="w-full py-3.5 rounded-xl text-white font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Next</button>
       </form>
     </div>
@@ -176,93 +693,48 @@ tailwind.config = {
 
 <!-- ════════════════════ APP SHELL ════════════════════ -->
 <div id="appShell" class="hidden min-h-screen bg-slate-50">
-
-  <!-- Mobile sidebar backdrop -->
   <div id="sidebarBackdrop" class="hidden fixed inset-0 bg-black/50 z-30 lg:hidden" onclick="toggleSidebar()"></div>
-
-  <!-- Sidebar -->
   <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col" style="background:#0f172a;">
     <div class="p-5 flex items-center gap-2 border-b border-white/5">
       <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-lg flex items-center justify-center text-white font-bold">L</div>
       <span class="text-white font-extrabold tracking-wide">LEADFLOW</span>
       <button onclick="toggleSidebar()" class="ml-auto lg:hidden text-gray-400"><i class="fas fa-times"></i></button>
     </div>
-
     <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1" id="sidebarNav">
-      <button onclick="navigate('dashboard')" data-page="dashboard" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-chart-pie w-5 text-center"></i> Dashboard
-      </button>
-      <button onclick="navigate('browse')" data-page="browse" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-compass w-5 text-center"></i> Browse Leads
-      </button>
-      <button onclick="navigate('orders')" data-page="orders" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-bag-shopping w-5 text-center"></i> My Orders
-      </button>
-      <button onclick="navigate('downloads')" data-page="downloads" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-download w-5 text-center"></i> Downloads
-      </button>
-      <button onclick="navigate('favorites')" data-page="favorites" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-heart w-5 text-center"></i> Favorites
-        <span id="favBadge" class="ml-auto bg-lime-400 text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full hidden">0</span>
-      </button>
-      <button onclick="navigate('wallet')" data-page="wallet" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-wallet w-5 text-center"></i> Wallet
-      </button>
-      <button onclick="navigate('support')" data-page="support" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium">
-        <i class="fas fa-headset w-5 text-center"></i> Support
-      </button>
+      <button onclick="navigate('dashboard')" data-page="dashboard" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-chart-pie w-5 text-center"></i> Dashboard</button>
+      <button onclick="navigate('browse')" data-page="browse" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-compass w-5 text-center"></i> Browse Leads</button>
+      <button onclick="navigate('orders')" data-page="orders" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-bag-shopping w-5 text-center"></i> My Orders</button>
+      <button onclick="navigate('downloads')" data-page="downloads" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-download w-5 text-center"></i> Downloads</button>
+      <button onclick="navigate('favorites')" data-page="favorites" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-heart w-5 text-center"></i> Favorites<span id="favBadge" class="ml-auto bg-lime-400 text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full hidden">0</span></button>
+      <button onclick="navigate('wallet')" data-page="wallet" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-wallet w-5 text-center"></i> Wallet</button>
+      <button onclick="navigate('support')" data-page="support" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-r-xl text-gray-300 hover:bg-white/5 transition text-sm font-medium"><i class="fas fa-headset w-5 text-center"></i> Support</button>
     </nav>
-
-    <!-- Mobile App Promo -->
     <div class="mx-3 mb-3 rounded-2xl p-4 text-slate-900" style="background:linear-gradient(135deg,#c5e86c,#a3d900);">
       <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wide"><i class="fas fa-mobile-screen"></i> Mobile App</div>
-      <p class="text-sm font-semibold mt-1.5 leading-snug">Download the LeadFlow app for instant lead access on the go.</p>
+      <p class="text-sm font-semibold mt-1.5 leading-snug">Download LeadFlow app for instant lead access on the go.</p>
       <div class="flex gap-2 mt-3">
         <button class="flex-1 bg-slate-900 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1"><i class="fab fa-apple"></i> iOS</button>
         <button class="flex-1 bg-slate-900 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1"><i class="fab fa-google-play"></i> Android</button>
       </div>
     </div>
-
-    <!-- User profile + logout -->
     <div class="mx-3 mb-4 bg-white/5 rounded-2xl p-3 border border-white/5">
       <div class="flex items-center gap-3">
         <div id="userAvatar" class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold text-sm">U</div>
-        <div class="flex-1 min-w-0">
-          <div id="userName" class="text-white text-sm font-semibold truncate">User</div>
-          <div id="userEmail" class="text-gray-400 text-xs truncate">user@email.com</div>
-        </div>
+        <div class="flex-1 min-w-0"><div id="userName" class="text-white text-sm font-semibold truncate">User</div><div id="userEmail" class="text-gray-400 text-xs truncate">user@email.com</div></div>
       </div>
-      <button onclick="logout()" class="mt-3 w-full py-2 bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2">
-        <i class="fas fa-right-from-bracket"></i> Logout
-      </button>
+      <button onclick="logout()" class="mt-3 w-full py-2 bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"><i class="fas fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
-
-  <!-- Main wrapper -->
   <div class="lg:ml-64">
-    <!-- Header -->
     <header class="sticky top-0 z-20 glass-light border-b border-slate-200 px-5 py-4 flex items-center gap-4">
       <button onclick="toggleSidebar()" class="lg:hidden text-slate-700 text-xl"><i class="fas fa-bars"></i></button>
-      <div class="flex-1">
-        <h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1>
-        <p id="pageSubtitle" class="text-sm text-slate-500">Welcome back, here's your overview</p>
-      </div>
-      <button onclick="navigate('wallet')" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition">
-        <i class="fas fa-wallet text-lime-400"></i>
-        <span>Rs.</span><span id="headerBalance">0</span>
-      </button>
-      <button onclick="toast('You have 3 new notifications','info')" class="relative w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition">
-        <i class="fas fa-bell"></i>
-        <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
-      </button>
+      <div class="flex-1"><h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1><p id="pageSubtitle" class="text-sm text-slate-500">Welcome back</p></div>
+      <button onclick="navigate('wallet')" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition"><i class="fas fa-wallet text-brand-lime"></i><span>Rs.</span><span id="headerBalance">0</span></button>
+      <button onclick="toast('You have 3 new notifications','info')" class="relative w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition"><i class="fas fa-bell"></i><span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span></button>
     </header>
-
-    <!-- Main content -->
     <main id="mainContent" class="p-5 md:p-7">
-
-      <!-- ─────── DASHBOARD ─────── -->
+      <!-- DASHBOARD -->
       <section id="page-dashboard" class="fade-in space-y-6">
-        <!-- Welcome banner -->
         <div class="rounded-2xl p-7 text-white relative overflow-hidden" style="background:linear-gradient(120deg,#0f172a,#1a4d2e 70%,#3d6b5e);">
           <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-lime-400/10"></div>
           <div class="absolute right-20 bottom-0 w-32 h-32 rounded-full bg-emerald-400/10"></div>
@@ -275,18 +747,11 @@ tailwind.config = {
             </div>
           </div>
         </div>
-
-        <!-- Stats row -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="statsRow"></div>
-
-        <!-- Chart + Recent Orders -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <div class="xl:col-span-2 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
             <div class="flex items-center justify-between mb-5">
-              <div>
-                <h3 class="font-bold text-slate-900">Lead Purchase Activity</h3>
-                <p class="text-xs text-slate-500">Daily leads purchased over time</p>
-              </div>
+              <div><h3 class="font-bold text-slate-900">Lead Purchase Activity</h3><p class="text-xs text-slate-500">Daily leads purchased over time</p></div>
               <div class="flex bg-slate-100 rounded-lg p-1 text-xs font-semibold">
                 <button onclick="updateChartRange(7)" id="range7" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm">7D</button>
                 <button onclick="updateChartRange(30)" id="range30" class="px-3 py-1.5 rounded-md text-slate-500">30D</button>
@@ -296,140 +761,67 @@ tailwind.config = {
             <div class="h-64"><canvas id="activityChart"></canvas></div>
           </div>
           <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-bold text-slate-900">Recent Orders</h3>
-              <button onclick="navigate('orders')" class="text-xs text-emerald-700 font-semibold hover:underline">View all</button>
-            </div>
+            <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-slate-900">Recent Orders</h3><button onclick="navigate('orders')" class="text-xs text-emerald-700 font-semibold hover:underline">View all</button></div>
             <div id="recentOrders" class="space-y-3"></div>
           </div>
         </div>
-
-        <!-- Quick Actions -->
-        <div>
-          <h3 class="font-bold text-slate-900 mb-3">Quick Actions</h3>
+        <div><h3 class="font-bold text-slate-900 mb-3">Quick Actions</h3>
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <button onclick="navigate('browse')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left">
-              <div class="w-11 h-11 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-cart-shopping"></i></div>
-              <div class="font-semibold text-slate-900 text-sm">Buy Leads</div>
-              <div class="text-xs text-slate-500 mt-0.5">Browse packages</div>
-            </button>
-            <button onclick="navigate('downloads')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left">
-              <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-file-csv"></i></div>
-              <div class="font-semibold text-slate-900 text-sm">Download CSV</div>
-              <div class="text-xs text-slate-500 mt-0.5">Get your leads</div>
-            </button>
-            <button onclick="openAddFundsModal()" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left">
-              <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-plus-circle"></i></div>
-              <div class="font-semibold text-slate-900 text-sm">Add Funds</div>
-              <div class="text-xs text-slate-500 mt-0.5">Top up wallet</div>
-            </button>
-            <button onclick="navigate('support')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left">
-              <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-ticket"></i></div>
-              <div class="font-semibold text-slate-900 text-sm">Raise Ticket</div>
-              <div class="text-xs text-slate-500 mt-0.5">Get support</div>
-            </button>
+            <button onclick="navigate('browse')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left"><div class="w-11 h-11 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-cart-shopping"></i></div><div class="font-semibold text-slate-900 text-sm">Buy Leads</div><div class="text-xs text-slate-500 mt-0.5">Browse packages</div></button>
+            <button onclick="navigate('downloads')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left"><div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-file-csv"></i></div><div class="font-semibold text-slate-900 text-sm">Download CSV</div><div class="text-xs text-slate-500 mt-0.5">Get your leads</div></button>
+            <button onclick="openAddFundsModal()" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left"><div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-plus-circle"></i></div><div class="font-semibold text-slate-900 text-sm">Add Funds</div><div class="text-xs text-slate-500 mt-0.5">Top up wallet</div></button>
+            <button onclick="navigate('support')" class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover text-left"><div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg mb-3"><i class="fas fa-ticket"></i></div><div class="font-semibold text-slate-900 text-sm">Raise Ticket</div><div class="text-xs text-slate-500 mt-0.5">Get support</div></button>
           </div>
         </div>
-
-        <!-- Leads by Platform -->
-        <div>
-          <h3 class="font-bold text-slate-900 mb-3">Leads by Platform</h3>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="platformMiniGrid"></div>
-        </div>
+        <div><h3 class="font-bold text-slate-900 mb-3">Leads by Platform</h3><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="platformMiniGrid"></div></div>
       </section>
-
-      <!-- ─────── BROWSE LEADS ─────── -->
+      <!-- BROWSE LEADS -->
       <section id="page-browse" class="hidden fade-in">
-        <!-- View 1: Platforms -->
         <div id="browsePlatforms">
-          <h2 class="text-2xl font-extrabold text-slate-900 mb-1">What You Want to Learn Today?</h2>
-          <p class="text-slate-500 mb-6">Pick a platform to explore lead packages filtered by audience.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="platformGrid"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <button id="browseTabSocial" onclick="switchBrowseTab('social')" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold transition">Social Platforms</button>
+            <button id="browseTabPractice" onclick="switchBrowseTab('practice')" class="px-5 py-2.5 bg-slate-200 text-slate-700 rounded-full text-sm font-bold transition">Practice Leads</button>
+          </div>
+          <div id="browseSocialView"><h2 class="text-2xl font-extrabold text-slate-900 mb-1">Choose Your Platform</h2><p class="text-slate-500 mb-6">Pick a platform to explore lead packages filtered by audience.</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="platformGrid"></div></div>
+          <div id="browsePracticeView" class="hidden"><h2 class="text-2xl font-extrabold text-slate-900 mb-1">Practice Leads</h2><p class="text-slate-500 mb-6">Low-cost leads for testing and learning. Perfect for campaign experiments.</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="practiceGridDash"></div></div>
         </div>
-        <!-- View 2: Packages -->
         <div id="browsePackages" class="hidden">
           <button onclick="showBrowsePlatforms()" class="mb-5 flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Platforms</button>
           <div id="packagePlatformHeader" class="mb-6"></div>
           <div class="flex flex-wrap gap-2 mb-6" id="audienceFilters"></div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="packageGrid"></div>
         </div>
+        <div id="browsePracticePackages" class="hidden">
+          <button onclick="showBrowsePlatforms()" class="mb-5 flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Practice Leads</button>
+          <div id="practicePackageHeader" class="mb-6"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="practicePackageGrid"></div>
+        </div>
       </section>
-
-      <!-- ─────── MY ORDERS ─────── -->
+      <!-- MY ORDERS -->
       <section id="page-orders" class="hidden fade-in">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-          <div class="flex items-center gap-3">
-            <select id="orderFilter" onchange="renderOrders()" class="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium">
-              <option value="all">All Orders</option>
-              <option value="Completed">Completed</option>
-              <option value="Pending">Pending</option>
-              <option value="Processing">Processing</option>
-            </select>
-          </div>
+          <select id="orderFilter" onchange="renderOrders()" class="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium"><option value="all">All Orders</option><option value="Completed">Completed</option><option value="Pending">Pending</option><option value="Processing">Processing</option></select>
           <button onclick="navigate('downloads')" class="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2"><i class="fas fa-download"></i> Download Center</button>
         </div>
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
-                <tr>
-                  <th class="text-left px-5 py-3.5 font-semibold">Order ID</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Package</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Platform</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Leads</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Amount</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Date</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Status</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Action</th>
-                </tr>
-              </thead>
-              <tbody id="ordersBody"></tbody>
-            </table>
-          </div>
+          <div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide"><tr><th class="text-left px-5 py-3.5 font-semibold">Order ID</th><th class="text-left px-5 py-3.5 font-semibold">Package</th><th class="text-left px-5 py-3.5 font-semibold">Platform</th><th class="text-left px-5 py-3.5 font-semibold">Leads</th><th class="text-left px-5 py-3.5 font-semibold">Amount</th><th class="text-left px-5 py-3.5 font-semibold">Date</th><th class="text-left px-5 py-3.5 font-semibold">Status</th><th class="text-left px-5 py-3.5 font-semibold">Action</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
           <div id="ordersPagination" class="px-5 py-4 flex items-center justify-between border-t border-slate-100"></div>
         </div>
       </section>
-
-      <!-- ─────── DOWNLOADS ─────── -->
+      <!-- DOWNLOADS -->
       <section id="page-downloads" class="hidden fade-in">
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
-                <tr>
-                  <th class="text-left px-5 py-3.5 font-semibold">Order ID</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Package Name</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Platform</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Leads Count</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Purchased On</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Status</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Action</th>
-                </tr>
-              </thead>
-              <tbody id="downloadsBody"></tbody>
-            </table>
-          </div>
+          <div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide"><tr><th class="text-left px-5 py-3.5 font-semibold">Order ID</th><th class="text-left px-5 py-3.5 font-semibold">Package Name</th><th class="text-left px-5 py-3.5 font-semibold">Platform</th><th class="text-left px-5 py-3.5 font-semibold">Leads Count</th><th class="text-left px-5 py-3.5 font-semibold">Purchased On</th><th class="text-left px-5 py-3.5 font-semibold">Status</th><th class="text-left px-5 py-3.5 font-semibold">Action</th></tr></thead><tbody id="downloadsBody"></tbody></table></div>
         </div>
       </section>
-
-      <!-- ─────── FAVORITES ─────── -->
-      <section id="page-favorites" class="hidden fade-in">
-        <div id="favoritesContent"></div>
-      </section>
-
-      <!-- ─────── WALLET ─────── -->
+      <!-- FAVORITES -->
+      <section id="page-favorites" class="hidden fade-in"><div id="favoritesContent"></div></section>
+      <!-- WALLET -->
       <section id="page-wallet" class="hidden fade-in space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div class="lg:col-span-2 rounded-2xl p-7 text-white relative overflow-hidden" style="background:linear-gradient(120deg,#0f172a,#1a4d2e 60%,#3d6b5e);">
             <div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-lime-400/10"></div>
-            <div class="relative z-10">
-              <p class="text-gray-300 text-sm">Wallet Balance</p>
-              <h2 class="text-4xl font-extrabold mt-1">Rs.<span id="walletBalance">0</span></h2>
-              <div class="flex gap-3 mt-5">
-                <button onclick="openAddFundsModal()" class="px-5 py-2.5 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Add Funds</button>
-                <button onclick="toast('Withdrawal request initiated','success')" class="px-5 py-2.5 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Withdraw</button>
-              </div>
-            </div>
+            <div class="relative z-10"><p class="text-gray-300 text-sm">Wallet Balance</p><h2 class="text-4xl font-extrabold mt-1">Rs.<span id="walletBalance">0</span></h2><div class="flex gap-3 mt-5"><button onclick="openAddFundsModal()" class="px-5 py-2.5 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Add Funds</button><button onclick="toast('Withdrawal request initiated','success')" class="px-5 py-2.5 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Withdraw</button></div></div>
           </div>
           <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
             <h3 class="font-bold text-slate-900 mb-4">Quick Add</h3>
@@ -443,59 +835,27 @@ tailwind.config = {
         </div>
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
           <div class="px-6 py-4 border-b border-slate-100"><h3 class="font-bold text-slate-900">Transaction History</h3></div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
-                <tr>
-                  <th class="text-left px-5 py-3.5 font-semibold">Date</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Description</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Type</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Amount</th>
-                  <th class="text-left px-5 py-3.5 font-semibold">Balance</th>
-                </tr>
-              </thead>
-              <tbody id="transactionsBody"></tbody>
-            </table>
-          </div>
+          <div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide"><tr><th class="text-left px-5 py-3.5 font-semibold">Date</th><th class="text-left px-5 py-3.5 font-semibold">Description</th><th class="text-left px-5 py-3.5 font-semibold">Type</th><th class="text-left px-5 py-3.5 font-semibold">Amount</th><th class="text-left px-5 py-3.5 font-semibold">Balance</th></tr></thead><tbody id="transactionsBody"></tbody></table></div>
         </div>
       </section>
-
-      <!-- ─────── SUPPORT ─────── -->
+      <!-- SUPPORT -->
       <section id="page-support" class="hidden fade-in">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="space-y-6">
             <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
               <h3 class="font-bold text-slate-900 mb-4">Create a Ticket</h3>
               <form onsubmit="submitTicket(event)" class="space-y-4">
-                <div>
-                  <label class="text-sm font-medium text-slate-700">Subject</label>
-                  <input id="ticketSubject" type="text" required placeholder="Briefly describe the issue" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-                </div>
-                <div>
-                  <label class="text-sm font-medium text-slate-700">Category</label>
-                  <select id="ticketCategory" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500">
-                    <option value="">Select Category</option>
-                    <option>Order Issue</option><option>Payment Issue</option><option>Lead Quality</option><option>Account Issue</option><option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="text-sm font-medium text-slate-700">Message</label>
-                  <textarea id="ticketMessage" required rows="4" placeholder="Explain in detail..." class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 resize-none"></textarea>
-                </div>
+                <div><label class="text-sm font-medium text-slate-700">Subject</label><input id="ticketSubject" type="text" required placeholder="Briefly describe the issue" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /></div>
+                <div><label class="text-sm font-medium text-slate-700">Category</label><select id="ticketCategory" required class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500"><option value="">Select Category</option><option>Order Issue</option><option>Payment Issue</option><option>Lead Quality</option><option>Account Issue</option><option>Other</option></select></div>
+                <div><label class="text-sm font-medium text-slate-700">Message</label><textarea id="ticketMessage" required rows="4" placeholder="Explain in detail..." class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 resize-none"></textarea></div>
                 <button type="submit" class="w-full py-3 rounded-xl text-white font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Submit Ticket</button>
               </form>
             </div>
             <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
               <h3 class="font-bold text-slate-900 mb-4">Contact Info</h3>
               <div class="space-y-3">
-                <a href="#" class="flex items-center gap-3 p-3 bg-green-50 rounded-xl hover:bg-green-100 transition">
-                  <div class="w-10 h-10 rounded-lg bg-green-500 text-white flex items-center justify-center"><i class="fab fa-whatsapp"></i></div>
-                  <div><div class="text-sm font-semibold text-slate-900">WhatsApp</div><div class="text-xs text-slate-500">+91 98765 43210</div></div>
-                </a>
-                <a href="#" class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
-                  <div class="w-10 h-10 rounded-lg bg-blue-500 text-white flex items-center justify-center"><i class="fas fa-envelope"></i></div>
-                  <div><div class="text-sm font-semibold text-slate-900">Email</div><div class="text-xs text-slate-500">support@leadflow.com</div></div>
-                </a>
+                <a href="#" class="flex items-center gap-3 p-3 bg-green-50 rounded-xl hover:bg-green-100 transition"><div class="w-10 h-10 rounded-lg bg-green-500 text-white flex items-center justify-center"><i class="fab fa-whatsapp"></i></div><div><div class="text-sm font-semibold text-slate-900">WhatsApp</div><div class="text-xs text-slate-500">+91 98765 43210</div></div></a>
+                <a href="#" class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition"><div class="w-10 h-10 rounded-lg bg-blue-500 text-white flex items-center justify-center"><i class="fas fa-envelope"></i></div><div><div class="text-sm font-semibold text-slate-900">Email</div><div class="text-xs text-slate-500">support@leadflow.com</div></div></a>
               </div>
             </div>
           </div>
@@ -505,96 +865,52 @@ tailwind.config = {
           </div>
         </div>
       </section>
-
     </main>
   </div>
 </div>
 
-<!-- ════════════════════ BUY MODAL ════════════════════ -->
-<div id="buyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(15,23,42,0.55); backdrop-filter:blur(6px);">
-  <div class="bg-white rounded-[2rem] w-full max-w-md p-7 modal-enter shadow-2xl">
-    <div class="flex items-start justify-between mb-5">
-      <div>
-        <h3 class="text-xl font-extrabold text-slate-900">Confirm Order</h3>
-        <p class="text-sm text-slate-500">Review your package details</p>
-      </div>
-      <button onclick="closeBuyModal()" class="text-slate-400 hover:text-slate-700"><i class="fas fa-times text-lg"></i></button>
-    </div>
+<!-- BUY MODAL -->
+<div id="buyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(15,23,42,0.55);backdrop-filter:blur(6px);">
+  <div class="bg-white rounded-[2rem] w-full max-w-md p-7 modal-enter shadow-2xl max-h-[90vh] overflow-y-auto">
+    <div class="flex items-start justify-between mb-5"><div><h3 class="text-xl font-extrabold text-slate-900">Confirm Order</h3><p class="text-sm text-slate-500">Review your package details</p></div><button onclick="closeBuyModal()" class="text-slate-400 hover:text-slate-700"><i class="fas fa-times text-lg"></i></button></div>
     <div id="buyModalBody" class="space-y-3"></div>
-    <div class="mt-5 p-4 bg-slate-50 rounded-xl flex items-center justify-between">
-      <span class="text-sm text-slate-600">Wallet Balance</span>
-      <span class="font-bold text-slate-900">Rs.<span id="buyModalBalance">0</span></span>
-    </div>
+    <div class="mt-5 p-4 bg-slate-50 rounded-xl flex items-center justify-between"><span class="text-sm text-slate-600">Wallet Balance</span><span class="font-bold text-slate-900">Rs.<span id="buyModalBalance">0</span></span></div>
     <button onclick="confirmBuy()" id="confirmBuyBtn" class="w-full mt-4 py-3.5 rounded-xl text-white font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Confirm Order</button>
   </div>
 </div>
 
-<!-- ════════════════════ ADD FUNDS MODAL ════════════════════ -->
-<div id="addFundsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(15,23,42,0.55); backdrop-filter:blur(6px);">
+<!-- ADD FUNDS MODAL -->
+<div id="addFundsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(15,23,42,0.55);backdrop-filter:blur(6px);">
   <div class="bg-white rounded-[2rem] w-full max-w-md p-7 modal-enter shadow-2xl">
-    <div class="flex items-start justify-between mb-5">
-      <div>
-        <h3 class="text-xl font-extrabold text-slate-900">Add Funds</h3>
-        <p class="text-sm text-slate-500">Top up your wallet instantly</p>
-      </div>
-      <button onclick="closeAddFundsModal()" class="text-slate-400 hover:text-slate-700"><i class="fas fa-times text-lg"></i></button>
-    </div>
+    <div class="flex items-start justify-between mb-5"><div><h3 class="text-xl font-extrabold text-slate-900">Add Funds</h3><p class="text-sm text-slate-500">Top up your wallet instantly</p></div><button onclick="closeAddFundsModal()" class="text-slate-400 hover:text-slate-700"><i class="fas fa-times text-lg"></i></button></div>
     <div class="space-y-4">
-      <div>
-        <label class="text-sm font-medium text-slate-700">Amount (Rs.)</label>
-        <input id="addFundsAmount" type="number" min="1" placeholder="Enter amount" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" />
-        <div class="flex gap-2 mt-2.5">
-          <button onclick="setAddFundsAmount(500)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+500</button>
-          <button onclick="setAddFundsAmount(1000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+1K</button>
-          <button onclick="setAddFundsAmount(2000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+2K</button>
-          <button onclick="setAddFundsAmount(5000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+5K</button>
-        </div>
-      </div>
-      <div>
-        <label class="text-sm font-medium text-slate-700">Payment Method</label>
-        <div class="grid grid-cols-3 gap-2 mt-1.5" id="paymentMethods">
-          <label class="cursor-pointer">
-            <input type="radio" name="pm" value="UPI" class="peer hidden" checked>
-            <div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition">
-              <i class="fas fa-mobile-screen text-emerald-600 text-lg"></i>
-              <div class="text-xs font-semibold mt-1">UPI</div>
-            </div>
-          </label>
-          <label class="cursor-pointer">
-            <input type="radio" name="pm" value="Card" class="peer hidden">
-            <div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition">
-              <i class="fas fa-credit-card text-blue-600 text-lg"></i>
-              <div class="text-xs font-semibold mt-1">Card</div>
-            </div>
-          </label>
-          <label class="cursor-pointer">
-            <input type="radio" name="pm" value="Wallet" class="peer hidden">
-            <div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition">
-              <i class="fas fa-wallet text-amber-600 text-lg"></i>
-              <div class="text-xs font-semibold mt-1">Wallet</div>
-            </div>
-          </label>
-        </div>
-      </div>
+      <div><label class="text-sm font-medium text-slate-700">Amount (Rs.)</label><input id="addFundsAmount" type="number" min="1" placeholder="Enter amount" class="w-full mt-1.5 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500" /><div class="flex gap-2 mt-2.5"><button onclick="setAddFundsAmount(500)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+500</button><button onclick="setAddFundsAmount(1000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+1K</button><button onclick="setAddFundsAmount(2000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+2K</button><button onclick="setAddFundsAmount(5000)" class="flex-1 py-2 border border-slate-200 rounded-lg text-sm font-semibold hover:border-emerald-500 hover:text-emerald-700 transition">+5K</button></div></div>
+      <div><label class="text-sm font-medium text-slate-700">Payment Method</label><div class="grid grid-cols-3 gap-2 mt-1.5" id="paymentMethods"><label class="cursor-pointer"><input type="radio" name="pm" value="UPI" class="peer hidden" checked><div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition"><i class="fas fa-mobile-screen text-emerald-600 text-lg"></i><div class="text-xs font-semibold mt-1">UPI</div></div></label><label class="cursor-pointer"><input type="radio" name="pm" value="Card" class="peer hidden"><div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition"><i class="fas fa-credit-card text-blue-600 text-lg"></i><div class="text-xs font-semibold mt-1">Card</div></div></label><label class="cursor-pointer"><input type="radio" name="pm" value="Wallet" class="peer hidden"><div class="p-3 border-2 border-slate-200 rounded-xl text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition"><i class="fas fa-wallet text-amber-600 text-lg"></i><div class="text-xs font-semibold mt-1">Wallet</div></div></label></div></div>
       <button onclick="confirmAddFunds()" class="w-full py-3.5 rounded-xl text-white font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Pay Now</button>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════ TOAST CONTAINER ════════════════════ -->
+<!-- TOAST CONTAINER -->
 <div id="toastContainer" class="fixed bottom-5 right-5 z-[100] space-y-2.5"></div>
 
 <script>
-/* ═══════════════ STATE MANAGEMENT ═══════════════ */
-const STORAGE_KEY = 'leadflow_state_v1';
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* STATE MANAGEMENT */
+/* ════════════════════════════════════════════════════════════════════════════ */
+const STORAGE_KEY = 'leadflow_state_v2';
 let state = loadState();
 let currentPackageId = null;
 let currentPlatformId = null;
+let currentPracticeId = null;
 let currentAudience = 'All';
+let currentBrowseTab = 'social';
 let orderPage = 1;
 const ORDERS_PER_PAGE = 10;
 let activityChart = null;
 let chartRange = 7;
+let selectedQuantity = 100;
+let customQty = 0;
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -604,47 +920,80 @@ function loadState() {
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
 function seedState() {
+  /* 5 Social Platforms */
   const platforms = [
-    { id:'p1', name:'Instagram', icon:'fab fa-instagram', gradient:'from-pink-500 to-rose-500', desc:'High-intent leads from DMs, Stories & Reels. Filtered by age, gender & location.', audiences:['Housewife','Working Pro','Students'], leads:12450 },
-    { id:'p2', name:'Facebook', icon:'fab fa-facebook-f', gradient:'from-blue-600 to-blue-800', desc:'Targeted leads from Groups, Ads & Marketplace ready for outreach.', audiences:['Housewife','Business Owners','Job Seekers'], leads:9870 },
-    { id:'p3', name:'YouTube', icon:'fab fa-youtube', gradient:'from-red-500 to-red-700', desc:'Engaged subscribers & commenters from your niche with high conversion.', audiences:['Students','Working Pro'], leads:7320 },
-    { id:'p4', name:'LinkedIn', icon:'fab fa-linkedin-in', gradient:'from-sky-500 to-blue-700', desc:'B2B professionals & decision makers perfect for high-ticket offers.', audiences:['Working Pro','Business Owners','Job Seekers'], leads:5640 },
-    { id:'p5', name:'Snapchat', icon:'fab fa-snapchat-ghost', gradient:'from-yellow-400 to-amber-500', desc:'Gen-Z audience, quick responders for trendy products & courses.', audiences:['Students'], leads:3210 },
-    { id:'p6', name:'Google Ads', icon:'fab fa-google', gradient:'from-indigo-500 to-violet-600', desc:'High-intent search leads from people actively looking for solutions.', audiences:['Business Owners','Working Pro','Job Seekers'], leads:8890 },
+    { id:'p1', name:'Instagram', icon:'fab fa-instagram', gradient:'from-pink-500 to-rose-500', bg:'#1a4d2e', desc:'High-intent leads from DMs, Stories & Reels. Filtered by age, gender & location.', audiences:['Housewife','Working Pro','Students'], pricePerLead:20, totalLeads:12450 },
+    { id:'p2', name:'Facebook', icon:'fab fa-facebook-f', gradient:'from-blue-600 to-blue-800', bg:'#e2e8f0', desc:'Targeted leads from Groups, Ads & Marketplace ready for outreach.', audiences:['Housewife','Business Owners','Job Seekers'], pricePerLead:18, totalLeads:9870 },
+    { id:'p3', name:'LinkedIn', icon:'fab fa-linkedin-in', gradient:'from-sky-500 to-blue-700', bg:'#c5e86c', desc:'B2B professionals & decision makers perfect for high-ticket offers.', audiences:['Working Pro','Business Owners','Job Seekers'], pricePerLead:35, totalLeads:5640 },
+    { id:'p4', name:'YouTube', icon:'fab fa-youtube', gradient:'from-red-500 to-red-700', bg:'#ffffff', desc:'Engaged subscribers & commenters from your niche with high conversion.', audiences:['Students','Working Pro'], pricePerLead:22, totalLeads:7320 },
+    { id:'p5', name:'Snapchat', icon:'fab fa-snapchat-ghost', gradient:'from-yellow-400 to-amber-500', bg:'#f1f5f9', desc:'Gen-Z audience, quick responders for trendy products & courses.', audiences:['Students'], pricePerLead:15, totalLeads:3210 },
   ];
+
+  /* Practice Lead Types */
+  const practiceTypes = [
+    { id:'pr1', name:'Girls Only', emoji:'👩', composition:'100% Female', desc:'Female-only leads. Best for beauty, fashion, and women-focused offers.', pricePerLead:3, bg:'from-pink-100 to-rose-50' },
+    { id:'pr2', name:'Boys Only', emoji:'👨', composition:'100% Male', desc:'Male-only leads. Ideal for tech, finance, and gaming offers.', pricePerLead:2, bg:'from-blue-100 to-sky-50' },
+    { id:'pr3', name:'70% Girls 30% Boys', emoji:'👩👨', composition:'70% Female, 30% Male', desc:'Majority female leads with male mix. Balanced for general campaigns.', pricePerLead:2, bg:'from-purple-100 to-violet-50' },
+    { id:'pr4', name:'Mixed Audience', emoji:'🤝', composition:'50% Female, 50% Male', desc:'Perfectly balanced 50/50 mix for broad audience testing.', pricePerLead:2, bg:'from-emerald-100 to-lime-50' },
+  ];
+
   const audiences = ['Housewife','Working Pro','Students','Business Owners','Job Seekers'];
   const tagsPool = [['Verified','Premium'],['Hot','Verified'],['New','Premium'],['Verified','Trending'],['Hot','Premium']];
   const packages = [];
   let pid = 1;
   platforms.forEach(pl => {
     pl.audiences.forEach(aud => {
-      [50,100,250].forEach((count,idx) => {
+      [50,100,250].forEach(count => {
+        const idx = [50,100,250].indexOf(count);
         packages.push({
           id:'pk'+pid,
           platformId:pl.id,
+          category:'social',
           name:`${pl.name} ${aud} ${count} Leads`,
           leadsCount:count,
-          price: count*15 + (idx*100),
+          pricePerLead:pl.pricePerLead,
+          price: count * pl.pricePerLead,
           audience:aud,
           deliveryTime: idx===0?'24 hours':'48 hours',
-          tags: tagsPool[(pid)%tagsPool.length],
+          tags: tagsPool[(pid-1)%tagsPool.length],
         });
         pid++;
       });
     });
   });
+  /* Practice lead packages */
+  practiceTypes.forEach(pt => {
+    [50,100,250].forEach(count => {
+      const idx = [50,100,250].indexOf(count);
+      packages.push({
+        id:'pk'+pid,
+        practiceId:pt.id,
+        category:'practice',
+        name:`${pt.name} ${count} Leads`,
+        leadsCount:count,
+        pricePerLead:pt.pricePerLead,
+        price: count * pt.pricePerLead,
+        audience:'Mixed',
+        deliveryTime: idx===0?'24 hours':'48 hours',
+        tags: tagsPool[(pid-1)%tagsPool.length],
+      });
+      pid++;
+    });
+  });
+
   const faqs = [
     { q:'What happens after I buy?', a:'You get instant access to your dashboard with CSV download option and lifetime access to purchased leads.' },
     { q:'Can I get sample leads before purchasing?', a:'Yes, we offer a sample pack of 10 leads for first-time users at a nominal cost.' },
     { q:'What makes these different from cold calling data?', a:'Our leads are sourced from active social platforms where users have shown intent, filtered by niche and demographics.' },
     { q:'Is there a refund if leads are invalid?', a:'We verify all leads before delivery. If invalid contacts exceed 10%, we offer instant replacement credits.' },
-    { q:"I'm already running ads. Can I still use this?", a:'Absolutely. Use our leads to supplement your ad funnel or feed them into WhatsApp automation.' },
+    { q:'Can I filter leads by location and age?', a:'Absolutely. Each package offers audience filters including location, age group, gender, and profession for precise targeting.' },
   ];
   const demoUser = { id:'u1', name:'Farhin Almas', email:'demo@leadflow.com', phone:'+91 98765 43210', country:'India', state:'Maharashtra', password:'demo123', walletBalance:12450, createdAt:Date.now() };
-  const s = {
+  return {
     users:[demoUser],
     currentUserId:null,
     platforms,
+    practiceTypes,
     packages,
     orders:[],
     favorites:[],
@@ -652,10 +1001,11 @@ function seedState() {
     tickets:[],
     faqs,
   };
-  return s;
 }
 
-/* ═══════════════ HELPERS ═══════════════ */
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* HELPERS */
+/* ════════════════════════════════════════════════════════════════════════════ */
 function currentUser(){ return state.users.find(u=>u.id===state.currentUserId); }
 function fmt(n){ return Number(n||0).toLocaleString('en-IN'); }
 function fmtDate(ts){ return new Date(ts).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); }
@@ -668,550 +1018,434 @@ function toast(msg, type='success') {
   el.className = `toast-in ${colors[type]} text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 min-w-[260px] max-w-sm`;
   el.innerHTML = `<i class="fas ${icons[type]} text-lg"></i><span class="text-sm font-medium">${msg}</span>`;
   document.getElementById('toastContainer').appendChild(el);
-  setTimeout(()=>{ el.style.transition='all .3s'; el.style.opacity='0'; el.style.transform='translateX(60px)'; setTimeout(()=>el.remove(),300); }, 3000);
+  setTimeout(()=>{ el.style.transition='all .3s'; el.style.opacity='0'; el.style.transform='translateX(60px)'; setTimeout(()=>el.remove(),300); },3000);
 }
 
 function togglePw(id, btn) {
   const inp = document.getElementById(id);
-  if (inp.type === 'password') { inp.type='text'; btn.innerHTML='<i class="fas fa-eye-slash"></i>'; }
-  else { inp.type='password'; btn.innerHTML='<i class="fas fa-eye"></i>'; }
+  if(inp.type==='password'){inp.type='text';btn.innerHTML='<i class="fas fa-eye-slash"></i>';}
+  else{inp.type='password';btn.innerHTML='<i class="fas fa-eye"></i>';}
 }
 
-/* ═══════════════ AUTH ═══════════════ */
-function showAuthPage(page) {
-  document.getElementById('loginPage').classList.toggle('hidden', page!=='login');
-  document.getElementById('registerPage').classList.toggle('hidden', page!=='register');
+function prefillDemo(){
+  document.getElementById('loginEmail').value='demo@leadflow.com';
+  document.getElementById('loginPassword').value='demo123';
 }
-function handleLogin(e) {
+
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* PAGE SWITCHING */
+/* ════════════════════════════════════════════════════════════════════════════ */
+function showAuthShell(page){
+  document.getElementById('landingShell').classList.add('hidden');
+  document.getElementById('authShell').classList.remove('hidden');
+  document.getElementById('appShell').classList.add('hidden');
+  showAuthPage(page);
+}
+function backToLanding(){
+  document.getElementById('landingShell').classList.remove('hidden');
+  document.getElementById('authShell').classList.add('hidden');
+  document.getElementById('appShell').classList.add('hidden');
+}
+function showAuthPage(page){
+  document.getElementById('loginPage').classList.toggle('hidden',page!=='login');
+  document.getElementById('registerPage').classList.toggle('hidden',page!=='register');
+}
+function handleContactForm(e){
+  e.preventDefault();
+  toast('Thank you! We will contact you shortly.','success');
+  document.getElementById('contactName').value='';
+  document.getElementById('contactEmail').value='';
+  document.getElementById('contactPhone').value='';
+}
+
+/* Landing page pack tab switch */
+function switchPackTab(tab){
+  if(tab==='social'){
+    document.getElementById('socialGrid').classList.remove('hidden');
+    document.getElementById('practiceGrid').classList.add('hidden');
+    document.getElementById('tabSocial').className='px-5 py-3 bg-white text-slate-900 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg transition';
+    document.getElementById('tabPractice').className='px-5 py-3 bg-white/10 text-white rounded-full text-sm font-bold flex items-center gap-2 border border-white/20 hover:bg-white/20 transition';
+  } else {
+    document.getElementById('socialGrid').classList.add('hidden');
+    document.getElementById('practiceGrid').classList.remove('hidden');
+    document.getElementById('tabPractice').className='px-5 py-3 bg-white text-slate-900 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg transition';
+    document.getElementById('tabSocial').className='px-5 py-3 bg-white/10 text-white rounded-full text-sm font-bold flex items-center gap-2 border border-white/20 hover:bg-white/20 transition';
+  }
+}
+
+/* Carousel scroll */
+function scrollCarousel(dir){
+  const track = document.getElementById('carouselTrack');
+  track.scrollBy({ left: dir * 340, behavior:'smooth' });
+}
+
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* AUTH */
+/* ════════════════════════════════════════════════════════════════════════════ */
+function handleLogin(e){
   e.preventDefault();
   const email = document.getElementById('loginEmail').value.trim().toLowerCase();
   const pw = document.getElementById('loginPassword').value;
   const user = state.users.find(u=>u.email.toLowerCase()===email);
-  if (!user) { toast('No account found with that email','error'); return; }
-  if (user.password !== pw) { toast('Incorrect password','error'); return; }
-  state.currentUserId = user.id;
-  saveState();
-  enterApp();
+  if(!user){toast('No account found with that email','error');return;}
+  if(user.password!==pw){toast('Incorrect password','error');return;}
+  state.currentUserId=user.id;saveState();enterApp();
   toast(`Welcome back, ${user.name.split(' ')[0]}!`,'success');
 }
-function handleRegister(e) {
+function handleRegister(e){
   e.preventDefault();
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
-  if (state.users.some(u=>u.email.toLowerCase()===email)) { toast('Account already exists with this email','error'); return; }
+  if(state.users.some(u=>u.email.toLowerCase()===email)){toast('Account already exists with this email','error');return;}
   const user = {
-    id: uid('u'),
-    name: document.getElementById('regName').value.trim(),
-    email,
-    phone: document.getElementById('regPhone').value.trim(),
-    country: document.getElementById('regCountry').value,
-    state: document.getElementById('regState').value,
-    password: document.getElementById('regPassword').value,
-    walletBalance: 500,
-    createdAt: Date.now(),
+    id:uid('u'), name:document.getElementById('regName').value.trim(), email,
+    phone:document.getElementById('regPhone').value.trim(),
+    country:document.getElementById('regCountry').value,
+    state:document.getElementById('regState').value,
+    password:document.getElementById('regPassword').value,
+    walletBalance:500, createdAt:Date.now(),
   };
   state.users.push(user);
-  state.transactions.push({ id:uid('t'), userId:user.id, type:'credit', amount:500, description:'Welcome bonus', balanceAfter:500, createdAt:Date.now() });
-  state.currentUserId = user.id;
-  saveState();
-  enterApp();
+  state.transactions.push({id:uid('t'),userId:user.id,type:'credit',amount:500,description:'Welcome bonus',balanceAfter:500,createdAt:Date.now()});
+  state.currentUserId=user.id;saveState();enterApp();
   toast('Account created! Rs.500 welcome bonus added','success');
 }
-function logout() {
-  state.currentUserId = null;
-  saveState();
+function logout(){
+  state.currentUserId=null;saveState();
   document.getElementById('appShell').classList.add('hidden');
-  document.getElementById('authShell').classList.remove('hidden');
-  showAuthPage('login');
+  document.getElementById('landingShell').classList.remove('hidden');
+  document.getElementById('authShell').classList.add('hidden');
   toast('Logged out successfully','info');
 }
-function enterApp() {
+function enterApp(){
+  document.getElementById('landingShell').classList.add('hidden');
   document.getElementById('authShell').classList.add('hidden');
   document.getElementById('appShell').classList.remove('hidden');
-  const u = currentUser();
-  document.getElementById('userName').textContent = u.name;
-  document.getElementById('userEmail').textContent = u.email;
-  document.getElementById('userAvatar').textContent = u.name.charAt(0).toUpperCase();
-  document.getElementById('welcomeName').textContent = u.name.split(' ')[0];
-  updateWalletUI();
-  updateFavBadge();
-  navigate('dashboard');
+  const u=currentUser();
+  document.getElementById('userName').textContent=u.name;
+  document.getElementById('userEmail').textContent=u.email;
+  document.getElementById('userAvatar').textContent=u.name.charAt(0).toUpperCase();
+  document.getElementById('welcomeName').textContent=u.name.split(' ')[0];
+  updateWalletUI();updateFavBadge();navigate('dashboard');
 }
 
-/* ═══════════════ NAVIGATION ═══════════════ */
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* NAVIGATION */
+/* ════════════════════════════════════════════════════════════════════════════ */
 const PAGE_META = {
-  dashboard: { title:'Dashboard', subtitle:"Welcome back, here's your overview" },
-  browse:    { title:'Browse Leads', subtitle:'Explore lead packages across platforms' },
-  orders:    { title:'My Orders', subtitle:'Track and manage your purchases' },
-  downloads: { title:'Downloads', subtitle:'Download your lead CSV files' },
-  favorites: { title:'Favorites', subtitle:'Your saved lead packages' },
-  wallet:    { title:'Wallet', subtitle:'Manage your balance and transactions' },
-  support:   { title:'Support', subtitle:'Get help and find answers' },
+  dashboard:{title:'Dashboard',subtitle:"Welcome back, here's your overview"},
+  browse:{title:'Browse Leads',subtitle:'Explore lead packages across platforms'},
+  orders:{title:'My Orders',subtitle:'Track and manage your purchases'},
+  downloads:{title:'Downloads',subtitle:'Download your lead CSV files'},
+  favorites:{title:'Favorites',subtitle:'Your saved lead packages'},
+  wallet:{title:'Wallet',subtitle:'Manage your balance and transactions'},
+  support:{title:'Support',subtitle:'Get help and find answers'},
 };
-function navigate(page) {
+function navigate(page){
   document.querySelectorAll('[id^="page-"]').forEach(s=>s.classList.add('hidden'));
-  const sec = document.getElementById('page-'+page);
-  if (sec) { sec.classList.remove('hidden'); sec.classList.add('fade-in'); }
+  const sec=document.getElementById('page-'+page);
+  if(sec){sec.classList.remove('hidden');sec.classList.add('fade-in');}
   document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
-  const item = document.querySelector(`.sidebar-item[data-page="${page}"]`);
-  if (item) item.classList.add('active');
-  document.getElementById('pageTitle').textContent = PAGE_META[page].title;
-  document.getElementById('pageSubtitle').textContent = PAGE_META[page].subtitle;
-  if (page==='dashboard') renderDashboard();
-  if (page==='browse') showBrowsePlatforms();
-  if (page==='orders') renderOrders();
-  if (page==='downloads') renderDownloads();
-  if (page==='favorites') renderFavorites();
-  if (page==='wallet') renderWallet();
-  if (page==='support') renderSupport();
-  if (window.innerWidth < 1024) closeSidebar();
+  const item=document.querySelector(`.sidebar-item[data-page="${page}"]`);
+  if(item)item.classList.add('active');
+  document.getElementById('pageTitle').textContent=PAGE_META[page].title;
+  document.getElementById('pageSubtitle').textContent=PAGE_META[page].subtitle;
+  if(page==='dashboard')renderDashboard();
+  if(page==='browse')showBrowsePlatforms();
+  if(page==='orders')renderOrders();
+  if(page==='downloads')renderDownloads();
+  if(page==='favorites')renderFavorites();
+  if(page==='wallet')renderWallet();
+  if(page==='support')renderSupport();
+  if(window.innerWidth<1024)closeSidebar();
 }
-function toggleSidebar() {
-  const sb = document.getElementById('sidebar');
-  const bd = document.getElementById('sidebarBackdrop');
-  sb.classList.toggle('-translate-x-full');
-  bd.classList.toggle('hidden');
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('-translate-x-full');
+  document.getElementById('sidebarBackdrop').classList.toggle('hidden');
 }
-function closeSidebar() {
+function closeSidebar(){
   document.getElementById('sidebar').classList.add('-translate-x-full');
   document.getElementById('sidebarBackdrop').classList.add('hidden');
 }
 
-/* ═══════════════ WALLET UI ═══════════════ */
-function updateWalletUI() {
-  const u = currentUser();
-  if (!u) return;
-  document.getElementById('headerBalance').textContent = fmt(u.walletBalance);
-  document.getElementById('walletBalance').textContent = fmt(u.walletBalance);
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* WALLET UI */
+/* ════════════════════════════════════════════════════════════════════════════ */
+function updateWalletUI(){
+  const u=currentUser();if(!u)return;
+  document.getElementById('headerBalance').textContent=fmt(u.walletBalance);
+  const wb=document.getElementById('walletBalance');if(wb)wb.textContent=fmt(u.walletBalance);
 }
-function updateFavBadge() {
-  const u = currentUser(); if(!u) return;
-  const count = state.favorites.filter(f=>f.userId===u.id).length;
-  const badge = document.getElementById('favBadge');
-  badge.textContent = count;
-  badge.classList.toggle('hidden', count===0);
+function updateFavBadge(){
+  const u=currentUser();if(!u)return;
+  const count=state.favorites.filter(f=>f.userId===u.id).length;
+  const badge=document.getElementById('favBadge');
+  badge.textContent=count;badge.classList.toggle('hidden',count===0);
 }
 
-/* ═══════════════ DASHBOARD ═══════════════ */
-function renderDashboard() {
-  const u = currentUser();
-  const myOrders = state.orders.filter(o=>o.userId===u.id);
-  const totalLeads = myOrders.reduce((s,o)=>s+o.leadsCount,0);
-  const downloads = myOrders.filter(o=>o.status==='Completed').length;
-  const favCount = state.favorites.filter(f=>f.userId===u.id).length;
-  const stats = [
-    { label:'Total Leads Purchased', val:fmt(totalLeads), icon:'fa-users', bg:'bg-blue-100', color:'text-blue-600', trend:'+12%' },
-    { label:'Total Orders', val:myOrders.length, icon:'fa-bag-shopping', bg:'bg-emerald-100', color:'text-emerald-600', trend:'+8%' },
-    { label:'CSV Downloads', val:downloads, icon:'fa-file-csv', bg:'bg-amber-100', color:'text-amber-600', trend:'+5%' },
-    { label:'Favorite Packages', val:favCount, icon:'fa-heart', bg:'bg-pink-100', color:'text-pink-600', trend:'+3%' },
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* DASHBOARD */
+/* ════════════════════════════════════════════════════════════════════════════ */
+function renderDashboard(){
+  const u=currentUser();
+  const myOrders=state.orders.filter(o=>o.userId===u.id);
+  const totalLeads=myOrders.reduce((s,o)=>s+o.leadsCount,0);
+  const downloads=myOrders.filter(o=>o.status==='Completed').length;
+  const favCount=state.favorites.filter(f=>f.userId===u.id).length;
+  const stats=[
+    {label:'Total Leads Purchased',val:fmt(totalLeads),icon:'fa-users',bg:'bg-blue-100',color:'text-blue-600',trend:'+12%'},
+    {label:'Total Orders',val:myOrders.length,icon:'fa-bag-shopping',bg:'bg-emerald-100',color:'text-emerald-600',trend:'+8%'},
+    {label:'CSV Downloads',val:downloads,icon:'fa-file-csv',bg:'bg-amber-100',color:'text-amber-600',trend:'+5%'},
+    {label:'Favorite Packages',val:favCount,icon:'fa-heart',bg:'bg-pink-100',color:'text-pink-600',trend:'+3%'},
   ];
-  document.getElementById('statsRow').innerHTML = stats.map(s=>`
+  document.getElementById('statsRow').innerHTML=stats.map(s=>`
     <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover">
       <div class="flex items-start justify-between">
+        <div><p class="text-xs text-slate-500 font-medium">${s.label}</p><p class="text-2xl font-extrabold text-slate-900 mt-1">${s.val}</p></div>
         <div class="w-11 h-11 rounded-xl ${s.bg} ${s.color} flex items-center justify-center text-lg"><i class="fas ${s.icon}"></i></div>
-        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">${s.trend}</span>
       </div>
-      <div class="text-2xl font-extrabold text-slate-900 mt-3">${s.val}</div>
-      <div class="text-xs text-slate-500 mt-0.5">${s.label}</div>
+      <p class="text-xs text-emerald-600 font-semibold mt-2">${s.trend} this month</p>
     </div>`).join('');
 
-  // Recent orders
-  const recent = myOrders.slice(-5).reverse();
-  const ro = document.getElementById('recentOrders');
-  if (recent.length===0) {
-    ro.innerHTML = `<div class="text-center py-8 text-slate-400 text-sm">No orders yet. <button onclick="navigate('browse')" class="text-emerald-700 font-semibold hover:underline">Browse leads</button></div>`;
+  /* Recent orders */
+  const recent=myOrders.slice(-4).reverse();
+  if(recent.length===0){
+    document.getElementById('recentOrders').innerHTML=`<div class="text-center py-8"><div class="w-14 h-14 mx-auto rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 mb-3"><i class="fas fa-bag-shopping text-xl"></i></div><p class="text-slate-500 text-sm">No orders yet</p><button onclick="navigate('browse')" class="mt-3 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition">Browse Leads</button></div>`;
   } else {
-    ro.innerHTML = recent.map(o=>{
-      const pkg = state.packages.find(p=>p.id===o.packageId);
-      const pl = state.platforms.find(p=>p.id===o.platformId);
-      const sc = { Completed:'bg-emerald-100 text-emerald-700', Pending:'bg-orange-100 text-orange-700', Processing:'bg-blue-100 text-blue-700' };
-      return `<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-br ${pl.gradient} text-white flex items-center justify-center text-sm"><i class="${pl.icon}"></i></div>
-        <div class="flex-1 min-w-0">
-          <div class="text-sm font-semibold text-slate-900 truncate">${pkg?pkg.name:'Package'}</div>
-          <div class="text-xs text-slate-500">${o.leadsCount} leads • Rs.${fmt(o.amount)}</div>
-        </div>
-        <span class="text-xs font-bold px-2.5 py-1 rounded-full ${sc[o.status]}">${o.status}</span>
+    document.getElementById('recentOrders').innerHTML=recent.map(o=>{
+      const statusColors={Completed:'bg-emerald-100 text-emerald-700',Pending:'bg-amber-100 text-amber-700',Processing:'bg-blue-100 text-blue-700'};
+      return `<div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+        <div class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-sm font-bold text-slate-700">${o.packageName.charAt(0)}</div>
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-slate-900 truncate">${o.packageName}</p><p class="text-xs text-slate-500">${fmt(o.leadsCount)} leads • Rs.${fmt(o.price)}</p></div>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${statusColors[o.status]||'bg-slate-100 text-slate-600'}">${o.status}</span>
       </div>`;
     }).join('');
   }
 
-  // Platform mini grid
-  document.getElementById('platformMiniGrid').innerHTML = state.platforms.map(p=>`
-    <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm card-hover text-center">
-      <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-xl"><i class="${p.icon}"></i></div>
-      <div class="text-sm font-semibold text-slate-900 mt-2">${p.name}</div>
-      <div class="text-xs text-slate-500 mt-0.5">${fmt(p.leads)} leads</div>
-    </div>`).join('');
+  /* Platform mini grid */
+  document.getElementById('platformMiniGrid').innerHTML=state.platforms.map(pl=>{
+    const count=myOrders.filter(o=>o.platformId===pl.id).reduce((s,o)=>s+o.leadsCount,0);
+    return `<div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm card-hover text-center">
+      <div class="w-10 h-10 mx-auto rounded-xl bg-gradient-to-br ${pl.gradient} flex items-center justify-center text-white text-lg mb-2"><i class="${pl.icon}"></i></div>
+      <p class="font-semibold text-slate-900 text-sm">${pl.name}</p>
+      <p class="text-xs text-slate-500 mt-0.5">${fmt(count)} leads</p>
+      <p class="text-xs text-brand-lime font-bold mt-1">₹${pl.pricePerLead}/lead</p>
+    </div>`;
+  }).join('');
 
   renderChart();
 }
 
-/* ═══════════════ CHART ═══════════════ */
-function updateChartRange(r) {
-  chartRange = r;
-  ['7','30','365'].forEach(x=>{
-    const el = document.getElementById('range'+x);
-    if (parseInt(x)===r) { el.classList.add('bg-white','text-slate-900','shadow-sm'); el.classList.remove('text-slate-500'); }
-    else { el.classList.remove('bg-white','text-slate-900','shadow-sm'); el.classList.add('text-slate-500'); }
-  });
-  renderChart();
-}
-function renderChart() {
-  const u = currentUser();
-  const myOrders = state.orders.filter(o=>o.userId===u.id);
-  const days = chartRange;
-  const labels = [], data = [];
-  const now = new Date();
-  for (let i=days-1; i>=0; i--) {
-    const d = new Date(now); d.setDate(now.getDate()-i);
-    const key = d.toISOString().slice(0,10);
-    labels.push(days<=7 ? d.toLocaleDateString('en-IN',{weekday:'short'}) : (days<=30 ? d.getDate() : d.toLocaleDateString('en-IN',{month:'short'})));
-    const dayOrders = myOrders.filter(o=>new Date(o.createdAt).toISOString().slice(0,10)===key);
-    data.push(dayOrders.reduce((s,o)=>s+o.leadsCount,0));
+function renderChart(){
+  const ctx=document.getElementById('activityChart');
+  if(!ctx)return;
+  if(activityChart)activityChart.destroy();
+  const u=currentUser();
+  const myOrders=state.orders.filter(o=>o.userId===u.id);
+  const days=chartRange;
+  const labels=[];const data=[];
+  for(let i=days-1;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+    labels.push(ds);
+    const dayStart=new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();
+    const dayEnd=dayStart+86400000;
+    const count=myOrders.filter(o=>o.createdAt>=dayStart&&o.createdAt<dayEnd).reduce((s,o)=>s+o.leadsCount,0);
+    data.push(count);
   }
-  const ctx = document.getElementById('activityChart').getContext('2d');
-  if (activityChart) activityChart.destroy();
-  activityChart = new Chart(ctx, {
+  if(data.every(v=>v===0)){
+    /* Generate some dummy data for visual appeal */
+    for(let i=0;i<data.length;i++){data[i]=Math.floor(Math.random()*20)+2;}
+  }
+  activityChart=new Chart(ctx,{
     type:'bar',
-    data:{ labels, datasets:[{ label:'Leads Purchased', data, backgroundColor:'#3d6b5e', borderRadius:6, maxBarThickness:30 }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ y:{beginAtZero:true, ticks:{precision:0}}, x:{grid:{display:false}} } }
+    data:{labels,datasets:[{label:'Leads Purchased',data,backgroundColor:'rgba(197,232,108,0.7)',borderColor:'#c5e86c',borderWidth:2,borderRadius:8,barThickness:days<=7?28:days<=30?12:6}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxTicksLimit:8}},y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}},animation:{duration:800}},
   });
 }
+function updateChartRange(r){
+  chartRange=r;
+  document.getElementById('range7').className=`px-3 py-1.5 rounded-md ${r===7?'bg-white text-slate-900 shadow-sm':'text-slate-500'}`;
+  document.getElementById('range30').className=`px-3 py-1.5 rounded-md ${r===30?'bg-white text-slate-900 shadow-sm':'text-slate-500'}`;
+  document.getElementById('range365').className=`px-3 py-1.5 rounded-md ${r===365?'bg-white text-slate-900 shadow-sm':'text-slate-500'}`;
+  renderChart();
+}
 
-/* ═══════════════ BROWSE LEADS ═══════════════ */
-function showBrowsePlatforms() {
+/* ════════════════════════════════════════════════════════════════════════════ */
+/* BROWSE LEADS */
+/* ════════════════════════════════════════════════════════════════════════════ */
+function switchBrowseTab(tab){
+  currentBrowseTab=tab;
+  document.getElementById('browseTabSocial').className=`px-5 py-2.5 rounded-full text-sm font-bold transition ${tab==='social'?'bg-brand-dark text-white':'bg-slate-200 text-slate-700'}`;
+  document.getElementById('browseTabPractice').className=`px-5 py-2.5 rounded-full text-sm font-bold transition ${tab==='practice'?'bg-brand-dark text-white':'bg-slate-200 text-slate-700'}`;
+  document.getElementById('browseSocialView').classList.toggle('hidden',tab!=='social');
+  document.getElementById('browsePracticeView').classList.toggle('hidden',tab!=='practice');
+}
+
+function showBrowsePlatforms(){
   document.getElementById('browsePlatforms').classList.remove('hidden');
   document.getElementById('browsePackages').classList.add('hidden');
-  document.getElementById('platformGrid').innerHTML = state.platforms.map(p=>`
-    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm card-hover">
-      <div class="flex items-start justify-between">
-        <div class="flex-1">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-2xl shadow-lg"><i class="${p.icon}"></i></div>
-          <h3 class="text-lg font-bold text-slate-900 mt-3">${p.name}</h3>
-          <p class="text-sm text-slate-500 mt-1 leading-snug">${p.desc}</p>
+  document.getElementById('browsePracticePackages').classList.add('hidden');
+  renderPlatformGrid();
+  renderPracticeGridDash();
+}
+
+function renderPlatformGrid(){
+  document.getElementById('platformGrid').innerHTML=state.platforms.map(pl=>{
+    const cardBg = pl.bg;
+    const isDark = ['#1a4d2e','#0f172a'].includes(cardBg);
+    return `<div class="rounded-3xl p-6 relative overflow-hidden card-hover cursor-pointer" style="background:${cardBg};" onclick="showPlatformPackages('${pl.id}')">
+      <div class="absolute -right-4 -top-4 w-20 h-20 rounded-full bg-gradient-to-br ${pl.gradient} opacity-20 blur-xl"></div>
+      <div class="relative z-10">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${pl.gradient} flex items-center justify-center text-white text-xl mb-4 shadow-lg"><i class="${pl.icon}"></i></div>
+        <h3 class="text-xl font-black ${isDark?'text-white':'text-slate-900'} mb-2">${pl.name}</h3>
+        <p class="${isDark?'text-gray-300':'text-slate-600'} text-sm leading-relaxed mb-3">${pl.desc}</p>
+        <div class="flex items-center justify-between">
+          <span class="${isDark?'text-brand-lime':'text-brand-greenDark'} font-bold text-sm">₹${pl.pricePerLead} / lead</span>
+          <span class="${isDark?'text-gray-400':'text-slate-500'} text-xs">${fmt(pl.totalLeads)} available</span>
         </div>
       </div>
-      <div class="flex flex-wrap gap-1.5 mt-3">
-        ${p.audiences.map(a=>`<span class="text-xs px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full font-medium">${a}</span>`).join('')}
-      </div>
-      <button onclick="showPackages('${p.id}')" class="w-full mt-4 py-2.5 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">View Packages <i class="fas fa-arrow-right ml-1"></i></button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
-function showPackages(platformId) {
-  currentPlatformId = platformId;
-  currentAudience = 'All';
+
+function renderPracticeGridDash(){
+  document.getElementById('practiceGridDash').innerHTML=state.practiceTypes.map(pt=>{
+    return `<div class="rounded-3xl p-6 relative overflow-hidden card-hover cursor-pointer bg-gradient-to-br ${pt.bg} border border-slate-200" onclick="showPracticePackages('${pt.id}')">
+      <div class="text-3xl mb-3">${pt.emoji}</div>
+      <h3 class="text-xl font-black text-slate-900 mb-2">${pt.name}</h3>
+      <p class="text-slate-600 text-sm leading-relaxed mb-2">${pt.desc}</p>
+      <div class="text-xs text-slate-500 mb-3">${pt.composition}</div>
+      <span class="text-brand-greenDark font-bold text-sm">₹${pt.pricePerLead} / lead</span>
+    </div>`;
+  }).join('');
+}
+
+function showPlatformPackages(plId){
+  currentPlatformId=plId;currentAudience='All';
   document.getElementById('browsePlatforms').classList.add('hidden');
   document.getElementById('browsePackages').classList.remove('hidden');
-  const pl = state.platforms.find(p=>p.id===platformId);
-  document.getElementById('packagePlatformHeader').innerHTML = `
+  const pl=state.platforms.find(p=>p.id===plId);
+  const isDark=['#1a4d2e','#0f172a'].includes(pl.bg);
+  document.getElementById('packagePlatformHeader').innerHTML=`
     <div class="flex items-center gap-4">
-      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${pl.gradient} text-white flex items-center justify-center text-3xl shadow-lg"><i class="${pl.icon}"></i></div>
-      <div>
-        <h2 class="text-2xl font-extrabold text-slate-900">${pl.name} Leads</h2>
-        <p class="text-slate-500 text-sm">${pl.desc}</p>
-      </div>
+      <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${pl.gradient} flex items-center justify-center text-white text-2xl shadow-lg"><i class="${pl.icon}"></i></div>
+      <div><h2 class="text-2xl font-extrabold text-slate-900">${pl.name} Leads</h2><p class="text-slate-500 text-sm">₹${pl.pricePerLead} per lead • ${fmt(pl.totalLeads)} available</p></div>
     </div>`;
-  const audiences = ['All', ...pl.audiences];
-  document.getElementById('audienceFilters').innerHTML = audiences.map(a=>`
-    <button onclick="filterPackages('${a}')" class="px-4 py-2 rounded-full text-sm font-semibold transition ${a===currentAudience?'bg-slate-900 text-white':'bg-white border border-slate-200 text-slate-600 hover:border-slate-400'}">${a}</button>`).join('');
-  renderPackages();
+  const audiences=['All',...pl.audiences];
+  document.getElementById('audienceFilters').innerHTML=audiences.map(a=>`
+    <button onclick="filterAudience('${a}')" class="px-4 py-2 rounded-full text-sm font-semibold transition ${a===currentAudience?'bg-brand-dark text-white':'bg-slate-100 text-slate-700 hover:bg-slate-200'}">${a}</button>`).join('');
+  renderPackageGrid();
 }
-function filterPackages(aud) { currentAudience = aud; showPackages(currentPlatformId); }
-function renderPackages() {
-  const u = currentUser();
-  let pkgs = state.packages.filter(p=>p.platformId===currentPlatformId);
-  if (currentAudience!=='All') pkgs = pkgs.filter(p=>p.audience===currentAudience);
-  const pl = state.platforms.find(p=>p.id===currentPlatformId);
-  const tagColors = { Verified:'bg-emerald-100 text-emerald-700', Premium:'bg-purple-100 text-purple-700', Hot:'bg-red-100 text-red-700', New:'bg-blue-100 text-blue-700', Trending:'bg-amber-100 text-amber-700' };
-  document.getElementById('packageGrid').innerHTML = pkgs.map(p=>{
-    const isFav = state.favorites.some(f=>f.userId===u.id && f.packageId===p.id);
-    return `<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover">
-      <div class="flex items-start justify-between">
-        <div class="flex-1">
-          <h3 class="font-bold text-slate-900">${p.name}</h3>
-          <div class="flex items-center gap-3 mt-1.5 text-sm text-slate-600">
-            <span><i class="fas fa-users text-slate-400"></i> ${p.leadsCount} leads</span>
-            <span><i class="fas fa-clock text-slate-400"></i> ${p.deliveryTime}</span>
-          </div>
-        </div>
-        <button onclick="toggleFavorite('${p.id}')" class="w-9 h-9 rounded-full ${isFav?'bg-red-50 text-red-500':'bg-slate-100 text-slate-400'} hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition"><i class="${isFav?'fas':'far'} fa-heart"></i></button>
+
+function showPracticePackages(ptId){
+  currentPracticeId=ptId;currentAudience='All';
+  document.getElementById('browsePlatforms').classList.add('hidden');
+  document.getElementById('browsePracticePackages').classList.remove('hidden');
+  const pt=state.practiceTypes.find(p=>p.id===ptId);
+  document.getElementById('practicePackageHeader').innerHTML=`
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${pt.bg} flex items-center justify-center text-3xl shadow-lg">${pt.emoji}</div>
+      <div><h2 class="text-2xl font-extrabold text-slate-900">${pt.name} Leads</h2><p class="text-slate-500 text-sm">₹${pt.pricePerLead} per lead • ${pt.composition}</p></div>
+    </div>`;
+  renderPracticePackageGrid();
+}
+
+function filterAudience(a){
+  currentAudience=a;
+  const pl=state.platforms.find(p=>p.id===currentPlatformId);
+  const audiences=['All',...pl.audiences];
+  document.getElementById('audienceFilters').innerHTML=audiences.map(x=>`
+    <button onclick="filterAudience('${x}')" class="px-4 py-2 rounded-full text-sm font-semibold transition ${x===a?'bg-brand-dark text-white':'bg-slate-100 text-slate-700 hover:bg-slate-200'}">${x}</button>`).join('');
+  renderPackageGrid();
+}
+
+function renderPackageGrid(){
+  const pkgs=state.packages.filter(p=>p.platformId===currentPlatformId&&p.category==='social'&&(currentAudience==='All'||p.audience===currentAudience));
+  if(pkgs.length===0){
+    document.getElementById('packageGrid').innerHTML=`<div class="col-span-full text-center py-12"><div class="w-14 h-14 mx-auto rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 mb-3"><i class="fas fa-filter text-xl"></i></div><p class="text-slate-500">No packages for this filter</p></div>`;
+    return;
+  }
+  const u=currentUser();
+  document.getElementById('packageGrid').innerHTML=pkgs.map(pk=>{
+    const isFav=state.favorites.some(f=>f.userId===u.id&&f.packageId===pk.id);
+    return `<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover relative">
+      <button onclick="toggleFavorite('${pk.id}')" class="absolute top-4 right-4 w-8 h-8 rounded-lg ${isFav?'bg-red-100 text-red-500':'bg-slate-50 text-slate-400'} flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition"><i class="fas fa-heart text-sm"></i></button>
+      <div class="flex flex-wrap gap-1.5 mb-3">${pk.tags.map(t=>`<span class="px-2 py-0.5 rounded-full text-xs font-semibold ${t==='Verified'?'bg-emerald-100 text-emerald-700':t==='Premium'?'bg-amber-100 text-amber-700':t==='Hot'?'bg-red-100 text-red-700':'bg-blue-100 text-blue-700'}">${t}</span>`).join('')}</div>
+      <h4 class="font-bold text-slate-900 text-lg mb-1">${pk.name}</h4>
+      <p class="text-slate-500 text-sm mb-3">${pk.audience} audience • ${pk.deliveryTime}</p>
+      <div class="flex items-center justify-between mb-4">
+        <div><span class="text-brand-lime font-bold text-lg">₹${fmt(pk.price)}</span><span class="text-slate-500 text-xs ml-1">(${pk.leadsCount} × ₹${pk.pricePerLead})</span></div>
+        <span class="text-xs text-slate-400">${fmt(pk.leadsCount)} leads</span>
       </div>
-      <div class="flex flex-wrap gap-1.5 mt-3">
-        ${p.tags.map(t=>`<span class="text-xs px-2 py-0.5 rounded-full font-semibold ${tagColors[t]||'bg-slate-100 text-slate-600'}">${t}</span>`).join('')}
-        <span class="text-xs px-2 py-0.5 rounded-full font-semibold bg-slate-100 text-slate-600">${p.audience}</span>
+      <!-- Dynamic quantity selector -->
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs text-slate-500 font-medium">Qty:</span>
+        ${[50,100,250].map(q=>`<button onclick="selectQty('${pk.id}',${q},this)" class="qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 transition ${q===pk.leadsCount?'bg-emerald-50 border-emerald-500 text-emerald-700':''}" data-pk="${pk.id}" data-qty="${q}">${q}</button>`).join('')}
+        <button onclick="openCustomQty('${pk.id}')" class="qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 transition" data-pk="${pk.id}">Custom</button>
       </div>
-      <div class="flex items-end justify-between mt-4">
-        <div>
-          <div class="text-xs text-slate-400">Price</div>
-          <div class="text-2xl font-extrabold text-slate-900">Rs.${fmt(p.price)}</div>
-        </div>
-        <button onclick="openBuyModal('${p.id}')" class="px-5 py-2.5 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Buy Now</button>
-      </div>
+      <div class="text-right mb-3" id="calcPrice-${pk.id}"><span class="text-xs text-slate-500">Total: </span><span class="font-bold text-slate-900">₹${fmt(pk.price)}</span></div>
+      <button onclick="openBuyModal('${pk.id}',${pk.leadsCount})" class="w-full py-3 rounded-xl text-white font-semibold hover:opacity-90 transition text-sm" style="background:#3d6b5e;">Buy Now — ₹${fmt(pk.price)}</button>
     </div>`;
   }).join('');
 }
 
-/* ═══════════════ FAVORITES ═══════════════ */
-function toggleFavorite(packageId) {
-  const u = currentUser();
-  const idx = state.favorites.findIndex(f=>f.userId===u.id && f.packageId===packageId);
-  if (idx>=0) { state.favorites.splice(idx,1); toast('Removed from favorites','info'); }
-  else { state.favorites.push({ id:uid('f'), userId:u.id, packageId }); toast('Added to favorites','success'); }
-  saveState(); updateFavBadge();
-  if (!document.getElementById('browsePackages').classList.contains('hidden')) renderPackages();
-  if (!document.getElementById('page-favorites').classList.contains('hidden')) renderFavorites();
-}
-function renderFavorites() {
-  const u = currentUser();
-  const favs = state.favorites.filter(f=>f.userId===u.id);
-  const c = document.getElementById('favoritesContent');
-  if (favs.length===0) {
-    c.innerHTML = `<div class="bg-white rounded-2xl p-12 border border-slate-100 shadow-sm text-center">
-      <div class="w-20 h-20 mx-auto rounded-full bg-red-50 text-red-300 flex items-center justify-center text-4xl"><i class="fas fa-heart"></i></div>
-      <h3 class="text-xl font-bold text-slate-900 mt-4">No Favorites Yet</h3>
-      <p class="text-slate-500 mt-1">Save packages you like for quick access later.</p>
-      <button onclick="navigate('browse')" class="mt-5 px-6 py-2.5 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Browse Leads</button>
-    </div>`;
-    return;
-  }
-  const tagColors = { Verified:'bg-emerald-100 text-emerald-700', Premium:'bg-purple-100 text-purple-700', Hot:'bg-red-100 text-red-700', New:'bg-blue-100 text-blue-700', Trending:'bg-amber-100 text-amber-700' };
-  c.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">` + favs.map(f=>{
-    const p = state.packages.find(pk=>pk.id===f.packageId); if(!p) return '';
-    const pl = state.platforms.find(pl=>pl.id===p.platformId);
-    return `<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover">
-      <div class="flex items-start justify-between">
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-br ${pl.gradient} text-white flex items-center justify-center text-sm"><i class="${pl.icon}"></i></div>
-            <h3 class="font-bold text-slate-900 text-sm">${p.name}</h3>
-          </div>
-          <div class="flex items-center gap-3 mt-1.5 text-xs text-slate-600">
-            <span><i class="fas fa-users text-slate-400"></i> ${p.leadsCount}</span>
-            <span><i class="fas fa-clock text-slate-400"></i> ${p.deliveryTime}</span>
-          </div>
-        </div>
-        <button onclick="toggleFavorite('${p.id}')" class="w-9 h-9 rounded-full bg-red-50 text-red-500 hover:bg-red-100 flex items-center justify-center transition"><i class="fas fa-heart"></i></button>
+function renderPracticePackageGrid(){
+  const pkgs=state.packages.filter(p=>p.practiceId===currentPracticeId&&p.category==='practice');
+  const u=currentUser();
+  const pt=state.practiceTypes.find(p=>p.id===currentPracticeId);
+  document.getElementById('practicePackageGrid').innerHTML=pkgs.map(pk=>{
+    const isFav=state.favorites.some(f=>f.userId===u.id&&f.packageId===pk.id);
+    return `<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm card-hover relative">
+      <button onclick="toggleFavorite('${pk.id}')" class="absolute top-4 right-4 w-8 h-8 rounded-lg ${isFav?'bg-red-100 text-red-500':'bg-slate-50 text-slate-400'} flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition"><i class="fas fa-heart text-sm"></i></button>
+      <div class="flex flex-wrap gap-1.5 mb-3">${pk.tags.map(t=>`<span class="px-2 py-0.5 rounded-full text-xs font-semibold ${t==='Verified'?'bg-emerald-100 text-emerald-700':t==='Premium'?'bg-amber-100 text-amber-700':t==='Hot'?'bg-red-100 text-red-700':'bg-blue-100 text-blue-700'}">${t}</span>`).join('')}</div>
+      <h4 class="font-bold text-slate-900 text-lg mb-1">${pk.name}</h4>
+      <p class="text-slate-500 text-sm mb-3">${pt.composition} • ${pk.deliveryTime}</p>
+      <div class="flex items-center justify-between mb-4">
+        <div><span class="text-brand-lime font-bold text-lg">₹${fmt(pk.price)}</span><span class="text-slate-500 text-xs ml-1">(${pk.leadsCount} × ₹${pk.pricePerLead})</span></div>
+        <span class="text-xs text-slate-400">${fmt(pk.leadsCount)} leads</span>
       </div>
-      <div class="flex flex-wrap gap-1.5 mt-3">${p.tags.map(t=>`<span class="text-xs px-2 py-0.5 rounded-full font-semibold ${tagColors[t]||'bg-slate-100 text-slate-600'}">${t}</span>`).join('')}</div>
-      <div class="flex items-end justify-between mt-4">
-        <div class="text-2xl font-extrabold text-slate-900">Rs.${fmt(p.price)}</div>
-        <button onclick="openBuyModal('${p.id}')" class="px-5 py-2.5 rounded-xl text-white text-sm font-semibold hover:opacity-90 transition" style="background:#3d6b5e;">Buy Now</button>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs text-slate-500 font-medium">Qty:</span>
+        ${[50,100,250].map(q=>`<button onclick="selectQty('${pk.id}',${q},this)" class="qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 transition ${q===pk.leadsCount?'bg-emerald-50 border-emerald-500 text-emerald-700':''}" data-pk="${pk.id}" data-qty="${q}">${q}</button>`).join('')}
+        <button onclick="openCustomQty('${pk.id}')" class="qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 transition" data-pk="${pk.id}">Custom</button>
       </div>
+      <div class="text-right mb-3" id="calcPrice-${pk.id}"><span class="text-xs text-slate-500">Total: </span><span class="font-bold text-slate-900">₹${fmt(pk.price)}</span></div>
+      <button onclick="openBuyModal('${pk.id}',${pk.leadsCount})" class="w-full py-3 rounded-xl text-white font-semibold hover:opacity-90 transition text-sm" style="background:#3d6b5e;">Buy Now — ₹${fmt(pk.price)}</button>
     </div>`;
-  }).join('') + `</div>`;
-}
-
-/* ═══════════════ ORDERS ═══════════════ */
-function renderOrders() {
-  const u = currentUser();
-  const filter = document.getElementById('orderFilter').value;
-  let orders = state.orders.filter(o=>o.userId===u.id);
-  if (filter!=='all') orders = orders.filter(o=>o.status===filter);
-  orders.sort((a,b)=>b.createdAt-a.createdAt);
-  const total = orders.length;
-  const totalPages = Math.max(1, Math.ceil(total/ORDERS_PER_PAGE));
-  if (orderPage>totalPages) orderPage = totalPages;
-  const start = (orderPage-1)*ORDERS_PER_PAGE;
-  const pageOrders = orders.slice(start, start+ORDERS_PER_PAGE);
-  const sc = { Completed:'bg-emerald-100 text-emerald-700', Pending:'bg-orange-100 text-orange-700', Processing:'bg-blue-100 text-blue-700' };
-  const body = document.getElementById('ordersBody');
-  if (pageOrders.length===0) {
-    body.innerHTML = `<tr><td colspan="8" class="text-center py-10 text-slate-400">No orders found. <button onclick="navigate('browse')" class="text-emerald-700 font-semibold hover:underline">Browse leads</button></td></tr>`;
-  } else {
-    body.innerHTML = pageOrders.map(o=>{
-      const pkg = state.packages.find(p=>p.id===o.packageId);
-      const pl = state.platforms.find(p=>p.id===o.platformId);
-      return `<tr class="border-t border-slate-100 hover:bg-slate-50">
-        <td class="px-5 py-3.5 font-mono text-xs text-slate-600">#${o.id.slice(-6).toUpperCase()}</td>
-        <td class="px-5 py-3.5 font-medium text-slate-900">${pkg?pkg.name:'-'}</td>
-        <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5"><i class="${pl?pl.icon:''} text-slate-400"></i> ${pl?pl.name:'-'}</span></td>
-        <td class="px-5 py-3.5">${o.leadsCount}</td>
-        <td class="px-5 py-3.5 font-semibold">Rs.${fmt(o.amount)}</td>
-        <td class="px-5 py-3.5 text-slate-600">${fmtDate(o.createdAt)}</td>
-        <td class="px-5 py-3.5"><span class="text-xs font-bold px-2.5 py-1 rounded-full ${sc[o.status]}">${o.status}</span></td>
-        <td class="px-5 py-3.5"><button onclick="viewOrder('${o.id}')" class="text-emerald-700 font-semibold text-xs hover:underline">View</button></td>
-      </tr>`;
-    }).join('');
-  }
-  document.getElementById('ordersPagination').innerHTML = `
-    <div class="text-xs text-slate-500">Showing ${pageOrders.length===0?0:start+1}–${start+pageOrders.length} of ${total}</div>
-    <div class="flex gap-1">
-      <button onclick="changeOrderPage(-1)" ${orderPage===1?'disabled':''} class="px-3 py-1.5 rounded-lg text-sm ${orderPage===1?'text-slate-300':'text-slate-700 hover:bg-slate-100'} border border-slate-200">Prev</button>
-      <span class="px-3 py-1.5 text-sm font-semibold text-slate-700">Page ${orderPage}/${totalPages}</span>
-      <button onclick="changeOrderPage(1)" ${orderPage===totalPages?'disabled':''} class="px-3 py-1.5 rounded-lg text-sm ${orderPage===totalPages?'text-slate-300':'text-slate-700 hover:bg-slate-100'} border border-slate-200">Next</button>
-    </div>`;
-}
-function changeOrderPage(dir) { orderPage += dir; renderOrders(); }
-function viewOrder(id) {
-  const o = state.orders.find(x=>x.id===id);
-  const pkg = state.packages.find(p=>p.id===o.packageId);
-  toast(`Order #${id.slice(-6).toUpperCase()} — ${pkg?pkg.name:''} (${o.status})`,'info');
-}
-
-/* ═══════════════ DOWNLOADS ═══════════════ */
-function renderDownloads() {
-  const u = currentUser();
-  const orders = state.orders.filter(o=>o.userId===u.id && o.status==='Completed');
-  const body = document.getElementById('downloadsBody');
-  if (orders.length===0) {
-    body.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-slate-400">No downloads available yet.</td></tr>`;
-    return;
-  }
-  body.innerHTML = orders.map(o=>{
-    const pkg = state.packages.find(p=>p.id===o.packageId);
-    const pl = state.platforms.find(p=>p.id===o.platformId);
-    return `<tr class="border-t border-slate-100 hover:bg-slate-50">
-      <td class="px-5 py-3.5 font-mono text-xs text-slate-600">#${o.id.slice(-6).toUpperCase()}</td>
-      <td class="px-5 py-3.5 font-medium text-slate-900">${pkg?pkg.name:'-'}</td>
-      <td class="px-5 py-3.5"><span class="inline-flex items-center gap-1.5"><i class="${pl?pl.icon:''} text-slate-400"></i> ${pl?pl.name:'-'}</span></td>
-      <td class="px-5 py-3.5">${o.leadsCount}</td>
-      <td class="px-5 py-3.5 text-slate-600">${fmtDate(o.createdAt)}</td>
-      <td class="px-5 py-3.5"><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Ready</span></td>
-      <td class="px-5 py-3.5"><button onclick="downloadCSV('${o.id}')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition flex items-center gap-1.5"><i class="fas fa-download"></i> Download</button></td>
-    </tr>`;
   }).join('');
 }
-function downloadCSV(orderId) {
-  const o = state.orders.find(x=>x.id===orderId);
-  if (!o) return;
-  const firstNames = ['Rahul','Priya','Amit','Neha','Sneha','Vikram','Anita','Karan','Pooja','Rohit','Divya','Arjun','Meera','Suresh','Kavya','Manish','Ritu','Sanjay','Anjali','Deepak'];
-  const lastNames = ['Sharma','Verma','Patel','Gupta','Singh','Reddy','Nair','Joshi','Kapoor','Mehta','Rao','Das','Bose','Chopra'];
-  const cities = ['Mumbai','Delhi','Bangalore','Pune','Chennai','Hyderabad','Kolkata','Ahmedabad','Jaipur','Surat','Lucknow','Nagpur'];
-  const rows = [['Name','Phone','Email','City','Source','Date']];
-  const pl = state.platforms.find(p=>p.id===o.platformId);
-  for (let i=0; i<o.leadsCount; i++) {
-    const fn = firstNames[Math.floor(Math.random()*firstNames.length)];
-    const ln = lastNames[Math.floor(Math.random()*lastNames.length)];
-    const phone = '+91' + Math.floor(6000000000 + Math.random()*3999999999);
-    const email = fn.toLowerCase() + Math.floor(Math.random()*999) + '@gmail.com';
-    const city = cities[Math.floor(Math.random()*cities.length)];
-    const date = new Date(Date.now()-Math.random()*30*86400000).toISOString().slice(0,10);
-    rows.push([`${fn} ${ln}`, phone, email, city, pl?pl.name:'Social', date]);
+
+/* Dynamic quantity selection */
+let selectedQtys = {}; /* { packageId: qty } */
+
+function selectQty(pkId, qty, btnEl){
+  selectedQtys[pkId] = qty;
+  const pk = state.packages.find(p=>p.id===pkId);
+  const total = qty * pk.pricePerLead;
+  /* Update button highlights */
+  document.querySelectorAll(`.qty-btn[data-pk="${pkId}"]`).forEach(b=>{
+    const bQty = b.dataset.qty;
+    if(bQty && Number(bQty)===qty){
+      b.className='qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border bg-emerald-50 border-emerald-500 text-emerald-700 transition';
+    } else if(bQty) {
+      b.className='qty-btn px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 hover:border-emerald-500 hover:text-emerald-700 transition';
+    }
+  });
+  /* Update calculated price display */
+  const calcEl = document.getElementById(`calcPrice-${pkId}`);
+  if(calcEl) calcEl.innerHTML=`<span class="text-xs text-slate-500">Total: </span><span class="font-bold text-slate-900">₹${fmt(total)}</span>`;
+  /* Update buy button */
+  const card = btnEl.closest('.card-hover') || btnEl.closest('.bg-white');
+  if(card){
+    const buyBtn = card.querySelector('button[onclick^="openBuyModal"]');
+    if(buyBtn) buyBtn.textContent=`Buy Now — ₹${fmt(total)}`;
+    buyBtn.setAttribute('onclick',`openBuyModal('${pkId}',${qty})`);
   }
-  const csv = rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
-  const blob = new Blob([csv], { type:'text/csv' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = `leads_${orderId.slice(-6)}.csv`; a.click();
-  URL.revokeObjectURL(url);
-  toast(`CSV with ${o.leadsCount} leads downloaded`,'success');
 }
 
-/* ═══════════════ WALLET ═══════════════ */
-function renderWallet() {
-  const u = currentUser();
-  updateWalletUI();
-  const txns = state.transactions.filter(t=>t.userId===u.id).sort((a,b)=>b.createdAt-a.createdAt);
-  const body = document.getElementById('transactionsBody');
-  if (txns.length===0) {
-    body.innerHTML = `<tr><td colspan="5" class="text-center py-10 text-slate-400">No transactions yet.</td></tr>`;
-    return;
-  }
-  body.innerHTML = txns.map(t=>`
-    <tr class="border-t border-slate-100 hover:bg-slate-50">
-      <td class="px-5 py-3.5 text-slate-600">${fmtDate(t.createdAt)}</td>
-      <td class="px-5 py-3.5 text-slate-900">${t.description}</td>
-      <td class="px-5 py-3.5"><span class="text-xs font-bold px-2.5 py-1 rounded-full ${t.type==='credit'?'bg-emerald-100 text-emerald-700':'bg-red-100 text-red-700'}">${t.type==='credit'?'Credit':'Debit'}</span></td>
-      <td class="px-5 py-3.5 font-semibold ${t.type==='credit'?'text-emerald-600':'text-red-600'}">${t.type==='credit'?'+':'-'}Rs.${fmt(t.amount)}</td>
-      <td class="px-5 py-3.5 text-slate-600">Rs.${fmt(t.balanceAfter)}</td>
-    </tr>`).join('');
-}
-
-/* ═══════════════ BUY MODAL ═══════════════ */
-function openBuyModal(packageId) {
-  currentPackageId = packageId;
-  const p = state.packages.find(x=>x.id===packageId);
-  const pl = state.platforms.find(x=>x.id===p.platformId);
-  const u = currentUser();
-  document.getElementById('buyModalBody').innerHTML = `
-    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
-      <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${pl.gradient} text-white flex items-center justify-center text-xl"><i class="${pl.icon}"></i></div>
-      <div class="flex-1">
-        <div class="font-bold text-slate-900">${p.name}</div>
-        <div class="text-xs text-slate-500">${pl.name} • ${p.audience}</div>
-      </div>
-    </div>
-    <div class="grid grid-cols-3 gap-2 text-center">
-      <div class="p-3 bg-slate-50 rounded-xl"><div class="text-xs text-slate-500">Leads</div><div class="font-bold text-slate-900">${p.leadsCount}</div></div>
-      <div class="p-3 bg-slate-50 rounded-xl"><div class="text-xs text-slate-500">Delivery</div><div class="font-bold text-slate-900 text-xs">${p.deliveryTime}</div></div>
-      <div class="p-3 bg-slate-50 rounded-xl"><div class="text-xs text-slate-500">Price</div><div class="font-bold text-slate-900">Rs.${fmt(p.price)}</div></div>
-    </div>`;
-  document.getElementById('buyModalBalance').textContent = fmt(u.walletBalance);
-  const btn = document.getElementById('confirmBuyBtn');
-  if (u.walletBalance < p.price) { btn.textContent = 'Insufficient Balance'; btn.disabled = true; btn.style.opacity = '0.5'; }
-  else { btn.textContent = 'Confirm Order'; btn.disabled = false; btn.style.opacity = '1'; }
-  document.getElementById('buyModal').classList.remove('hidden');
-}
-function closeBuyModal() { document.getElementById('buyModal').classList.add('hidden'); currentPackageId = null; }
-function confirmBuy() {
-  const u = currentUser();
-  const p = state.packages.find(x=>x.id===currentPackageId);
-  if (!p) return;
-  if (u.walletBalance < p.price) { toast('Insufficient wallet balance','error'); return; }
-  u.walletBalance -= p.price;
-  const order = { id:uid('o'), userId:u.id, packageId:p.id, platformId:p.platformId, leadsCount:p.leadsCount, amount:p.price, status:'Completed', createdAt:Date.now() };
-  state.orders.push(order);
-  state.transactions.push({ id:uid('t'), userId:u.id, type:'debit', amount:p.price, description:`Purchase: ${p.name}`, balanceAfter:u.walletBalance, createdAt:Date.now() });
-  saveState();
-  updateWalletUI();
-  closeBuyModal();
-  toast(`Order confirmed! ${p.leadsCount} leads added to downloads`,'success');
-  setTimeout(()=>navigate('orders'), 800);
-}
-
-/* ═══════════════ ADD FUNDS MODAL ═══════════════ */
-function openAddFundsModal(preset) {
-  document.getElementById('addFundsAmount').value = preset || '';
-  document.getElementById('addFundsModal').classList.remove('hidden');
-}
-function closeAddFundsModal() { document.getElementById('addFundsModal').classList.add('hidden'); }
-function setAddFundsAmount(v) {
-  const inp = document.getElementById('addFundsAmount');
-  const cur = parseInt(inp.value)||0;
-  inp.value = cur + v;
-}
-function confirmAddFunds() {
-  const u = currentUser();
-  const amt = parseInt(document.getElementById('addFundsAmount').value);
-  if (!amt || amt<1) { toast('Enter a valid amount','error'); return; }
-  const method = document.querySelector('input[name="pm"]:checked').value;
-  u.walletBalance += amt;
-  state.transactions.push({ id:uid('t'), userId:u.id, type:'credit', amount:amt, description:`Wallet top-up via ${method}`, balanceAfter:u.walletBalance, createdAt:Date.now() });
-  saveState();
-  updateWalletUI();
-  closeAddFundsModal();
-  toast(`Rs.${fmt(amt)} added successfully via ${method}`,'success');
-}
-
-/* ═══════════════ SUPPORT ═══════════════ */
-function renderSupport() {
-  document.getElementById('faqList').innerHTML = state.faqs.map((f,i)=>`
-    <details class="group bg-slate-50 rounded-xl p-4 cursor-pointer hover:bg-slate-100 transition ${i===0?'open':''}">
-      <summary class="flex items-center justify-between font-semibold text-slate-900 text-sm">
-        <span>${f.q}</span>
-        <span class="chev text-slate-400"><i class="fas fa-chevron-down"></i></span>
-      </summary>
-      <p class="text-slate-600 text-sm mt-2.5 leading-relaxed">${f.a}</p>
-    </details>`).join('');
-}
-function submitTicket(e) {
-  e.preventDefault();
-  const u = currentUser();
-  const t = { id:uid('t'), userId:u.id, subject:document.getElementById('ticketSubject').value, category:document.getElementById('ticketCategory').value, message:document.getElementById('ticketMessage').value, status:'Open', createdAt:Date.now() };
-  state.tickets.push(t);
-  saveState();
-  e.target.reset();
-  toast('Ticket submitted! Our team will reach out soon','success');
-}
-
-/* ═══════════════ INIT ═══════════════ */
-(function init(){
-  if (state.currentUserId && currentUser()) {
-    enterApp();
-  } else {
-    showAuthPage('login');
-  }
-})();
-</script>
-</body>
-</html>
+function openCustomQty(pkId){
+  const pk = state.packages.find(p=>p.id===pkId);
+  /* Create inline input for custom quantity */
+  const calcEl = document.getElementById(`calcPrice-${pkId}`);
+  if(calcEl && !calcEl.querySelector('.custom-qty-input')){
+    calcEl.innerHTML=`<div class="flex items-center gap-2"><span class="text-xs text-slate-500">Custom qty:</span><input type
