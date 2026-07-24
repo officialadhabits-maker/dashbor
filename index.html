@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 tailwind.config = {
   theme: {
@@ -29,8 +28,8 @@ tailwind.config = {
   .marquee-track { display:flex; animation: marquee 30s linear infinite; width:max-content; }
   @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
   
-  .glass { background:rgba(255,255,255,0.8); backdrop-filter:blur(12px); -webkit-backdrop-filter: blur(12px); }
-  .dark-glass { background:rgba(11,17,32,0.75); backdrop-filter:blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .glass { background:rgba(255,255,255,0.8); backdrop-filter:blur(12px); }
+  .dark-glass { background:rgba(11,17,32,0.75); backdrop-filter:blur(12px); }
   
   .sidebar-item.active { background: #3d6b5e; color: #fff; font-weight: 700; }
   .sidebar-item.active i { color: #c5e86c; }
@@ -70,7 +69,7 @@ tailwind.config = {
     </div>
     <div class="ml-auto flex items-center gap-3">
       <button onclick="showAuthPage('login')" class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-bold hover:bg-lime-400 transition shadow-md">Log in</button>
-      <button onclick="showAuthPage('register')" class="px-5 py-2.5 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition">Register</button>
+      <button onclick="showAuthPage('register')" class="px-5 py-2.5 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition hidden sm:block">Register</button>
     </div>
   </nav>
 
@@ -156,13 +155,13 @@ tailwind.config = {
             <button onclick="showAuthPage('register')" class="px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">View Packs</button>
           </div>
         </div>
-        <!-- YouTube -->
+        <!-- Practic Leads (NEW SECTION) -->
         <div class="bg-lime-400 rounded-3xl p-8 relative overflow-hidden premium-card">
-          <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-red-500 shadow-lg mb-6"><i class="fab fa-youtube"></i></div>
-          <h3 class="text-2xl font-extrabold text-slate-900">YouTube Subs</h3>
-          <p class="text-slate-800 text-sm mt-3 leading-relaxed">Engaged subscribers & commenters from your niche. High conversion potential.</p>
+          <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-lime-400 shadow-lg mb-6"><i class="fas fa-user-graduate"></i></div>
+          <h3 class="text-2xl font-extrabold text-slate-900">Practic Leads</h3>
+          <p class="text-slate-800 text-sm mt-3 leading-relaxed">Low-cost leads to practice your pitch. Only Girls at ₹3, Mix & 70/30 at ₹2.</p>
           <div class="mt-6 flex items-center justify-between">
-            <span class="text-3xl font-extrabold text-slate-900">₹20<span class="text-sm text-slate-700 font-normal">/lead</span></span>
+            <span class="text-3xl font-extrabold text-slate-900">₹2<span class="text-sm text-slate-700 font-normal">/lead</span></span>
             <button onclick="showAuthPage('register')" class="px-5 py-2.5 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-slate-800 transition">View Packs</button>
           </div>
         </div>
@@ -201,11 +200,6 @@ tailwind.config = {
                 <div class="text-white text-sm font-semibold">100 Leads Assigned</div>
                 <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-lime-400 h-2 rounded-full" style="width:100%"></div></div>
               </div>
-              <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700 opacity-60">
-                <div class="flex justify-between text-xs text-gray-400 mb-2"><span>YouTube • Students</span><span class="text-yellow-400 font-bold">₹875</span></div>
-                <div class="text-white text-sm font-semibold">Processing...</div>
-                <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-yellow-400 h-2 rounded-full" style="width:40%"></div></div>
-              </div>
             </div>
           </div>
         </div>
@@ -221,16 +215,14 @@ tailwind.config = {
         <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight">Choose. Pay. Receive. Close.</h2>
         <p class="text-slate-600 mt-4 max-w-2xl mx-auto text-lg">A frictionless journey from lead selection to closed deal.</p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 relative">
         <svg class="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style="z-index:0">
           <path d="M280 120 Q400 120 400 200 T520 280" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
           <path d="M520 400 Q400 400 400 480 T280 560" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
         </svg>
-
         <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm">
           <div class="w-14 h-48 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 1</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">📦</div><h3 class="text-xl font-extrabold text-slate-900">Choose Your Platform.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Select Instagram, Facebook, YouTube, or any platform that aligns with your product.</p></div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">📦</div><h3 class="text-xl font-extrabold text-slate-900">Choose Your Platform.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Select Instagram, Facebook, YouTube, LinkedIn, Snapchat or Practic Leads.</p></div>
         </div>
         <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm md:mt-24">
           <div class="w-14 h-48 bg-slate-700 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 2</div>
@@ -238,7 +230,7 @@ tailwind.config = {
         </div>
         <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm">
           <div class="w-14 h-48 bg-lime-400 rounded-full flex items-center justify-center text-slate-900 font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 3</div>
-          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">💳</div><h3 class="text-xl font-extrabold text-slate-900">Make Payment.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pay securely via UPI, Card, or Wallet. Amount calculated instantly based on lead count.</p></div>
+          <div><div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-2xl mb-4 border border-slate-100">💳</div><h3 class="text-xl font-extrabold text-slate-900">Make Payment.</h3><p class="text-slate-600 mt-3 text-sm leading-relaxed">Pay securely via UPI, Card, or Wallet. Exact amount calculated instantly (Leads x Price).</p></div>
         </div>
         <div class="relative z-10 bg-white rounded-3xl p-8 flex gap-6 border border-slate-100 premium-card shadow-sm md:mt-24">
           <div class="w-14 h-48 bg-slate-700 rounded-full flex items-center justify-center text-white font-extrabold text-sm shrink-0" style="writing-mode:vertical-rl; transform:rotate(180deg)">Step - 4</div>
@@ -255,19 +247,16 @@ tailwind.config = {
         <div>
           <span class="text-xs font-bold tracking-widest text-emerald-700 uppercase">Why LeadFlow?</span>
           <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 tracking-tight leading-tight">We Don't Just Sell Data.<br><span class="text-emerald-700">We Deliver Opportunities.</span></h2>
-          
           <div class="mt-10 grid grid-cols-2 gap-8">
             <div><div class="text-5xl font-extrabold text-slate-900">50k+</div><div class="text-slate-500 mt-2 font-medium">Leads Delivered</div></div>
             <div><div class="text-5xl font-extrabold text-slate-900">500+</div><div class="text-slate-500 mt-2 font-medium">Active Resellers</div></div>
           </div>
-
           <ul class="mt-10 space-y-5">
             <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Rigorously verified contact information.</span></li>
             <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Instant CSV access from dashboard.</span></li>
             <li class="flex items-start gap-4"><div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center mt-1"><i class="fas fa-check text-emerald-600 text-xs"></i></div><span class="text-slate-700 text-lg font-medium">Transparent pricing, zero hidden costs.</span></li>
           </ul>
         </div>
-
         <div class="relative flex justify-center">
            <div class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-lime-100 rounded-full blur-3xl opacity-50"></div>
            <div class="relative w-72 h-[500px] bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl overflow-hidden">
@@ -279,17 +268,11 @@ tailwind.config = {
                             <div class="text-white text-sm font-semibold">50 Leads Assigned</div>
                             <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-lime-400 h-2 rounded-full" style="width:100%"></div></div>
                         </div>
-                        <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700">
-                            <div class="flex justify-between text-xs text-gray-400 mb-2"><span>LinkedIn • B2B</span><span class="text-lime-400 font-bold">₹2,000</span></div>
-                            <div class="text-white text-sm font-semibold">100 Leads Assigned</div>
-                            <div class="mt-3 w-full bg-slate-700 h-2 rounded-full"><div class="bg-lime-400 h-2 rounded-full" style="width:100%"></div></div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
       </div>
-
       <div class="text-center mt-24 bg-slate-900 rounded-[2rem] p-12 border border-slate-800">
         <p class="text-2xl md:text-3xl font-medium text-white max-w-3xl mx-auto leading-relaxed">
           Loved by thousands <span class="text-3xl">😍</span> who turned their outreach skills into real income and <span class="text-3xl">💰</span> growth opportunities online.
@@ -309,15 +292,15 @@ tailwind.config = {
       <div class="space-y-4">
         <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm" open>
           <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>What happens after I buy?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">You get instant access to your dashboard with lifetime access to your purchased leads, CSV download option, and auto-refill notifications — no waiting, no friction.</p>
+          <p class="text-slate-600 mt-4 leading-relaxed">You get instant access to your dashboard with lifetime access to your purchased leads, CSV download option, and auto-refill notifications.</p>
         </details>
         <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm">
           <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>Are these leads verified?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">Yes, we verify all leads before delivery. In case of invalid contacts exceeding 10%, we offer instant replacement credits — no questions asked.</p>
+          <p class="text-slate-600 mt-4 leading-relaxed">Yes, we verify all leads before delivery. In case of invalid contacts exceeding 10%, we offer instant replacement credits.</p>
         </details>
         <details class="group bg-white rounded-2xl p-6 cursor-pointer hover:shadow-lg transition border border-slate-100 shadow-sm">
-          <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>Can I filter by specific audience?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">Absolutely. You can filter by Housewife, Working Pro, Students, Only Boys, Only Girls, etc., ensuring high conversion for your specific offer.</p>
+          <summary class="flex items-center justify-between font-bold text-slate-900 text-lg"><span>What is Practic Leads?</span><span class="transition group-open:rotate-180 text-emerald-600"><i class="fas fa-chevron-down"></i></span></summary>
+          <p class="text-slate-600 mt-4 leading-relaxed">Practic Leads are low-cost leads (Rs. 2 to Rs. 3) provided so you can practice your sales pitch before buying premium leads.</p>
         </details>
       </div>
     </div>
@@ -328,7 +311,6 @@ tailwind.config = {
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
       <div>
         <h2 class="text-3xl md:text-4xl font-extrabold text-white">From the Founder's Desk!!</h2>
-        <p class="text-gray-400 mt-2">Uncover the purpose, passion, and vision that drives LeadFlow.</p>
         <div class="mt-10 text-6xl text-lime-400 font-serif leading-none">"</div>
         <p class="text-gray-300 leading-relaxed mt-2 text-lg">
           India doesn't need more ad spend. It needs smart distribution. LeadFlow is built to help affiliate marketers, network marketers, and resellers get quality leads without burning capital on agencies. We're not just selling data... we're unlocking your sales potential.
@@ -350,7 +332,7 @@ tailwind.config = {
     </div>
     <footer class="max-w-6xl mx-auto mt-20 pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center gap-3"><div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-lime-400 rounded-xl flex items-center justify-center text-white font-bold">L</div><span class="text-white font-extrabold text-xl">LeadFlow</span></div>
-      <div class="text-sm text-gray-500">© 2024 LeadFlow. All Rights Reserved. • Privacy Policy • Terms</div>
+      <div class="text-sm text-gray-500">© 2024 LeadFlow. All Rights Reserved.</div>
     </footer>
   </section>
 </div>
@@ -369,7 +351,6 @@ tailwind.config = {
       <button onclick="showLanding()" class="w-10 h-10 text-gray-300 hover:text-white text-sm border border-white/10 rounded-full"><i class="fas fa-home"></i></button>
     </div>
   </nav>
-
   <div id="loginPage" class="relative z-10 min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
     <div class="bg-white rounded-[2rem] w-full max-w-[440px] p-10 shadow-2xl border border-slate-100">
       <div class="flex items-start justify-between mb-8"><h1 class="text-3xl font-extrabold text-slate-900 leading-tight">Welcome to<br>LeadFlow</h1><div class="text-right text-sm"><span class="text-slate-500">No Account ?</span><br><a href="#" onclick="showAuthPage('register');return false;" class="text-emerald-700 font-bold hover:underline">Sign up</a></div></div>
@@ -382,7 +363,6 @@ tailwind.config = {
       <p class="text-center text-xs text-slate-400 mt-6">Demo Login: <span class="font-semibold">demo@leadflow.com</span> / <span class="font-semibold">demo123</span></p>
     </div>
   </div>
-
   <div id="registerPage" class="hidden relative z-10 min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
     <div class="bg-white rounded-[2rem] w-full max-w-[540px] p-10 shadow-2xl border border-slate-100">
       <div class="flex items-start justify-between mb-8"><h1 class="text-3xl font-extrabold text-slate-900">Sign up</h1><div class="text-right text-sm"><span class="text-slate-500">Have an Account ?</span><br><a href="#" onclick="showAuthPage('login');return false;" class="text-emerald-700 font-bold hover:underline">Sign in</a></div></div>
@@ -393,8 +373,8 @@ tailwind.config = {
           <div><label class="text-sm font-bold text-slate-700">Contact Number</label><input id="regPhone" type="tel" required placeholder="+91 98765 43210" class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white" /></div>
         </div>
         <div class="grid grid-cols-2 gap-4">
-          <div><label class="text-sm font-bold text-slate-700">Country</label><select id="regCountry" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select Country</option><option>India</option><option>United States</option><option>UAE</option></select></div>
-          <div><label class="text-sm font-bold text-slate-700">State</label><select id="regState" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select State</option><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option></select></div>
+          <div><label class="text-sm font-bold text-slate-700">Country</label><select id="regCountry" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select Country</option><option>India</option><option>United States</option></select></div>
+          <div><label class="text-sm font-bold text-slate-700">State</label><select id="regState" required class="w-full mt-2 px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white"><option value="">Select State</option><option>Maharashtra</option><option>Delhi</option></select></div>
         </div>
         <div><label class="text-sm font-bold text-slate-700">Password</label><div class="relative mt-2"><input id="regPassword" type="password" required placeholder="••••••••" class="w-full px-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:border-emerald-500 focus:bg-white pr-12" /><button type="button" onclick="togglePw('regPassword',this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fas fa-eye"></i></button></div></div>
         <button type="submit" class="w-full py-4 rounded-xl text-white font-bold hover:opacity-90 transition text-lg" style="background:#3d6b5e;">Next</button>
@@ -415,7 +395,7 @@ tailwind.config = {
       <button onclick="navigate('wallet')" data-page="wallet" class="sidebar-item w-full flex items-center gap-3 px-4 py-3.5 rounded-r-xl text-gray-300 hover:bg-white/5 text-sm font-medium"><i class="fas fa-wallet w-5 text-center"></i> Wallet</button>
     </nav>
     <div class="mx-3 mb-4 bg-white/5 rounded-2xl p-4 border border-white/5">
-      <div class="flex items-center gap-3"><div id="userAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold">U</div><div class="flex-1 min-w-0"><div id="userName" class="text-white text-sm font-semibold truncate">User</div><div id="userEmail" class="text-gray-400 text-xs truncate">user@email.com</div></div></div>
+      <div class="flex items-center gap-3"><div id="userAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-lime-400 flex items-center justify-center text-white font-bold">U</div><div class="flex-1 min-w-0"><div id="userName" class="text-white text-sm font-semibold truncate">User</div></div></div>
       <button onclick="logout()" class="mt-3 w-full py-2 bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 rounded-lg text-sm font-medium flex items-center justify-center gap-2"><i class="fas fa-right-from-bracket"></i> Logout</button>
     </div>
   </aside>
@@ -423,14 +403,14 @@ tailwind.config = {
   <div class="lg:ml-64">
     <header class="sticky top-0 z-20 glass border-b border-slate-200 px-6 py-4 flex items-center gap-4">
       <button onclick="toggleSidebar()" class="lg:hidden text-slate-700 text-xl"><i class="fas fa-bars"></i></button>
-      <div class="flex-1"><h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1><p id="pageSubtitle" class="text-sm text-slate-500">Welcome back, here's your overview</p></div>
+      <div class="flex-1"><h1 id="pageTitle" class="text-xl font-bold text-slate-900">Dashboard</h1><p id="pageSubtitle" class="text-sm text-slate-500">Welcome back</p></div>
       <button onclick="navigate('wallet')" class="hidden sm:flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition"><i class="fas fa-wallet text-lime-400"></i> Rs.<span id="headerBalance">0</span></button>
     </header>
 
     <main class="p-6 md:p-8">
       <section id="page-dashboard" class="fade-in space-y-8">
         <div class="rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl" style="background:linear-gradient(120deg,#0B1120,#1a4d2e 70%,#3d6b5e);">
-          <div class="relative z-10"><h2 class="text-3xl font-extrabold">Welcome! <span id="welcomeName">User</span> 👋</h2><p class="text-gray-300 mt-2 max-w-lg text-lg">Ready to scale your sales today? Browse fresh leads or top up your wallet.</p><div class="flex gap-3 mt-6"><button onclick="navigate('browse')" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Browse Leads</button><button onclick="openAddFundsModal()" class="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Add Funds</button></div></div>
+          <div class="relative z-10"><h2 class="text-3xl font-extrabold">Welcome! <span id="welcomeName">User</span> 👋</h2><p class="text-gray-300 mt-2 max-w-lg text-lg">Ready to scale your sales today?</p><div class="flex gap-3 mt-6"><button onclick="navigate('browse')" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold hover:bg-lime-300 transition">Browse Leads</button><button onclick="openAddFundsModal()" class="px-6 py-3 bg-white/10 border border-white/20 text-white rounded-xl text-sm font-semibold hover:bg-white/20 transition">Add Funds</button></div></div>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="statsRow"></div>
         <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm"><h3 class="font-bold text-slate-900 text-lg mb-4">Recent Orders</h3><div id="recentOrders" class="space-y-3"></div></div>
@@ -449,7 +429,7 @@ tailwind.config = {
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div class="lg:col-span-2 rounded-[2rem] p-8 text-white shadow-xl" style="background:linear-gradient(120deg,#0B1120,#1a4d2e 60%,#3d6b5e);"><p class="text-gray-300 text-sm font-medium">Wallet Balance</p><h2 class="text-5xl font-extrabold mt-2">Rs.<span id="walletBalance">0</span></h2><div class="flex gap-3 mt-6"><button onclick="openAddFundsModal()" class="px-6 py-3 bg-lime-400 text-slate-900 rounded-xl text-sm font-bold">Add Funds</button></div></div>
         </div>
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><div class="px-6 py-4 border-b"><h3 class="font-bold text-slate-900">Transaction History</h3></div><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Date</th><th class="px-5 py-4 text-left">Description</th><th class="px-5 py-4 text-left">Type</th><th class="px-5 py-4 text-left">Amount</th></tr></thead><tbody id="transactionsBody"></tbody></table></div>
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"><div class="px-6 py-4 border-b"><h3 class="font-bold text-slate-900">Transaction History</h3></div><table class="w-full text-sm"><thead class="bg-slate-50 text-xs uppercase"><tr><th class="px-5 py-4 text-left">Date</th><th class="px-5 py-4 text-left">Description</th><th class="px-5 py-4 text-left">Amount</th></tr></thead><tbody id="transactionsBody"></tbody></table></div>
       </section>
     </main>
   </div>
@@ -475,20 +455,22 @@ tailwind.config = {
 <div id="toastContainer" class="fixed bottom-6 right-6 z-[100] space-y-3"></div>
 
 <script>
-const STORAGE_KEY = 'leadflow_classic_v1';
+const STORAGE_KEY = 'leadflow_classic_final_v1';
 let state = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : seedState();
 let currentPlatform = null;
 let tempConfig = { audience: null, count: 50, pricePerLead: 15 };
 
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 function seedState() {
+  // Only 5 Platforms + Practic Leads
   const platforms = [
     { id:'p1', name:'Instagram', icon:'fab fa-instagram', gradient:'from-pink-500 to-rose-500', desc:'High-intent leads from Reels & DMs.', audiences:['Mix Leads', 'Students', 'Only Girls', 'Only Boys'] },
     { id:'p2', name:'Facebook', icon:'fab fa-facebook-f', gradient:'from-blue-600 to-blue-800', desc:'Targeted leads from Groups & Ads.', audiences:['Mix Leads', 'Housewife', 'Business Owners'] },
     { id:'p3', name:'YouTube', icon:'fab fa-youtube', gradient:'from-red-500 to-red-700', desc:'Engaged subscribers & commenters.', audiences:['Mix Leads', 'Students', 'Only Boys'] },
     { id:'p4', name:'LinkedIn', icon:'fab fa-linkedin-in', gradient:'from-sky-500 to-blue-700', desc:'B2B professionals & decision makers.', audiences:['Working Pro', 'Business Owners'] },
     { id:'p5', name:'Snapchat', icon:'fab fa-snapchat-ghost', gradient:'from-yellow-400 to-amber-500', desc:'Gen-Z audience, quick responders.', audiences:['Only Girls', 'Only Boys', 'Students'] },
-    { id:'p6', name:'Google Ads', icon:'fab fa-google', gradient:'from-indigo-500 to-violet-600', desc:'High-intent search leads.', audiences:['Mix Leads', 'Business Owners'] }
+    // NEW SECTION: Practic Leads
+    { id:'p6', name:'Practic Leads', icon:'fas fa-user-graduate', gradient:'from-emerald-500 to-teal-700', desc:'Practice your pitch with real-time low-cost leads.', audiences:['Only Girls (Rs.3)', '70% Girls / 30% Boys (Rs.2)', 'Mix Leads (Rs.2)'] }
   ];
   const demoUser = { id:'u1', name:'Farhin Almas', email:'demo@leadflow.com', password:'demo123', walletBalance:12450 };
   return { users:[demoUser], currentUserId:null, platforms, orders:[], transactions:[{ id:'t1', userId:'u1', type:'credit', amount:12450, description:'Initial load', balanceAfter:12450, createdAt:Date.now() }] };
@@ -509,11 +491,11 @@ function togglePw(id, btn) { const inp = document.getElementById(id); inp.type =
 function showLanding() { document.getElementById('landingShell').classList.remove('hidden'); document.getElementById('authShell').classList.add('hidden'); document.getElementById('appShell').classList.add('hidden'); }
 function showAuthPage(p) { document.getElementById('landingShell').classList.add('hidden'); document.getElementById('appShell').classList.add('hidden'); document.getElementById('authShell').classList.remove('hidden'); document.getElementById('loginPage').classList.toggle('hidden', p!=='login'); document.getElementById('registerPage').classList.toggle('hidden', p!=='register'); }
 function handleLogin(e) { e.preventDefault(); const u = state.users.find(u=>u.email===document.getElementById('loginEmail').value.trim().toLowerCase()); if(!u||u.password!==document.getElementById('loginPassword').value) return toast('Invalid credentials','error'); state.currentUserId=u.id; saveState(); enterApp(); toast(`Welcome back, ${u.name.split(' ')[0]}!`); }
-function handleRegister(e) { e.preventDefault(); const email = document.getElementById('regEmail').value.trim().toLowerCase(); if (state.users.some(u=>u.email===email)) return toast('Account already exists','error'); const u = { id:uid('u'), name:document.getElementById('regName').value, email, phone:document.getElementById('regPhone').value, country:document.getElementById('regCountry').value, state:document.getElementById('regState').value, password:document.getElementById('regPassword').value, walletBalance:500, createdAt:Date.now() }; state.users.push(u); state.transactions.push({ id:uid('t'), userId:u.id, type:'credit', amount:500, description:'Welcome bonus', balanceAfter:500, createdAt:Date.now() }); state.currentUserId=u.id; saveState(); enterApp(); toast('Account created! Rs.500 welcome bonus added'); }
+function handleRegister(e) { e.preventDefault(); const email = document.getElementById('regEmail').value.trim().toLowerCase(); if (state.users.some(u=>u.email===email)) return toast('Account already exists','error'); const u = { id:uid('u'), name:document.getElementById('regName').value, email, password:document.getElementById('regPassword').value, walletBalance:500, createdAt:Date.now() }; state.users.push(u); state.transactions.push({ id:uid('t'), userId:u.id, type:'credit', amount:500, description:'Welcome bonus', balanceAfter:500, createdAt:Date.now() }); state.currentUserId=u.id; saveState(); enterApp(); toast('Account created! Rs.500 welcome bonus added'); }
 function logout() { state.currentUserId=null; saveState(); showLanding(); toast('Logged out successfully','info'); }
-function enterApp() { document.getElementById('authShell').classList.add('hidden'); document.getElementById('appShell').classList.remove('hidden'); const u=currentUser(); document.getElementById('userName').textContent=u.name; document.getElementById('userEmail').textContent=u.email; document.getElementById('userAvatar').textContent=u.name.charAt(0); document.getElementById('welcomeName').textContent=u.name.split(' ')[0]; updateWalletUI(); navigate('dashboard'); }
+function enterApp() { document.getElementById('authShell').classList.add('hidden'); document.getElementById('appShell').classList.remove('hidden'); const u=currentUser(); document.getElementById('userName').textContent=u.name; document.getElementById('userAvatar').textContent=u.name.charAt(0); document.getElementById('welcomeName').textContent=u.name.split(' ')[0]; updateWalletUI(); navigate('dashboard'); }
 
-const PAGE_META = { dashboard:{t:'Dashboard',s:"Welcome back, here's your overview"}, browse:{t:'Browse Leads',s:'Explore premium lead packages across platforms'}, orders:{t:'My Orders',s:'Track and manage your purchases'}, wallet:{t:'Wallet',s:'Manage your balance and transaction history'} };
+const PAGE_META = { dashboard:{t:'Dashboard',s:"Welcome back"}, browse:{t:'Browse Leads',s:'Explore premium lead packages'}, orders:{t:'My Orders',s:'Track and manage your purchases'}, wallet:{t:'Wallet',s:'Manage your balance and transactions'} };
 function navigate(page) {
   document.querySelectorAll('[id^="page-"]').forEach(s=>s.classList.add('hidden'));
   const sec = document.getElementById('page-'+page);
@@ -537,17 +519,23 @@ function renderDashboard() {
   document.getElementById('recentOrders').innerHTML = o.slice(-5).reverse().map(x=>`<div class="flex items-center gap-3 p-4 rounded-xl hover:bg-slate-50 border border-slate-100"><div class="flex-1 min-w-0"><div class="text-sm font-bold truncate">${x.platformName} (${x.audience})</div><div class="text-xs text-slate-500">${x.leadsCount} leads • Rs.${fmt(x.amount)}</div></div><span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">${x.status}</span></div>`).join('') || '<div class="text-center py-8 text-slate-400 text-sm">No orders yet.</div>';
 }
 
-function showBrowsePlatforms(){document.getElementById('browsePlatforms').classList.remove('hidden');document.getElementById('browsePackages').classList.add('hidden');document.getElementById('platformGridApp').innerHTML=state.platforms.map(p=>`<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card cursor-pointer" onclick="showPackages('${p.id}')"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-3xl shadow-lg mb-4"><i class="${p.icon}"></i></div><h3 class="text-xl font-bold text-slate-900">${p.name}</h3><p class="text-sm text-slate-500 mt-2 mb-4">${p.desc}</p><div class="flex flex-wrap gap-2 mb-4">${p.audiences.map(a=>`<span class="text-xs px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full font-semibold">${a}</span>`).join('')}</div><button class="w-full mt-2 py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">View Packages</button></div>`).join('');}
+function showBrowsePlatforms(){document.getElementById('browsePlatforms').classList.remove('hidden');document.getElementById('browsePackages').classList.add('hidden');document.getElementById('platformGridApp').innerHTML=state.platforms.map(p=>`<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card cursor-pointer" onclick="showPackages('${p.id}')"><div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center text-3xl shadow-lg mb-4"><i class="${p.icon}"></i></div><h3 class="text-xl font-bold text-slate-900">${p.name}</h3><p class="text-sm text-slate-500 mt-2 mb-4">${p.desc}</p><button class="w-full mt-2 py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">View Packages</button></div>`).join('');}
 function showPackages(id) {
   currentPlatform = state.platforms.find(p=>p.id==id);
   document.getElementById('browsePlatforms').classList.add('hidden');
   document.getElementById('browsePackages').classList.remove('hidden');
   document.getElementById('packagePlatformHeader').innerHTML = `<div class="flex items-center gap-4"><div class="w-20 h-20 rounded-2xl bg-gradient-to-br ${currentPlatform.gradient} text-white flex items-center justify-center text-4xl shadow-lg"><i class="${currentPlatform.icon}"></i></div><div><h2 class="text-3xl font-extrabold text-slate-900">${currentPlatform.name} Leads</h2><p class="text-slate-500 mt-1">${currentPlatform.desc}</p></div></div>`;
+  
   document.getElementById('packageGrid').innerHTML = currentPlatform.audiences.map(aud => {
-    // Dynamic Pricing: Mix=15, Housewife/Students/Boys/Girls=18, Working Pro/Business=20
-    let price = 15;
-    if(['Business Owners', 'Working Pro'].includes(aud)) price = 20;
-    else if(['Only Girls', 'Only Boys', 'Students', 'Housewife'].includes(aud)) price = 18;
+    // Exact Calculation Pricing Logic
+    let price = 15; // Default for standard platforms
+    if(currentPlatform.name === 'Practic Leads') {
+      if(aud.includes('Rs.3')) price = 3;
+      else price = 2;
+    } else {
+      if(['Business Owners', 'Working Pro'].includes(aud)) price = 20;
+      else if(['Only Girls', 'Only Boys', 'Students', 'Housewife'].includes(aud)) price = 18;
+    }
     return `<div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm premium-card"><div class="flex justify-between items-center mb-3"><h3 class="font-bold text-slate-900 text-lg">${aud}</h3><span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">₹${price}/lead</span></div><p class="text-slate-500 text-xs mb-4">High-quality ${aud} leads for ${currentPlatform.name}.</p><button onclick="openBuyModal('${currentPlatform.id}', '${aud}', ${price})" class="w-full py-3 rounded-xl text-white text-sm font-bold hover:opacity-90" style="background:#3d6b5e;">Buy Now</button></div>`;
   }).join('');
 }
@@ -559,6 +547,7 @@ function openBuyModal(pid, aud, price) {
 }
 function updateBuyModalUI() {
   const u = currentUser();
+  // Exact Calculation: count * pricePerLead (e.g., 50 * 20 = 1000)
   const total = tempConfig.count * tempConfig.pricePerLead;
   document.getElementById('buyModalBody').innerHTML = `
     <div class="space-y-5">
@@ -598,7 +587,7 @@ function renderOrders() {
 }
 function renderWallet() {
   const u=currentUser(); const t=state.transactions.filter(t=>t.userId===u.id);
-  document.getElementById('transactionsBody').innerHTML = t.length ? t.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 text-slate-600">${new Date(x.createdAt).toLocaleDateString()}</td><td class="px-5 py-4 text-slate-900">${x.description}</td><td class="px-5 py-4"><span class="text-xs font-bold px-2.5 py-1 rounded-full ${x.type==='credit'?'bg-emerald-100 text-emerald-700':'bg-red-100 text-red-700'}">${x.type}</span></td><td class="px-5 py-4 font-bold ${x.type==='credit'?'text-emerald-600':'text-red-600'}">${x.type==='credit'?'+':'-'} Rs. ${fmt(x.amount)}</td></tr>`).join('') : '<tr><td colspan="4" class="text-center py-10 text-slate-400">No transactions yet</td></tr>';
+  document.getElementById('transactionsBody').innerHTML = t.length ? t.map(x=>`<tr class="border-t hover:bg-slate-50"><td class="px-5 py-4 text-slate-600">${new Date(x.createdAt).toLocaleDateString()}</td><td class="px-5 py-4 text-slate-900">${x.description}</td><td class="px-5 py-4 font-bold ${x.type==='credit'?'text-emerald-600':'text-red-600'}">${x.type==='credit'?'+':'-'} Rs. ${fmt(x.amount)}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center py-10 text-slate-400">No transactions yet</td></tr>';
 }
 function openAddFundsModal() { document.getElementById('addFundsAmount').value=''; document.getElementById('addFundsModal').classList.remove('hidden'); }
 function closeAddFundsModal() { document.getElementById('addFundsModal').classList.add('hidden'); }
